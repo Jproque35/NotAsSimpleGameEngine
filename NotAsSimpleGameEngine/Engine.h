@@ -12,7 +12,6 @@ enum class EngineState {
 };
 
 class Engine {
-
 private:
 	static Engine* instance;
 	RenderWindow m_Window;
@@ -29,7 +28,6 @@ public:
 	static Engine* getInstance();
 	static void resetInstance();
 	void start();
-
 };
 
 #endif

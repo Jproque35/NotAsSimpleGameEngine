@@ -44,9 +44,10 @@ public:
 	float getWidth() inline const;
 	float getHeight() inline const;
 	bool intersects(const Collider& other) inline const ;
-	Collision getCollisionData(const Collider& other) inline const ;
-	vector<Collider*> getCollisionList() const;
-	void repositionAfterCollision(const Collider& other);
+	vector<Collider*> getObjectCollisionList() const;
+	Collision getObjectCollisionData(const Collider& other) inline const ;
+	vector<CollisionDirection> getBoundaryCollisionData() const;
+	void repositionAfterObjectCollision(const Collider& other);
 	void update(float dtAsSeconds);
 	void destroy() const;
 };

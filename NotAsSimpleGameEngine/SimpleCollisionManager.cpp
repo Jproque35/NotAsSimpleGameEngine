@@ -64,39 +64,42 @@ void SimpleCollisionManager::erase(int id) {
 		this->m_DeletionQueue.push(desire);
 	}
 	catch (exception& e) {
-		cout << "Collider with id " << id << " does not exist!" << endl;
+		cout << "CollisionManager: Collider with id " << id << " does not exist!" << endl;
 	}
 }
 
-vector<Collider*> SimpleCollisionManager::getCollisionList(int id) {
-	vector<Collider*> desire;
+vector<Collider*> SimpleCollisionManager::getObjectCollisionList(int id) {
+	try {
+		vector<Collider*> desire;
 
-	if (id < this->m_Colliders.size() && this->m_Colliders[id] != NULL) {
-		Collider* currCollider = this->m_Colliders[id];
+		if (id < this->m_Colliders.size() && this->m_Colliders[id] != NULL) {
+			Collider* currCollider = this->m_Colliders[id];
 
-		for (int i = 0; i < this->m_Colliders.size(); ++i) {
+			for (int i = 0; i < this->m_Colliders.size(); ++i) {
 
-			if (currCollider != this->m_Colliders[i]
-				&& currCollider->intersects(*this->m_Colliders[i])) {
-				desire.push_back(this->m_Colliders[i]);
+				if (currCollider != this->m_Colliders[i]
+					&& currCollider->intersects(*this->m_Colliders[i])) {
+					desire.push_back(this->m_Colliders[i]);
+				}
 			}
 		}
-	}
 
-	return desire;
+		return desire;
+	}
+	catch (exception& e) {
+		cout << "CollisionManager: Collider with id " << id << " does not exist!" << endl;
+	}
 }
 
 void SimpleCollisionManager::updateSingleCollider(Collider& collider) {
-	vector<Collider*> colList = this->getCollisionList(collider.getId());
+	vector<Collider*> colList = this->getObjectCollisionList(collider.getId());
 
 	if (colList.size() > 0 && !collider.isStationary()) {
-		//cout << "CollisionManager: Collider with id " << collider.getId() << " is colliding with " << colList.size() << " objects." << endl;
-
 		for (int j = 0; j < colList.size(); ++j) {
 			Collider* currCollider = colList[j];
 
 			if (currCollider) {
-				collider.repositionAfterCollision(*currCollider);
+				collider.repositionAfterObjectCollision(*currCollider);
 			}
 		}
 	}

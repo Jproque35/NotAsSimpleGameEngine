@@ -33,7 +33,7 @@ public:
 	static void resetInstance();
 	int add(Collider& col);
 	void erase(int id);
-	vector<Collider*> getCollisionList(int id);
+	vector<Collider*> getObjectCollisionList(int id);
 	void update(float dtAsSeconds);
 	void cleanUp();
 

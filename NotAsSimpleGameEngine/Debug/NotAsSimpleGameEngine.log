@@ -1,10 +1,8 @@
-﻿  Collider.cpp
-  SimpleCollisionManager.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(66,20): warning C4101: 'e': unreferenced local variable
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(74,9): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(77,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(95,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(106,20): warning C4018: '<': signed/unsigned mismatch
+﻿  BasicPlayer.cpp
+  Box.cpp
+  Collider.cpp
+  Mover.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(29,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(55,21): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

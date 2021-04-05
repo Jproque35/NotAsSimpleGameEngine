@@ -5,7 +5,7 @@
 BasicPlayer::BasicPlayer(float x, float y)
 	: Entity(x, y),
 	m_Speed(150.0f) {
-	Vector2f rectSize(50.0f, 50.0f);
+	Vector2f rectSize(32.0f, 32.0f);
 	//this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
 	//this->m_Collider = new Collider(*this, this->m_Position, rectSize);
 	this->m_Type = EntityType::Player;
@@ -56,9 +56,4 @@ void BasicPlayer::update(float dtAsSeconds) {
 	Vector2f moveDir = this->inputToVector();
 
 	this->Move(moveDir.x * dtAsSeconds, moveDir.y * dtAsSeconds);
-
-	/*
-	if (this->m_Collider->getCollisionList().size() > 0) {
-		cout << "BasicPlayer: Collision Ocurring..." << endl;
-	}*/
 }

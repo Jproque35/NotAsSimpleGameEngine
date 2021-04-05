@@ -10,7 +10,8 @@ private:
     Vector2f m_TravelDirection;
     RectangleGraphic* m_Graphic;
 
-    void changeDirection(float dtAsSeconds);
+    void changeDirectionAfterObjectCollision(float dtAsSeconds);
+    void changeDirectionAfterBoundaryCollision(vector<CollisionDirection> directionList);
 
 protected:
     void update(float dtAsSeconds);

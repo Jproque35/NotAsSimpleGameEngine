@@ -5,9 +5,10 @@
 #include "Mover.h"
 #include <iostream>
 #include "Collider.h"
+//#include "Engine.h"
 
 TestScene::TestScene() : 
-	Scene(320, 320),
+	Scene(640.0f, 640.0f),
 	m_Seconds(0.0f) {}
 
 void TestScene::enter(float dtAsSeconds) {

@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "MathLib.h"
 #include "GameObject.h"
+#include "SceneManager.h"
 #include "SimpleCollisionManager.h"
 
 Collider::Collider(GameObject& owner, const Vector2f& size, bool stationary)
@@ -41,6 +42,10 @@ bool Collider::intersects(const Collider& other) inline const {
 	return this->horizontalCollision(other) && this->verticalCollision(other);
 }
 
+vector<Collider*> Collider::getObjectCollisionList() const {
+	return SimpleCollisionManager::getInstance()->getObjectCollisionList(this->m_Id);
+}
+
 CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2f diff) const {
 	Vector2f compass[] = {
 		Vector2f(0.0f, 1.0f),
@@ -63,7 +68,7 @@ CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2
 	return (CollisionDirection)desire;
 }
 
-Collision Collider::getCollisionData(const Collider& other) inline  const {
+Collision Collider::getObjectCollisionData(const Collider& other) inline  const {
 	bool collided = this->intersects(other) && other.m_Owner->isActive();
 	Vector2f diff(other.m_Owner->getPosition().x - this->m_Owner->getPosition().x, 
 		other.m_Owner->getPosition().y - this->m_Owner->getPosition().y);
@@ -72,12 +77,30 @@ Collision Collider::getCollisionData(const Collider& other) inline  const {
 	return std::make_tuple(collided, colDir, diff);
 }
 
-vector<Collider*> Collider::getCollisionList() const {
-	return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
+vector<CollisionDirection> Collider::getBoundaryCollisionData() const {
+	vector<CollisionDirection> desire;
+
+	if (this->m_Owner->getPosition().x < 0) {
+		desire.push_back(CollisionDirection::Left);
+	}
+
+	if (this->m_Owner->getPosition().y < 0) {
+		desire.push_back(CollisionDirection::Up);
+	}
+
+	if (this->m_Owner->getPosition().x + this->m_Width > SceneManager::getInstance()->getCurrentScene().getWidth()) {
+		desire.push_back(CollisionDirection::Right);
+	}
+
+	if (this->m_Owner->getPosition().y + this->m_Height > SceneManager::getInstance()->getCurrentScene().getHeight()) {
+		desire.push_back(CollisionDirection::Down);
+	}
+
+	return desire;
 }
 
-void Collider::repositionAfterCollision(const Collider& other) {
-	Collision col = this->getCollisionData(other);
+void Collider::repositionAfterObjectCollision(const Collider& other) {
+	Collision col = this->getObjectCollisionData(other);
 
 	//cout << "Collider: Resolving collision..." << endl;
 

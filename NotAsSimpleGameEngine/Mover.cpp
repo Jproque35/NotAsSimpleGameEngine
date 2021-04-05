@@ -6,7 +6,7 @@ Mover::Mover(float x, float y)
 	: Entity(x, y),
 	m_Speed(50.0f),
 	m_TravelDirection(0.0f, 0.0f) {
-	Vector2f rectSize(50.0f, 50.0f);
+	Vector2f rectSize(32.0f, 32.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Red);
 
 	this->m_Collider = new Collider(*this, rectSize, false);
@@ -21,13 +21,13 @@ Mover::~Mover() {
 	std::cout << "Destroying Mover..." << std::endl;
 }
 
-void Mover::changeDirection(float dtAsSeconds) {
-	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
+void Mover::changeDirectionAfterObjectCollision(float dtAsSeconds) {
+	vector<Collider*> collisionList = this->m_Collider->getObjectCollisionList();
 
 	if (collisionList.size() > 0) {
 
 		for (int i = 0; i < collisionList.size(); ++i) {
-			Collision currCollision = this->m_Collider->getCollisionData(*collisionList[i]);
+			Collision currCollision = this->m_Collider->getObjectCollisionData(*collisionList[i]);
 
 			CollisionDirection colDir = std::get<1>(currCollision);
 
@@ -49,7 +49,37 @@ void Mover::changeDirection(float dtAsSeconds) {
 
 }
 
+void Mover::changeDirectionAfterBoundaryCollision(vector<CollisionDirection> directionList) {
+	if (directionList.size() > 0) {
+
+		for (int i = 0; i < directionList.size(); ++i) {
+			CollisionDirection colDir = directionList[i];
+
+			if (colDir == CollisionDirection::Up && this->m_TravelDirection.y < 0.0f) {
+				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
+			}
+			else if (colDir == CollisionDirection::Down && this->m_TravelDirection.y > 0.0f) {
+				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
+			}
+			else if (colDir == CollisionDirection::Left && this->m_TravelDirection.x < 0.0f) {
+				this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
+			}
+			else if (colDir == CollisionDirection::Right && this->m_TravelDirection.x > 0.0f) {
+				this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
+			}
+		}
+
+	}
+}
+
 void Mover::update(float dtAsSeconds) {
 	this->Move(this->m_TravelDirection.x * dtAsSeconds, this->m_TravelDirection.y * dtAsSeconds);
-	this->changeDirection(dtAsSeconds);
+	this->changeDirectionAfterObjectCollision(dtAsSeconds);
+
+	vector<CollisionDirection> screenCollisions = this->m_Collider->getBoundaryCollisionData();
+	if (screenCollisions.size() > 0) {
+			
+		this->changeDirectionAfterBoundaryCollision(screenCollisions);
+
+	}
 }
