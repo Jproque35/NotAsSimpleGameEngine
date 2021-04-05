@@ -26,7 +26,7 @@ private:
 	SimpleCollisionManager& operator=(const SimpleCollisionManager& rhs) = delete;
 	~SimpleCollisionManager();
 
-	void evaluateCollider(const Collider& currCollider, int i, float dtAsSeconds);
+	void updateSingleCollider(Collider& collider);
 
 public:
 	static SimpleCollisionManager* getInstance();

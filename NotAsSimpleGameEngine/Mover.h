@@ -10,7 +10,7 @@ private:
     Vector2f m_TravelDirection;
     RectangleGraphic* m_Graphic;
 
-    void processCollisions(float dtAsSeconds);
+    void changeDirection(float dtAsSeconds);
 
 protected:
     void update(float dtAsSeconds);

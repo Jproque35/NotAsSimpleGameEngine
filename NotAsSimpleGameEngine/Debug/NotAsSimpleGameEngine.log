@@ -1,95 +1,10 @@
-﻿  BasicPlayer.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\BasicPlayer.cpp(89,21): warning C4018: '<': signed/unsigned mismatch
-  Box.cpp
-  Collider.cpp
-  CompactVector.cpp
-  DrawableManager.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(11,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(5): message : while compiling class template member function 'CompactVector<DrawableObject>::CompactVector(int)'
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(7): message : see reference to function template instantiation 'CompactVector<DrawableObject>::CompactVector(int)' being compiled
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(7): message : see reference to class template instantiation 'CompactVector<DrawableObject>' being compiled
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(32,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(24): message : while compiling class template member function 'CompactVector<DrawableObject>::~CompactVector(void)'
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(14): message : see reference to function template instantiation 'CompactVector<DrawableObject>::~CompactVector(void)' being compiled
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(81,20): warning C4101: 'e': unreferenced local variable
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(77): message : while compiling class template member function 'T &CompactVector<T>::get(int) const'
-          with
-          [
-              T=DrawableObject
-          ]
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(38): message : see reference to function template instantiation 'T &CompactVector<T>::get(int) const' being compiled
-          with
-          [
-              T=DrawableObject
-          ]
-  DrawableObject.cpp
-  GameObjectComponent.cpp
-  Mover.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(29,21): warning C4018: '<': signed/unsigned mismatch
-  RectangleGraphic.cpp
+﻿  Collider.cpp
   SimpleCollisionManager.cpp
 C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
 C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(66,20): warning C4101: 'e': unreferenced local variable
 C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(74,9): warning C4018: '<': signed/unsigned mismatch
 C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(77,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(96,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(123,20): warning C4018: '<': signed/unsigned mismatch
-  Draw.cpp
-  Engine.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(13,50): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(14,50): warning C4244: '=': conversion from 'unsigned int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(16,58): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(16,44): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Entity.cpp
-  GameObject.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObject.cpp(16,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObject.cpp(55,20): warning C4018: '<': signed/unsigned mismatch
-  GameObjectManager.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(11,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(5): message : while compiling class template member function 'CompactVector<GameObject>::CompactVector(int)'
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(8): message : see reference to function template instantiation 'CompactVector<GameObject>::CompactVector(int)' being compiled
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(8): message : see reference to class template instantiation 'CompactVector<GameObject>' being compiled
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(32,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(24): message : while compiling class template member function 'CompactVector<GameObject>::~CompactVector(void)'
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(14): message : see reference to function template instantiation 'CompactVector<GameObject>::~CompactVector(void)' being compiled
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(81,20): warning C4101: 'e': unreferenced local variable
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CompactVector.cpp(77): message : while compiling class template member function 'T &CompactVector<T>::get(int) const'
-          with
-          [
-              T=GameObject
-          ]
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(35): message : see reference to function template instantiation 'T &CompactVector<T>::get(int) const' being compiled
-          with
-          [
-              T=GameObject
-          ]
-  Input.cpp
-  InputManager.cpp
-  Main.cpp
-  MathLib.cpp
-  Scene.cpp
-  Generating Code...
-  Compiling...
-  SceneManager.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SceneManager.cpp(11,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SceneManager.cpp(46,11): warning C4018: '<': signed/unsigned mismatch
-  TestScene.cpp
-  Update.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(95,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(106,20): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

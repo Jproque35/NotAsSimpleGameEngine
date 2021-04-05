@@ -3,6 +3,7 @@
 #pragma once
 #include "GameObject.h"
 #include "Collider.h"
+#include <math.h>
 
 enum class Direction {
     Up,
@@ -20,6 +21,7 @@ enum class EntityType {
 
 class Entity :
     public GameObject {
+
 private:
     Entity() = delete;
     Entity(const Entity& other) = delete;
@@ -37,7 +39,6 @@ public:
     virtual ~Entity();
 
     void Move(float x, float y);
-    Collider& getCollider();
 };
 
 #endif

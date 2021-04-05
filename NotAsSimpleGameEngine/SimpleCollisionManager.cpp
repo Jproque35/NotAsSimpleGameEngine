@@ -76,57 +76,42 @@ vector<Collider*> SimpleCollisionManager::getCollisionList(int id) {
 
 		for (int i = 0; i < this->m_Colliders.size(); ++i) {
 
-			if (currCollider != this->m_Colliders[i]) {
-
-				Collision col = currCollider->getCollisionData(*this->m_Colliders[i]);
-
-				if (std::get<0>(col)) {
-					desire.push_back(this->m_Colliders[i]);
-				}
-
+			if (currCollider != this->m_Colliders[i]
+				&& currCollider->intersects(*this->m_Colliders[i])) {
+				desire.push_back(this->m_Colliders[i]);
 			}
-
 		}
 	}
 
 	return desire;
 }
 
-void SimpleCollisionManager::evaluateCollider(const Collider& currCollider, int i, float dtAsSeconds) {
-	for (int j = 0; j < this->m_Colliders.size(); ++j) {
-		if (i != j) {
-			Collision col = currCollider.getCollisionData(*this->m_Colliders[j]);
+void SimpleCollisionManager::updateSingleCollider(Collider& collider) {
+	vector<Collider*> colList = this->getCollisionList(collider.getId());
 
-			if (std::get<0>(col)) {
-				std::cout << "Collision Detected" << std::endl;
+	if (colList.size() > 0 && !collider.isStationary()) {
+		//cout << "CollisionManager: Collider with id " << collider.getId() << " is colliding with " << colList.size() << " objects." << endl;
 
-				switch (std::get<1>(col)) {
-				case CollisionDirection::Up:
-					std::cout << "Up collision" << std::endl;
-					break;
-				case CollisionDirection::Down:
-					std::cout << "Down collision" << std::endl;
-					break;
-				case CollisionDirection::Left:
-					std::cout << "Left collision" << std::endl;
-					break;
-				case CollisionDirection::Right:
-					std::cout << "Right collision" << std::endl;
-				}
+		for (int j = 0; j < colList.size(); ++j) {
+			Collider* currCollider = colList[j];
+
+			if (currCollider) {
+				collider.repositionAfterCollision(*currCollider);
 			}
 		}
 	}
 }
 
 void SimpleCollisionManager::update(float dtAsSeconds) {
-	
 	for (int i = 0; i < this->m_Colliders.size(); ++i) {
 		Collider* currCollider = this->m_Colliders[i];
 		
 		if (currCollider && currCollider->getOwner().isActive()) {
-			evaluateCollider(*currCollider, i, dtAsSeconds);
+			updateSingleCollider(*currCollider);
 		}
 	}
+
+	this->cleanUp();
 }
 
 void SimpleCollisionManager::cleanUp() {

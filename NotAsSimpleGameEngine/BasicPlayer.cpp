@@ -10,8 +10,9 @@ BasicPlayer::BasicPlayer(float x, float y)
 	//this->m_Collider = new Collider(*this, this->m_Position, rectSize);
 	this->m_Type = EntityType::Player;
 
+
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
-	this->m_Collider = new Collider(*this, this->m_Position, rectSize);
+	this->m_Collider = new Collider(*this, rectSize, false);
 
 	this->addComponent(*m_Collider);
 	this->addComponent(*m_Graphic);
@@ -51,47 +52,13 @@ Vector2f BasicPlayer::inputToVector() {
 	return direction;
 }
 
-void BasicPlayer::resolveCollision(const Collider& other) {
-
-	Collision col = this->m_Collider->getCollisionData(other);
-
-	if (std::get<0>(col)) {
-		//std::cout << "Collision occurred with BasicPlayer" << std::endl;
-		CollisionDirection colDir = std::get<1>(col);
-		Vector2f colVector = std::get<2>(col);
-
-		cout << "Collision Vector is " << colVector.x << " " << colVector.y << endl;
-
-		if (colDir == CollisionDirection::Down) {
-			this->Move(0.0f, -(this->m_Collider->getHeight() - abs(colVector.y)));
-		}
-		else if (colDir == CollisionDirection::Right) {
-			this->Move(-( this->m_Collider->getWidth() - abs(colVector.x) ), 0.0f);
-		}
-		else if (colDir == CollisionDirection::Up) {
-			this->Move(0.0f, other.getHeight() - abs(colVector.y));
-		}
-		else if (colDir == CollisionDirection::Left) {
-			this->Move(other.getWidth() - abs(colVector.x), 0.0f);
-		}
-	}
-
-}
-
 void BasicPlayer::update(float dtAsSeconds) {
 	Vector2f moveDir = this->inputToVector();
 
 	this->Move(moveDir.x * dtAsSeconds, moveDir.y * dtAsSeconds);
 
-	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
-
-	if (collisionList.size() > 0) {
-		for (int i = 0; i < collisionList.size(); ++i) {
-			this->resolveCollision(*collisionList[i]);
-		}
-	}
-
-	//cout << "BasicPlayer position is " << this->m_Pos.x << " " << this->m_Pos.y << endl;
-	//this->m_Rect->setPosition(this->m_Position);
-	//this->m_Graphic->update(dtAsSeconds);
+	/*
+	if (this->m_Collider->getCollisionList().size() > 0) {
+		cout << "BasicPlayer: Collision Ocurring..." << endl;
+	}*/
 }

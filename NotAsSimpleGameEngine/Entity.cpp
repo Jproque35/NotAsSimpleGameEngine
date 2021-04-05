@@ -15,7 +15,3 @@ void Entity::Move(float x, float y) {
 	this->m_Position.x += x;
 	this->m_Position.y += y;
 }
-
-Collider& Entity::getCollider() {
-	return *this->m_Collider;
-}

@@ -43,9 +43,6 @@
     <Filter Include="Source Files\GameObjects\Base">
       <UniqueIdentifier>{4cc5700f-39f7-4119-93c0-4c792bfd035c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\GameObjects\Event">
-      <UniqueIdentifier>{f54fa232-e36e-485b-aaa4-de45b9974cc5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\GameObjects\TestObjects">
       <UniqueIdentifier>{5bc5bf2e-5863-4842-a6b7-043a56e2de5c}</UniqueIdentifier>
     </Filter>
@@ -78,6 +75,15 @@
     </Filter>
     <Filter Include="Header Files\Engine\Main">
       <UniqueIdentifier>{8056601d-ff69-4768-b996-88237077810f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Components\Base">
+      <UniqueIdentifier>{c84ef073-a7c7-4364-9d21-74dcb3dde6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Components\Graphics">
+      <UniqueIdentifier>{c92581d6-b82e-4da6-a54c-d92d9559c1d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObjects\Components\Collision">
+      <UniqueIdentifier>{339f5fcd-ec72-4552-a269-f4e709e89d5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +182,6 @@
     <ClInclude Include="BasicPlayer.h">
       <Filter>Header Files\GameObjects\TestObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Header Files\GameObjects\Components</Filter>
-    </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Header Files\GameObjects\TestObjects</Filter>
     </ClInclude>
@@ -204,13 +207,16 @@
       <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectComponent.h">
-      <Filter>Header Files\GameObjects\Components</Filter>
+      <Filter>Header Files\GameObjects\Components\Base</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
-      <Filter>Header Files\GameObjects\Components</Filter>
+      <Filter>Header Files\GameObjects\Components\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="RectangleGraphic.h">
-      <Filter>Header Files\GameObjects\Components</Filter>
+      <Filter>Header Files\GameObjects\Components\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\GameObjects\Components\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

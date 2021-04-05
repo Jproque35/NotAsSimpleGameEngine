@@ -16,7 +16,6 @@ private:
     BasicPlayer& operator=(const BasicPlayer& rhs) = delete;
 
     Vector2f inputToVector();
-    void resolveCollision(const Collider& other);
 
 protected:
     void update(float dtAsSeconds) final;

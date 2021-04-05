@@ -3,9 +3,11 @@
 #include "GameObject.h"
 #include "SimpleCollisionManager.h"
 
-Collider::Collider(GameObject& owner, const Vector2f& pos, const Vector2f& size)
+Collider::Collider(GameObject& owner, const Vector2f& size, bool stationary)
 	: GameObjectComponent(owner),
-	m_RectCol(pos, size) {
+	m_Stationary(stationary),
+	m_Height(size.y),
+	m_Width(size.x) {
 	this->m_Id = SimpleCollisionManager::getInstance()->add(*this);
 }
 
@@ -13,52 +15,39 @@ Collider::~Collider() {
 	cout << this << ": Destroying Collider..." << endl;
 }
 
-float Collider::getX() const {
-	return this->m_RectCol.left;
+bool Collider::isStationary() inline const {
+	return this->m_Stationary;
 }
 
-float Collider::getY() const {
-	return this->m_RectCol.top;
+float Collider::getWidth() inline const {
+	return this->m_Width;
 }
 
-void Collider::setWidth(float width) {
-	this->m_RectCol.width = width;
+float Collider::getHeight() inline const {
+	return this->m_Height;
 }
 
-float Collider::getWidth() const {
-	return this->m_RectCol.width;
+bool Collider::horizontalCollision(const Collider& other) inline const {
+	return this->m_Owner->getPosition().x < other.m_Owner->getPosition().x + other.m_Width
+		&& other.m_Owner->getPosition().x < this->m_Owner->getPosition().x + this->m_Width;
 }
 
-void Collider::setHeight(float height) {
-	this->m_RectCol.height = height;
+bool Collider::verticalCollision(const Collider& other) inline const {
+	return this->m_Owner->getPosition().y < other.m_Owner->getPosition().y + other.m_Height
+		&& other.m_Owner->getPosition().y < this->m_Owner->getPosition().y + this->m_Height;
 }
 
-float Collider::getHeight() const {
-	return this->m_RectCol.height;
+bool Collider::intersects(const Collider& other) inline const {
+	return this->horizontalCollision(other) && this->verticalCollision(other);
 }
 
-void Collider::setPosition(float x, float y) {
-	this->m_RectCol.top = y;
-	this->m_RectCol.left = x;
-}
-
-bool Collider::intersects(const Collider& other) const {
-	return this->m_RectCol.intersects(other.m_RectCol);
-}
-
-void Collider::printCollider() const {
-	std::cout << "Collider Position: " << this->m_RectCol.left << " " << this->m_RectCol.top << std::endl;
-}
-
-CollisionDirection Collider::getCollisionDirection(const FloatRect& other) const {
+CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2f diff) const {
 	Vector2f compass[] = {
 		Vector2f(0.0f, 1.0f),
 		Vector2f(1.0f, 0.0f),
 		Vector2f(0.0f, -1.0f),
 		Vector2f(-1.0f, 0.0f)
 	};
-
-	Vector2f diff(other.left - this->m_RectCol.left, other.top - this->m_RectCol.top);
 
 	float max = 0;
 	unsigned int desire = 0;
@@ -74,23 +63,53 @@ CollisionDirection Collider::getCollisionDirection(const FloatRect& other) const
 	return (CollisionDirection)desire;
 }
 
-Collision Collider::getCollisionData(const Collider& other) const {
-	if (this->m_RectCol.intersects(other.m_RectCol) && other.m_Owner->isActive()) {
-		Vector2f diff(other.m_RectCol.left - this->m_RectCol.left, other.m_RectCol.top - this->m_RectCol.top);
+Collision Collider::getCollisionData(const Collider& other) inline  const {
+	bool collided = this->intersects(other) && other.m_Owner->isActive();
+	Vector2f diff(other.m_Owner->getPosition().x - this->m_Owner->getPosition().x, 
+		other.m_Owner->getPosition().y - this->m_Owner->getPosition().y);
+	CollisionDirection colDir = this->getRelativeDirection(other, diff);
 
-		return std::make_tuple( true,getCollisionDirection(other.m_RectCol), diff);
-	}
-
-	return std::make_tuple(false, CollisionDirection::Up, Vector2f(0.0f, 0.0f));
+	return std::make_tuple(collided, colDir, diff);
 }
 
 vector<Collider*> Collider::getCollisionList() const {
 	return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
 }
 
+void Collider::repositionAfterCollision(const Collider& other) {
+	Collision col = this->getCollisionData(other);
+
+	//cout << "Collider: Resolving collision..." << endl;
+
+	if (std::get<0>(col)) {
+		CollisionDirection colDir = std::get<1>(col);
+		Vector2f colVector = std::get<2>(col);
+
+		//cout << "Collision Vector is " << colVector.x << " " << colVector.y << endl;
+
+		Vector2f ownerPos = this->m_Owner->getPosition(); 
+		float xPos = ownerPos.x;
+		float yPos = ownerPos.y;
+
+		if (colDir == CollisionDirection::Down) {
+			yPos = yPos - (this->getHeight() - abs(colVector.y));
+		}
+		else if (colDir == CollisionDirection::Right) {
+			xPos = xPos - (this->getWidth() - abs(colVector.x));
+		}
+		else if (colDir == CollisionDirection::Up) {
+			yPos = yPos + other.getHeight() - abs(colVector.y);
+		}
+		else if (colDir == CollisionDirection::Left) {
+			xPos = xPos + other.getWidth() - abs(colVector.x);
+		}
+
+		this->m_Owner->setPosition(xPos, yPos);
+	}
+
+}
+
 void Collider::update(float dtAsSeconds) {
-	this->m_RectCol.left = this->m_Owner->getPosition().x;
-	this->m_RectCol.top = this->m_Owner->getPosition().y;
 }
 
 void Collider::destroy() const {

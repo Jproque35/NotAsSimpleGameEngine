@@ -4,12 +4,12 @@
 
 Mover::Mover(float x, float y)
 	: Entity(x, y),
-	m_Speed(20.0f),
+	m_Speed(50.0f),
 	m_TravelDirection(0.0f, 0.0f) {
 	Vector2f rectSize(50.0f, 50.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Red);
 
-	this->m_Collider = new Collider(*this, this->m_Position, rectSize);
+	this->m_Collider = new Collider(*this, rectSize, false);
 	this->m_TravelDirection.x = this->m_Speed;
 	this->m_TravelDirection.y = this->m_Speed;
 
@@ -21,7 +21,7 @@ Mover::~Mover() {
 	std::cout << "Destroying Mover..." << std::endl;
 }
 
-void Mover::processCollisions(float dtAsSeconds) {
+void Mover::changeDirection(float dtAsSeconds) {
 	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
 
 	if (collisionList.size() > 0) {
@@ -50,7 +50,6 @@ void Mover::processCollisions(float dtAsSeconds) {
 }
 
 void Mover::update(float dtAsSeconds) {
-	this->processCollisions(dtAsSeconds);
-
 	this->Move(this->m_TravelDirection.x * dtAsSeconds, this->m_TravelDirection.y * dtAsSeconds);
+	this->changeDirection(dtAsSeconds);
 }
