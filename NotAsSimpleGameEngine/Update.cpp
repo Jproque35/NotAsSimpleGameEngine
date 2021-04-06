@@ -2,6 +2,7 @@
 #include "SceneManager.h"
 #include "GameObjectManager.h"
 #include "SimpleCollisionManager.h"
+#include "CollisionManager.h"
 
 void Engine::update(float dtAsSeconds) {
 	SceneManager::getInstance()->getCurrentScene().process(dtAsSeconds);
@@ -17,4 +18,5 @@ void Engine::update(float dtAsSeconds) {
 
 	GameObjectManager::getInstance()->cleanUp();
 	SimpleCollisionManager::getInstance()->update(dtAsSeconds);
+	CollisionManager::getInstance()->update(dtAsSeconds);
 }

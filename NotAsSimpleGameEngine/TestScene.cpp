@@ -5,6 +5,7 @@
 #include "Mover.h"
 #include <iostream>
 #include "Collider.h"
+#include "CollisionManager.h"
 //#include "Engine.h"
 
 TestScene::TestScene() : 
@@ -28,8 +29,9 @@ void TestScene::enter(float dtAsSeconds) {
 void TestScene::update(float dtAsSeconds) {
 	Scene::update(dtAsSeconds);
 	this->m_Seconds += dtAsSeconds;
-	if (this->m_Seconds >= 1.0f) {
-		std::cout << "TestScene: Tick" << std::endl;
+	if (this->m_Seconds >= 20.0f) {
+		//std::cout << "TestScene: Tick" << std::endl;
+		CollisionManager::getInstance()->print();
 		this->m_Seconds = 0.0f;
 	}
 }

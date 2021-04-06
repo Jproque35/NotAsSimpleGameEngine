@@ -22,7 +22,7 @@ Mover::~Mover() {
 }
 
 void Mover::changeDirectionAfterObjectCollision(float dtAsSeconds) {
-	vector<Collider*> collisionList = this->m_Collider->getObjectCollisionList();
+	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
 
 	if (collisionList.size() > 0) {
 

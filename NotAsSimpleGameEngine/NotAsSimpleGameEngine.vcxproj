@@ -155,6 +155,7 @@
     <ClCompile Include="BasicPlayer.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="CompactVector.cpp" />
     <ClCompile Include="DrawableManager.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="BasicPlayer.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="CompactVector.h" />
     <ClInclude Include="DrawableManager.h" />
     <ClInclude Include="DrawableObject.h" />

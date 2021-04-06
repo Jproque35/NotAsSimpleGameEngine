@@ -17,8 +17,6 @@ Engine::Engine() {
 	this->resolution.y = 640.0f;
 
 	this->m_Window.create(VideoMode(resolution.x, resolution.y), "Simple Game Engine");
-	TestScene* testScene = new TestScene();
-	SceneManager::getInstance()->add(*testScene);
 }
 
 Engine::~Engine() {
@@ -33,6 +31,7 @@ Engine* Engine::getInstance() {
 	if (!instance) {
 		instance = new Engine();
 	}
+
 	return instance;
 }
 
@@ -40,6 +39,7 @@ void Engine::resetInstance() {
 	if (instance) {
 		delete(instance);
 	}
+
 	instance = NULL;
 }
 
@@ -47,27 +47,23 @@ void Engine::start() {
 
 	Clock clock;
 
+	TestScene* testScene = new TestScene();
+	SceneManager::getInstance()->add(*testScene);
+
 	while (this->m_Window.isOpen()) {
-
 		Event event;
+
 		while (this->m_Window.pollEvent(event)) {
-
 			if (event.type == Event::Closed) {
-
 				this->m_Window.close();
-
 			}
-
 		}
 
 		Time dt = clock.restart();
-
 		float dtAsSeconds = dt.asSeconds();
 
 		input();
 		update(dtAsSeconds);
 		draw();
-
 	}
-
 }

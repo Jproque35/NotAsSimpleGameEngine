@@ -23,6 +23,8 @@ public:
 	virtual ~GameObjectComponent();
 
 	int getId() const;
+	float getX() const;
+	float getY() const;
 	GameObject& getOwner() const;
 	virtual void update(float dtAsSeconds) = 0;
 	virtual void destroy() const = 0;

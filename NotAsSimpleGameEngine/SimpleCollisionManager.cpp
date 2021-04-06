@@ -68,7 +68,7 @@ void SimpleCollisionManager::erase(int id) {
 	}
 }
 
-vector<Collider*> SimpleCollisionManager::getObjectCollisionList(int id) {
+vector<Collider*> SimpleCollisionManager::getCollisionList(int id) {
 	try {
 		vector<Collider*> desire;
 
@@ -92,7 +92,7 @@ vector<Collider*> SimpleCollisionManager::getObjectCollisionList(int id) {
 }
 
 void SimpleCollisionManager::updateSingleCollider(Collider& collider) {
-	vector<Collider*> colList = this->getObjectCollisionList(collider.getId());
+	vector<Collider*> colList = this->getCollisionList(collider.getId());
 
 	if (colList.size() > 0 && !collider.isStationary()) {
 		for (int j = 0; j < colList.size(); ++j) {

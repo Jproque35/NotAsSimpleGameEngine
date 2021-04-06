@@ -9,6 +9,14 @@ GameObjectComponent::~GameObjectComponent() {
 	cout << "Destroying GameObjectComponent..." << endl;
 }
 
+float GameObjectComponent::getX() const {
+	return this->m_Owner->getPosition().x;
+}
+
+float GameObjectComponent::getY() const {
+	return this->m_Owner->getPosition().y;
+}
+
 int GameObjectComponent::getId() const {
 	return this->m_Id;
 }

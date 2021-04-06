@@ -85,6 +85,12 @@
     <Filter Include="Header Files\GameObjects\Components\Collision">
       <UniqueIdentifier>{339f5fcd-ec72-4552-a269-f4e709e89d5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Managers\CollisionManagers">
+      <UniqueIdentifier>{8919a997-6520-4c35-a14e-32f598f6f8c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Managers\CollisionManagers">
+      <UniqueIdentifier>{a7b3e7d0-9686-4578-9b5e-353b1818edb7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjectManager.cpp">
@@ -116,9 +122,6 @@
     </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\GameObjects\TestObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="SimpleCollisionManager.cpp">
-      <Filter>Source Files\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Mover.cpp">
       <Filter>Source Files\GameObjects\TestObjects</Filter>
@@ -156,6 +159,12 @@
     <ClCompile Include="RectangleGraphic.cpp">
       <Filter>Source Files\GameObjects\Components</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Source Files\Managers\CollisionManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleCollisionManager.cpp">
+      <Filter>Source Files\Managers\CollisionManagers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -184,9 +193,6 @@
     </ClInclude>
     <ClInclude Include="Box.h">
       <Filter>Header Files\GameObjects\TestObjects</Filter>
-    </ClInclude>
-    <ClInclude Include="SimpleCollisionManager.h">
-      <Filter>Header Files\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Mover.h">
       <Filter>Header Files\GameObjects\TestObjects</Filter>
@@ -217,6 +223,12 @@
     </ClInclude>
     <ClInclude Include="Collider.h">
       <Filter>Header Files\GameObjects\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleCollisionManager.h">
+      <Filter>Header Files\Managers\CollisionManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Header Files\Managers\CollisionManagers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
