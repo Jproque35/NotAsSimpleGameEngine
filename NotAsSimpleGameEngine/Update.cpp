@@ -17,6 +17,6 @@ void Engine::update(float dtAsSeconds) {
 	}
 
 	GameObjectManager::getInstance()->cleanUp();
-	SimpleCollisionManager::getInstance()->update(dtAsSeconds);
 	CollisionManager::getInstance()->update(dtAsSeconds);
+	SimpleCollisionManager::getInstance()->update(dtAsSeconds);
 }

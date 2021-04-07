@@ -1,7 +1,4 @@
-﻿  CollisionManager.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(74,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(85,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(99,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(128,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(137,20): warning C4018: '<': signed/unsigned mismatch
+﻿  CollisionList.cpp
+  CollisionListNode.cpp
+  Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe
