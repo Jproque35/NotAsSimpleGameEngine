@@ -22,6 +22,7 @@ class GameObjectComponent;
 class GameObject {
 private:
 	vector<GameObjectComponent*> m_Components;
+	static int m_CurrId;
 
 	GameObject() = delete;
 	GameObject(const GameObject& obj) = delete;

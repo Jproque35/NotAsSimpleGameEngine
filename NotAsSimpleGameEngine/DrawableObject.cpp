@@ -3,7 +3,8 @@
 
 DrawableObject::DrawableObject(GameObject& owner)
 	: GameObjectComponent(owner) {
-	this->m_Id = DrawableManager::getInstance()->add(*this);
+	//this->m_Id = DrawableManager::getInstance()->add(*this);
+	DrawableManager::getInstance()->add(*this);
 }
 
 DrawableObject::~DrawableObject() {
@@ -11,5 +12,5 @@ DrawableObject::~DrawableObject() {
 }
 
 void DrawableObject::destroy() const {
-	DrawableManager::getInstance()->erase(this->m_Id);
+
 }

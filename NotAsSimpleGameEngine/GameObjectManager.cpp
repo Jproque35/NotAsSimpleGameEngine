@@ -1,11 +1,11 @@
 #include "GameObjectManager.h"
-#include "CompactVector.cpp"
+#include "Container.cpp"
 #include <iostream>
 
 GameObjectManager* GameObjectManager::instance = NULL;
 
 GameObjectManager::GameObjectManager() {
-	this->m_Storage = new CompactVector<GameObject>(128);
+	this->m_Storage = new Container<GameObject>(128);
 }
 
 GameObjectManager::~GameObjectManager() {
@@ -27,17 +27,12 @@ void GameObjectManager::resetInstance() {
 	instance = NULL;
 }
 
-int GameObjectManager::add(GameObject& obj) {
-	return this->m_Storage->add(obj);
+void GameObjectManager::add(GameObject& obj) {
+	this->m_Storage->add(obj, obj.getId());
 }
 
 GameObject& GameObjectManager::get(int i) inline const {
 	return this->m_Storage->get(i);
-}
-
-void GameObjectManager::erase(int i) {
-	cout << "GameObjectManager: Marking object with address " << &this->m_Storage->get(i) << " for deletion." << endl;
-	this->m_Storage->erase(i);
 }
 
 int GameObjectManager::size() const {

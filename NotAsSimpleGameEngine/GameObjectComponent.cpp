@@ -1,8 +1,11 @@
 #include "GameObjectComponent.h"
 #include "GameObject.h"
 
+int GameObjectComponent::m_CurrId = 0;
+
 GameObjectComponent::GameObjectComponent(GameObject& obj) {
 	this->m_Owner = &obj;
+	this->m_Id = m_CurrId++;
 }
 
 GameObjectComponent::~GameObjectComponent() {

@@ -2,7 +2,7 @@
 #define GAMEOBJECTMANAGER_H
 #pragma once
 #include"GameObject.h"
-#include "CompactVector.h"
+#include "Container.h"
 #include <SFML/Graphics.hpp>
 
 using namespace std;
@@ -12,7 +12,7 @@ class GameObjectManager {
 
 private:
 	static GameObjectManager* instance;
-	CompactVector<GameObject>* m_Storage;
+	Container<GameObject>* m_Storage;
 
 	GameObjectManager();
 	~GameObjectManager();
@@ -20,9 +20,8 @@ private:
 public:
 	static GameObjectManager* getInstance();
 	static void resetInstance();
-	int add(GameObject& obj);
+	void add(GameObject& obj);
 	GameObject& get(int i) inline const;
-	void erase(int i);
 	int size() inline const;
 	void cleanUp();
 

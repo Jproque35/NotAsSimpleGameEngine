@@ -132,7 +132,7 @@
     <ClCompile Include="Mover.cpp">
       <Filter>Source Files\GameObjects\TestObjects</Filter>
     </ClCompile>
-    <ClCompile Include="CompactVector.cpp">
+    <ClCompile Include="Container.cpp">
       <Filter>Source Files\Engine\Library</Filter>
     </ClCompile>
     <ClCompile Include="MathLib.cpp">
@@ -177,6 +177,12 @@
     <ClCompile Include="CollisionList.cpp">
       <Filter>Source Files\Engine\Library\CollisionMap</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionListEntry.cpp">
+      <Filter>Source Files\Managers\CollisionManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManagerEntry.cpp">
+      <Filter>Source Files\Managers\CollisionManagers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -212,7 +218,7 @@
     <ClInclude Include="TestScene.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="CompactVector.h">
+    <ClInclude Include="Container.h">
       <Filter>Header Files\Engine\Library</Filter>
     </ClInclude>
     <ClInclude Include="MathLib.h">
@@ -246,6 +252,12 @@
       <Filter>Header Files\Engine\Library\CollisionMap</Filter>
     </ClInclude>
     <ClInclude Include="CollisionList.h">
+      <Filter>Header Files\Engine\Library\CollisionMap</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManagerEntry.h">
+      <Filter>Header Files\Engine\Library\CollisionMap</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionListEntry.h">
       <Filter>Header Files\Engine\Library\CollisionMap</Filter>
     </ClInclude>
   </ItemGroup>

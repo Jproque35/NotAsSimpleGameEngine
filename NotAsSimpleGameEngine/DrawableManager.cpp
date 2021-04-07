@@ -1,10 +1,10 @@
 #include "DrawableManager.h"
-#include "CompactVector.cpp"
+#include "Container.cpp"
 
 DrawableManager* DrawableManager::instance = NULL;
 
 DrawableManager::DrawableManager() {
-	this->m_Storage = new CompactVector<DrawableObject>(128);
+	this->m_Storage = new Container<DrawableObject>(128);
 }
 
 DrawableManager::~DrawableManager() {
@@ -29,18 +29,14 @@ void DrawableManager::resetInstance() {
 	instance = NULL;
 }
 
-int DrawableManager::add(DrawableObject& obj) {
+void DrawableManager::add(DrawableObject& obj) {
 	cout << "DrawableManager: Adding DrawableObject to manager..." << endl;
-	return this->m_Storage->add(obj);
+	this->m_Ids.push_back( obj.getId() );
+	this->m_Storage->add(obj, obj.getId());
 }
 
 DrawableObject& DrawableManager::get(int id) inline const {
 	return this->m_Storage->get(id);
-}
-
-void DrawableManager::erase(int id) {
-	cout << "DrawableManager: Marking object with address " << &this->m_Storage->get(id) << " for deletion." << endl;
-	this->m_Storage->erase(id);
 }
 
 int DrawableManager::size() inline const {
@@ -49,4 +45,8 @@ int DrawableManager::size() inline const {
 
 void DrawableManager::cleanUp() {
 	this->m_Storage->cleanUp();
+}
+
+vector<int> DrawableManager::getIdList() const {
+	return this->m_Ids;
 }

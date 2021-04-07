@@ -1,4 +1,63 @@
-﻿  CollisionList.cpp
-  CollisionListNode.cpp
+﻿  BasicPlayer.cpp
+  Box.cpp
+  Collider.cpp
+  Container.cpp
+  DrawableManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(12,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(8): message : while compiling class template member function 'Container<DrawableObject>::~Container(void)'
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(14): message : see reference to function template instantiation 'Container<DrawableObject>::~Container(void)' being compiled
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(7): message : see reference to class template instantiation 'Container<DrawableObject>' being compiled
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(40,20): warning C4101: 'e': unreferenced local variable
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(36): message : while compiling class template member function 'T &Container<T>::get(int) const'
+          with
+          [
+              T=DrawableObject
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\DrawableManager.cpp(39): message : see reference to function template instantiation 'T &Container<T>::get(int) const' being compiled
+          with
+          [
+              T=DrawableObject
+          ]
+  DrawableObject.cpp
+  Mover.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(29,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(55,21): warning C4018: '<': signed/unsigned mismatch
+  Draw.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Draw.cpp(12,20): warning C4018: '<': signed/unsigned mismatch
+  Engine.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(19,58): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(19,44): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameObject.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObject.cpp(19,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObject.cpp(58,20): warning C4018: '<': signed/unsigned mismatch
+  GameObjectManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(12,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(8): message : while compiling class template member function 'Container<GameObject>::~Container(void)'
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(14): message : see reference to function template instantiation 'Container<GameObject>::~Container(void)' being compiled
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(8): message : see reference to class template instantiation 'Container<GameObject>' being compiled
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(40,20): warning C4101: 'e': unreferenced local variable
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(36): message : while compiling class template member function 'T &Container<T>::get(int) const'
+          with
+          [
+              T=GameObject
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(35): message : see reference to function template instantiation 'T &Container<T>::get(int) const' being compiled
+          with
+          [
+              T=GameObject
+          ]
+  MathLib.cpp
+  TestScene.cpp
+  Update.cpp
   Generating Code...
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(43): warning C4715: 'Container<GameObject>::get': not all control paths return a value
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(43): warning C4715: 'Container<DrawableObject>::get': not all control paths return a value
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

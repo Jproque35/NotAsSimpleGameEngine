@@ -10,6 +10,8 @@ class GameObject;
 class GameObjectComponent {
 
 private:
+	static int m_CurrId;
+
 	GameObjectComponent() = delete;
 	GameObjectComponent(const GameObjectComponent& obj) = delete;
 	GameObjectComponent& operator=(const GameObjectComponent& rhs) = delete;

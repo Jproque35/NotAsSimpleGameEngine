@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
+#include "CollisionListEntry.h"
 
 CollisionManager* CollisionManager::instance = NULL;
 
@@ -57,6 +58,9 @@ void CollisionManager::updateSingleCollider(Collider& col) {
 	}
 }
 
+bool CollisionManager::compare_values(CollisionListEntry* lhs, CollisionListEntry* rhs) {
+	return lhs->getValue() < rhs->getValue();
+}
 
 void CollisionManager::update(float dtAsSeconds) {
 

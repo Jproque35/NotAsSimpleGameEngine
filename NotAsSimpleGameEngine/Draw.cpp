@@ -6,22 +6,14 @@
 void Engine::draw() {
 	this->m_Window.clear(Color::Black);
 
-	/*
-	GameObjectManager* gm = GameObjectManager::getInstance();
-
-	for (int i = 0; i < gm->size(); ++i) {
-		GameObject* currObj = &gm->get(i);
-		if (currObj != NULL && currObj->isActive()) {
-			m_Window.draw(currObj->getGraphic());
-		}
-	}*/
-
 	DrawableManager* dm = DrawableManager::getInstance();
 
-	for (int i = 0; i < dm->size(); ++i) {
-		DrawableObject* currDrawable = &dm->get(i);
+	vector<int> idList = dm->getIdList();
+	for (int i = 0; i < idList.size(); ++i) {
+		DrawableObject* currDrawable = &dm->get(idList[i]);
 
 		if (currDrawable && currDrawable->getOwner().isActive()) {
+			cout << "Drawing object.." << endl;
 			m_Window.draw(currDrawable->getGraphic());
 		}
 	}

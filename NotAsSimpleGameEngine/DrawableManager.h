@@ -2,9 +2,10 @@
 #define DRAWABLEMANAGER_H
 #pragma once
 #include "DrawableObject.h"
-#include "CompactVector.h"
+#include "Container.h"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <unordered_map>
 
 using namespace sf;
 using namespace std;
@@ -12,8 +13,9 @@ using namespace std;
 class DrawableManager {
 private:
 	static DrawableManager* instance;
-	CompactVector<DrawableObject>* m_Storage;
-	
+	Container<DrawableObject>* m_Storage;
+	vector<int> m_Ids;
+
 	DrawableManager();
 	~DrawableManager();
 	DrawableManager(const DrawableManager& obj) = delete;
@@ -23,9 +25,9 @@ public:
 	static DrawableManager* getInstance();
 	static void resetInstance();
 
-	int add(DrawableObject& obj);
+	void add(DrawableObject& obj);
 	DrawableObject& get(int id) inline const;
-	void erase(int id);
+	vector<int> getIdList() const;
 	int size() inline const;
 	void cleanUp();
 };

@@ -2,12 +2,15 @@
 #include "GameObjectComponent.h"
 #include "GameObjectManager.h"
 
+int GameObject::m_CurrId = 0;
+
 GameObject::GameObject(float x, float y) :
 	m_Active(false),
 	m_Position(x, y),
-	m_Id( GameObjectManager::getInstance()->add(*this) ) {
+	m_Id( m_CurrId++ ) {
 	std::cout << "GameObject created at position " << this->m_Position.x << " " << this->m_Position.y << std::endl;
 	this->input = InputManager::getInstance();
+	GameObjectManager::getInstance()->add(*this);
 }
 
 GameObject::~GameObject() {
@@ -17,7 +20,7 @@ GameObject::~GameObject() {
 		GameObjectComponent* currComponent = this->m_Components[i];
 
 		if (currComponent) {
-			currComponent->destroy();
+			//currComponent->destroy();
 		}
 
 		currComponent = NULL;
