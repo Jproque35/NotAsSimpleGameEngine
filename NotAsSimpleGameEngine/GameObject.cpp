@@ -4,9 +4,9 @@
 
 int GameObject::m_CurrId = 0;
 
-GameObject::GameObject(float x, float y) :
+GameObject::GameObject() :
 	m_Active(false),
-	m_Position(x, y),
+	m_Position(0.0f, 0.0f),
 	m_Id( m_CurrId++ ) {
 	std::cout << "GameObject created at position " << this->m_Position.x << " " << this->m_Position.y << std::endl;
 	this->input = InputManager::getInstance();
@@ -25,6 +25,12 @@ GameObject::~GameObject() {
 
 		currComponent = NULL;
 	}
+}
+
+void GameObject::init(float x, float y) {
+	this->m_Position.x = x;
+	this->m_Position.y = y;
+	this->m_Active = true;
 }
 
 int GameObject::getId() const {

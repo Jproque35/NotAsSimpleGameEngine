@@ -24,7 +24,6 @@ private:
 	vector<GameObjectComponent*> m_Components;
 	static int m_CurrId;
 
-	GameObject() = delete;
 	GameObject(const GameObject& obj) = delete;
 	GameObject& operator=(const GameObject& rhs) = delete;
 
@@ -37,9 +36,10 @@ protected:
 	void addComponent(GameObjectComponent& component);
 
 public:
-	GameObject(float x, float y);
+	GameObject();
 	virtual ~GameObject();
 
+	virtual void init(float x, float y);
 	int getId() const;
 	bool isActive() const;
 	void setActive(bool isActive);

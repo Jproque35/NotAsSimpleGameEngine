@@ -15,7 +15,7 @@ Collider::Collider(GameObject& owner, const Vector2f& size, bool stationary)
 }
 
 Collider::~Collider() {
-	cout << this << ": Destroying Collider..." << endl;
+	cout << "Collider: Destroying Collider..." << endl;
 }
 
 bool Collider::isStationary() inline const {
@@ -131,7 +131,6 @@ void Collider::repositionAfterObjectCollision(const Collider& other) {
 
 		this->m_Owner->setPosition(xPos, yPos);
 	}
-
 }
 
 void Collider::update(float dtAsSeconds) {

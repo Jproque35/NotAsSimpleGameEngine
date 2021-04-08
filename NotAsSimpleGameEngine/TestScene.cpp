@@ -16,14 +16,13 @@ void TestScene::enter(float dtAsSeconds) {
 	Scene::enter(dtAsSeconds);
 	std::cout << "Entering Test Scene" << std::endl;
 
-	testPlayer = new BasicPlayer(200.0f, 200.0f);
-	GameObjectManager::getInstance()->get(testPlayer->getId()).setActive(true);
+	testPlayer = new BasicPlayer();
+	testBox = new Box();
+	testMover = new Mover();
 
-	testBox = new Box(300.0f, 300.0f);
-	GameObjectManager::getInstance()->get(testBox->getId()).setActive(true);
-
-	testMover = new Mover(0.0f, 0.0f);
-	GameObjectManager::getInstance()->get(testMover->getId()).setActive(true);
+	testPlayer->init(200.0f, 200.0f);
+	testBox->init(300.0f, 300.0f);
+	testMover->init(0.0f, 0.0f);
 }
 
 void TestScene::update(float dtAsSeconds) {

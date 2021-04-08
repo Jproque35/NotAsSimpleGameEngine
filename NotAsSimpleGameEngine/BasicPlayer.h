@@ -11,7 +11,6 @@ private:
     float m_Speed;
     RectangleGraphic* m_Graphic;
 
-    BasicPlayer() = delete;
     BasicPlayer(const BasicPlayer& obj) = delete;
     BasicPlayer& operator=(const BasicPlayer& rhs) = delete;
 
@@ -21,9 +20,10 @@ protected:
     void update(float dtAsSeconds) final;
 
 public:
-    BasicPlayer(float x, float y);
+    BasicPlayer();
     ~BasicPlayer();
 
+    void init(float x, float y) final;
 };
 
 #endif

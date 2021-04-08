@@ -23,7 +23,6 @@ class Entity :
     public GameObject {
 
 private:
-    Entity() = delete;
     Entity(const Entity& other) = delete;
     Entity& operator=(const Entity& rhs) = delete;
 
@@ -35,7 +34,7 @@ protected:
     virtual void update(float dtAsSeconds) = 0;
 
 public:
-    Entity(float x, float y);
+    Entity();
     virtual ~Entity();
 
     void Move(float x, float y);

@@ -2,25 +2,26 @@
 #include "DrawableManager.h"
 #include "RectangleGraphic.h"
 
-BasicPlayer::BasicPlayer(float x, float y)
-	: Entity(x, y),
+BasicPlayer::BasicPlayer()
+	: Entity(),
 	m_Speed(150.0f) {
 	Vector2f rectSize(32.0f, 32.0f);
-	//this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
-	//this->m_Collider = new Collider(*this, this->m_Position, rectSize);
 	this->m_Type = EntityType::Player;
-
 
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
 	this->m_Collider = new Collider(*this, rectSize, false);
 
 	this->addComponent(*m_Collider);
 	this->addComponent(*m_Graphic);
-
 }
 
 BasicPlayer::~BasicPlayer() {
 	cout << this << ": Destroying BasicPlayer..." << endl;
+}
+
+void BasicPlayer::init(float x, float y) {
+	GameObject::init(x, y);
+	cout << "BasePlayer: Initialized at position " << x << ", " << y << endl;
 }
 
 Vector2f BasicPlayer::inputToVector() {

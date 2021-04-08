@@ -11,7 +11,6 @@ void Engine::update(float dtAsSeconds) {
 	for (int i = 0; i < gm->size(); ++i) {
 		GameObject* currObj = &gm->get(i);
 		if (currObj != NULL && currObj->isActive()) {
-			//currObj->update(dtAsSeconds);
 			currObj->process(dtAsSeconds);
 		}
 	}

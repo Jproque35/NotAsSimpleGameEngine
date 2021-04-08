@@ -10,6 +10,9 @@ private:
     Vector2f m_TravelDirection;
     RectangleGraphic* m_Graphic;
 
+    Mover(const Mover& other) = delete;
+    Mover& operator=(const Mover& rhs) = delete;
+
     void changeDirectionAfterObjectCollision(float dtAsSeconds);
     void changeDirectionAfterBoundaryCollision(vector<CollisionDirection> directionList);
 
@@ -17,8 +20,9 @@ protected:
     void update(float dtAsSeconds);
 
 public:
-    Mover(float x, float y);
+    Mover();
     ~Mover();
 
+    void init(float x, float y) final;
 };
 

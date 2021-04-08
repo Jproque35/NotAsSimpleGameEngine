@@ -2,8 +2,8 @@
 #include "DrawableManager.h"
 #include "RectangleGraphic.h"
 
-Mover::Mover(float x, float y)
-	: Entity(x, y),
+Mover::Mover()
+	: Entity(),
 	m_Speed(50.0f),
 	m_TravelDirection(0.0f, 0.0f) {
 	Vector2f rectSize(32.0f, 32.0f);
@@ -19,6 +19,11 @@ Mover::Mover(float x, float y)
 
 Mover::~Mover() {
 	std::cout << "Destroying Mover..." << std::endl;
+}
+
+void Mover::init(float x, float y) {
+	GameObject::init(x, y);
+	cout << "Mover: Initialized at position " << x << ", " << y << endl;
 }
 
 void Mover::changeDirectionAfterObjectCollision(float dtAsSeconds) {

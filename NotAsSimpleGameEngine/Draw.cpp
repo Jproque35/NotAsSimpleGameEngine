@@ -13,7 +13,6 @@ void Engine::draw() {
 		DrawableObject* currDrawable = &dm->get(idList[i]);
 
 		if (currDrawable && currDrawable->getOwner().isActive()) {
-			cout << "Drawing object.." << endl;
 			m_Window.draw(currDrawable->getGraphic());
 		}
 	}
