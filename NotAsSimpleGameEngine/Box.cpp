@@ -23,6 +23,6 @@ void Box::init(float x, float y) {
 
 void Box::update(float dtAsSeconds) {
 	if (this->m_Collider->getCollisionList().size() > 0) {
-		//cout << "Box: Collision Ocurring..." << endl;
+		cout << "Box: Collision Ocurring..." << endl;
 	}
 }

@@ -171,18 +171,6 @@
     <ClCompile Include="SimpleCollisionManager.cpp">
       <Filter>Source Files\Managers\CollisionManagers</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionListNode.cpp">
-      <Filter>Source Files\Engine\Library\CollisionMap</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionList.cpp">
-      <Filter>Source Files\Engine\Library\CollisionMap</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionListEntry.cpp">
-      <Filter>Source Files\Managers\CollisionManagers</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionManagerEntry.cpp">
-      <Filter>Source Files\Managers\CollisionManagers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -247,18 +235,6 @@
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Header Files\Managers\CollisionManagers</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionListNode.h">
-      <Filter>Header Files\Engine\Library\CollisionMap</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionList.h">
-      <Filter>Header Files\Engine\Library\CollisionMap</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManagerEntry.h">
-      <Filter>Header Files\Engine\Library\CollisionMap</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionListEntry.h">
-      <Filter>Header Files\Engine\Library\CollisionMap</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

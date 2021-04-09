@@ -2,7 +2,7 @@
 #include "GameObjectManager.h"
 #include "SceneManager.h"
 #include "InputManager.h"
-#include "SimpleCollisionManager.h"
+#include "CollisionManager.h"
 #include "DrawableManager.h"
 #include "TestScene.h"
 
@@ -23,7 +23,7 @@ Engine::~Engine() {
 	GameObjectManager::resetInstance();
 	SceneManager::resetInstance();
 	InputManager::resetInstance();
-	SimpleCollisionManager::resetInstance();
+	CollisionManager::resetInstance();
 	DrawableManager::resetInstance();
 }
 

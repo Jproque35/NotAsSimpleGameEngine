@@ -29,7 +29,7 @@ void TestScene::update(float dtAsSeconds) {
 	Scene::update(dtAsSeconds);
 	this->m_Seconds += dtAsSeconds;
 	if (this->m_Seconds >= 20.0f) {
-		//std::cout << "TestScene: Tick" << std::endl;
+		std::cout << "TestScene: Tick" << std::endl;
 		CollisionManager::getInstance()->print();
 		this->m_Seconds = 0.0f;
 	}

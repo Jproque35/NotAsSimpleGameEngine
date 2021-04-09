@@ -2,7 +2,6 @@
 #include "MathLib.h"
 #include "GameObject.h"
 #include "SceneManager.h"
-#include "SimpleCollisionManager.h"
 #include "CollisionManager.h"
 
 Collider::Collider(GameObject& owner, const Vector2f& size, bool stationary)
@@ -10,7 +9,6 @@ Collider::Collider(GameObject& owner, const Vector2f& size, bool stationary)
 	m_Stationary(stationary),
 	m_Height(size.y),
 	m_Width(size.x) {
-	this->m_Id = SimpleCollisionManager::getInstance()->add(*this);
 	CollisionManager::getInstance()->add(*this);
 }
 
@@ -45,7 +43,8 @@ bool Collider::intersects(const Collider& other) inline const {
 }
 
 vector<Collider*> Collider::getCollisionList() const {
-	return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
+	//return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
+	return CollisionManager::getInstance()->getCollisionList(*this);
 }
 
 CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2f diff) const {
@@ -137,5 +136,5 @@ void Collider::update(float dtAsSeconds) {
 }
 
 void Collider::destroy() const {
-	SimpleCollisionManager::getInstance()->erase(this->m_Id);
+	//SimpleCollisionManager::getInstance()->erase(this->m_Id);
 }

@@ -8,15 +8,31 @@
 using namespace std;
 
 class Collider;
-class CollisionManagerEntry;
-class CollisionListEntry;
+
+enum CollisionEntryType {
+	Start,
+	End
+};
+
+struct CollisionEntry {
+	Collider* owner = NULL;
+	float value = 0.0f;
+	CollisionEntryType type = CollisionEntryType::Start;
+
+	bool operator<(const CollisionEntry& rhs) {
+		return this->value < rhs.value;
+	}
+};
+
 
 class CollisionManager {
 private:
 	static CollisionManager* instance;
-	unordered_map<Collider*, CollisionManagerEntry*> m_Entries;
-	list<CollisionListEntry*> m_XList;
-	list<CollisionListEntry*> m_YList;
+	unordered_map<int, Collider*> m_Colliders;
+	unordered_map<int, vector<Collider*>> m_CollisionLists;
+	list<CollisionEntry> m_XList;
+	list<CollisionEntry> m_YList;
+	float currTime;
 
 	CollisionManager();
 	~CollisionManager();
@@ -24,18 +40,24 @@ private:
 	CollisionManager& operator=(const CollisionManager& rhs) = delete;
 
 
+	void addXEntries(Collider& col);
+	void addYEntries(Collider& col);
 	void updateSingleCollider(Collider& collider);
+	void updateXList();
+	void updateYList();
+	unordered_map<int, vector<Collider*>> buildSingleAxisActiveList( list<CollisionEntry>& axisList );
+	void buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*> checkList);
+	void buildCollisionLists();
 
 public:
 	static CollisionManager* getInstance();
 	static void resetInstance();
-	int add(Collider& col);
-	void erase(int id);
+	void add(Collider& col);
+	Collider& get(int id);
 	vector<Collider*> getCollisionList(const Collider& col);
 	void update(float dtAsSeconds);
 	void cleanUp();
 	void print();
-	bool compare_values(CollisionListEntry* lhs, CollisionListEntry* rhs);
 };
 
 #endif

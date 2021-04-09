@@ -1,16 +1,22 @@
 #include "Collider.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
-#include "CollisionListEntry.h"
 
 CollisionManager* CollisionManager::instance = NULL;
 
-CollisionManager::CollisionManager() {
-
-}
+CollisionManager::CollisionManager() :
+	currTime(0.0f) {}
 
 CollisionManager::~CollisionManager() {
 
+	cout << "***CollisionManager: Destroying CollisionManager.." << endl;
+
+	for (auto it = this->m_Colliders.begin(); it != this->m_Colliders.end(); ++it) {
+		if (it->second != NULL) {
+			delete(it->second);
+		}
+		this->m_Colliders[it->first] = NULL;
+	}
 }
 
 CollisionManager* CollisionManager::getInstance() {
@@ -29,19 +35,132 @@ void CollisionManager::resetInstance() {
 	instance = NULL;
 }
 
-int CollisionManager::add(Collider& col) {
-	return -1;
+void CollisionManager::addXEntries(Collider& col) {
+	CollisionEntry xStart;
+	CollisionEntry xEnd;
+
+	xStart.owner = &col;
+	xStart.value = col.getOwner().getPosition().x;
+	xStart.type = CollisionEntryType::Start;
+
+	xEnd.owner = &col;
+	xEnd.value = col.getOwner().getPosition().x + col.getWidth();
+	xEnd.type = CollisionEntryType::End;
+
+	this->m_XList.push_back(xStart);
+	cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << xStart.value << endl;
+	this->m_XList.push_back(xEnd);
+	cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << xEnd.value << endl;
 }
 
+void CollisionManager::addYEntries(Collider& col) {
+	CollisionEntry yStart;
+	CollisionEntry yEnd;
 
-void CollisionManager::erase(int id) {
+	yStart.owner = &col;
+	yStart.value = col.getOwner().getPosition().y;
+	yStart.type = CollisionEntryType::Start;
 
+	yEnd.owner = &col;
+	yEnd.value = col.getOwner().getPosition().y + col.getHeight();
+	yEnd.type = CollisionEntryType::End;
+
+	this->m_YList.push_back(yStart);
+	cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << yStart.value << endl;
+	this->m_YList.push_back(yEnd);
+	cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << yEnd.value << endl;
+}
+
+void CollisionManager::add(Collider& col) {
+	this->m_Colliders[col.getId()] = &col;
+
+	this->addXEntries(col);
+	this->addYEntries(col);
+}
+
+Collider& CollisionManager::get(int id) {
+	return *this->m_Colliders[id];
 }
 
 vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
-	vector<Collider*> desire;
+	return this->m_CollisionLists[col.getId()];
+}
 
-	return desire;
+void CollisionManager::updateXList() {
+	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
+		float x = it->owner->getOwner().getPosition().x;
+		float width = it->owner->getWidth();
+
+		if (it->type == CollisionEntryType::Start) {
+			it->value = x;
+		}
+		else {
+			it->value = x + width;
+		}
+	}
+
+	this->m_XList.sort();
+}
+
+void CollisionManager::updateYList() {
+	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
+		float y = it->owner->getOwner().getPosition().y;
+		float height = it->owner->getHeight();
+
+		if (it->type == CollisionEntryType::Start) {
+			it->value = y;
+		}
+		else {
+			it->value = y + height;
+		}
+	}
+
+	this->m_YList.sort();
+}
+unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisActiveList(list<CollisionEntry>& axisList) {
+	unordered_map<int, vector<Collider*>> intersectionLists;
+	list<int> activeColliders;
+
+	for (auto it = axisList.begin(); it != axisList.end(); ++it) {
+		if (it->type == CollisionEntryType::Start) {
+			activeColliders.push_back(it->owner->getId());
+		}
+		else {
+			activeColliders.remove(it->owner->getId());
+		}
+
+		for (auto it2 = activeColliders.begin(); it2 != activeColliders.end(); ++it2) {
+			if (*it2 != it->owner->getId()) {
+				intersectionLists[*it2].push_back(it->owner);
+			}
+		}
+	}
+
+	return intersectionLists;
+}
+
+void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*> checkList) {
+	for (int i = 0; i < colList.size(); ++i) {
+		for (int j = 0; j < checkList.size(); ++j) {
+			if (colList[i] == checkList[j]
+					&& this->m_Colliders[id]->intersects(*colList[i]) ) {
+				this->m_CollisionLists[id].push_back(colList[i]);
+			}
+		}
+	}
+}
+
+void CollisionManager::buildCollisionLists() {
+	unordered_map<int, vector<Collider*>> xLists = this->buildSingleAxisActiveList(this->m_XList);
+	unordered_map<int, vector<Collider*>> yLists = this->buildSingleAxisActiveList(this->m_YList);
+
+	for (auto it = this->m_CollisionLists.begin(); it != this->m_CollisionLists.end(); ++it) {
+		it->second.clear();
+	}
+
+	for (auto it = xLists.begin(); it != xLists.end(); ++it) {
+		this->buildSingleCollisionList(it->first, it->second, yLists[it->first]);
+	}
 }
 
 void CollisionManager::updateSingleCollider(Collider& col) {
@@ -58,11 +177,33 @@ void CollisionManager::updateSingleCollider(Collider& col) {
 	}
 }
 
-bool CollisionManager::compare_values(CollisionListEntry* lhs, CollisionListEntry* rhs) {
-	return lhs->getValue() < rhs->getValue();
-}
-
 void CollisionManager::update(float dtAsSeconds) {
+
+	this->updateXList();
+	this->updateYList();
+
+	this->buildCollisionLists();
+
+	for (auto it = this->m_Colliders.begin(); it != this->m_Colliders.end(); ++it) {
+		this->updateSingleCollider(*it->second);
+	}
+
+	/*
+	if (this->currTime >= 30.0f) {
+		cout << "CollisionManager: X Entries: " << endl;
+		for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
+			cout << "CollisionManager: {" << it->owner->getId() << ", " << it->value << "}" << endl;
+		}
+
+		cout << "CollisionManager: Y Entires: " << endl;
+		for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
+			cout << "CollisionManager: {" << it->owner->getId() << ", " << it->value << "}" << endl;
+		}
+		this->currTime = 0.0f;
+	}
+	else {
+		this->currTime += dtAsSeconds;
+	}*/
 
 	this->cleanUp();
 }
