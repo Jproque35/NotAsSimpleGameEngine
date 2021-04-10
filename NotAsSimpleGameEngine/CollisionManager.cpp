@@ -99,7 +99,7 @@ void CollisionManager::updateXList() {
 		}
 	}
 
-	this->m_XList.sort();
+	sort(this->m_XList.begin(), this->m_XList.end());
 }
 
 void CollisionManager::updateYList() {
@@ -115,23 +115,29 @@ void CollisionManager::updateYList() {
 		}
 	}
 
-	this->m_YList.sort();
+	sort(this->m_YList.begin(), this->m_YList.end());
 }
-unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisActiveList(list<CollisionEntry>& axisList) {
+
+unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisActiveList(vector<CollisionEntry>& axisList) {
 	unordered_map<int, vector<Collider*>> intersectionLists;
 	list<int> activeColliders;
 
-	for (auto it = axisList.begin(); it != axisList.end(); ++it) {
-		if (it->type == CollisionEntryType::Start) {
-			activeColliders.push_back(it->owner->getId());
+	Collider* currCollider = NULL;
+	CollisionEntryType currType = CollisionEntryType::Start;
+	for(int i = 0; i < axisList.size(); ++i) {
+		currCollider = axisList[i].owner;
+		currType = axisList[i].type;
+
+		if(currType == CollisionEntryType::Start) {
+			activeColliders.push_back(currCollider->getId());
 		}
 		else {
-			activeColliders.remove(it->owner->getId());
+			activeColliders.remove(currCollider->getId());
 		}
 
 		for (auto it2 = activeColliders.begin(); it2 != activeColliders.end(); ++it2) {
-			if (*it2 != it->owner->getId()) {
-				intersectionLists[*it2].push_back(it->owner);
+			if (*it2 != currCollider->getId()) {
+				intersectionLists[*it2].push_back(currCollider);
 			}
 		}
 	}
@@ -139,7 +145,7 @@ unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisActiveLis
 	return intersectionLists;
 }
 
-void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*> checkList) {
+void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*>& checkList) {
 	for (int i = 0; i < colList.size(); ++i) {
 		for (int j = 0; j < checkList.size(); ++j) {
 			if (colList[i] == checkList[j]
@@ -178,7 +184,6 @@ void CollisionManager::updateSingleCollider(Collider& col) {
 }
 
 void CollisionManager::update(float dtAsSeconds) {
-
 	this->updateXList();
 	this->updateYList();
 
@@ -187,23 +192,6 @@ void CollisionManager::update(float dtAsSeconds) {
 	for (auto it = this->m_Colliders.begin(); it != this->m_Colliders.end(); ++it) {
 		this->updateSingleCollider(*it->second);
 	}
-
-	/*
-	if (this->currTime >= 30.0f) {
-		cout << "CollisionManager: X Entries: " << endl;
-		for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
-			cout << "CollisionManager: {" << it->owner->getId() << ", " << it->value << "}" << endl;
-		}
-
-		cout << "CollisionManager: Y Entires: " << endl;
-		for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
-			cout << "CollisionManager: {" << it->owner->getId() << ", " << it->value << "}" << endl;
-		}
-		this->currTime = 0.0f;
-	}
-	else {
-		this->currTime += dtAsSeconds;
-	}*/
 
 	this->cleanUp();
 }

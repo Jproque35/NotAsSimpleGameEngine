@@ -30,8 +30,8 @@ private:
 	static CollisionManager* instance;
 	unordered_map<int, Collider*> m_Colliders;
 	unordered_map<int, vector<Collider*>> m_CollisionLists;
-	list<CollisionEntry> m_XList;
-	list<CollisionEntry> m_YList;
+	vector<CollisionEntry> m_XList;
+	vector<CollisionEntry> m_YList;
 	float currTime;
 
 	CollisionManager();
@@ -45,8 +45,8 @@ private:
 	void updateSingleCollider(Collider& collider);
 	void updateXList();
 	void updateYList();
-	unordered_map<int, vector<Collider*>> buildSingleAxisActiveList( list<CollisionEntry>& axisList );
-	void buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*> checkList);
+	unordered_map<int, vector<Collider*>> buildSingleAxisActiveList( vector<CollisionEntry>& axiList );
+	void buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*>& checkList);
 	void buildCollisionLists();
 
 public:
