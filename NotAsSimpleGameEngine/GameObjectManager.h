@@ -21,8 +21,8 @@ public:
 	static GameObjectManager* getInstance();
 	static void resetInstance();
 	void add(GameObject& obj);
-	GameObject& get(int i) inline const;
-	int size() inline const;
+	GameObject& get(int i) const;
+	int size() const;
 	void cleanUp();
 
 };

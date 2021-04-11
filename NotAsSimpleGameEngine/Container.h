@@ -26,9 +26,9 @@ public:
 	Container(int size);
 	~Container();
 
-	int size() inline const;
+	int size() const;
 	void add(T& obj, int id);
-	T& get(int id) inline const;
+	T& get(int id) const;
 	void erase(int id);
 	void cleanUp();
 

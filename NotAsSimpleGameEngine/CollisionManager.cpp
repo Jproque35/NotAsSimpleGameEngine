@@ -40,11 +40,13 @@ void CollisionManager::addXEntries(Collider& col) {
 	CollisionEntry xEnd;
 
 	xStart.owner = &col;
-	xStart.value = col.getOwner().getPosition().x;
+	//xStart.value = col.getOwner().getPosition().x;
+	xStart.value = col.getLeft();
 	xStart.type = CollisionEntryType::Start;
 
 	xEnd.owner = &col;
-	xEnd.value = col.getOwner().getPosition().x + col.getWidth();
+	//xEnd.value = col.getOwner().getPosition().x + col.getWidth();
+	xEnd.value = col.getLeft() + col.getWidth();
 	xEnd.type = CollisionEntryType::End;
 
 	this->m_XList.push_back(xStart);
@@ -58,11 +60,13 @@ void CollisionManager::addYEntries(Collider& col) {
 	CollisionEntry yEnd;
 
 	yStart.owner = &col;
-	yStart.value = col.getOwner().getPosition().y;
+	//yStart.value = col.getOwner().getPosition().y;
+	yStart.value = col.getTop();
 	yStart.type = CollisionEntryType::Start;
 
 	yEnd.owner = &col;
-	yEnd.value = col.getOwner().getPosition().y + col.getHeight();
+	//yEnd.value = col.getOwner().getPosition().y + col.getHeight();
+	yEnd.value = col.getTop() + col.getHeight();
 	yEnd.type = CollisionEntryType::End;
 
 	this->m_YList.push_back(yStart);
@@ -88,7 +92,9 @@ vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
 
 void CollisionManager::updateXList() {
 	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
-		float x = it->owner->getOwner().getPosition().x;
+		//float x = it->owner->getOwner().getPosition().x;
+		float x = it->owner->getLeft();
+		//float width = it->owner->getWidth();
 		float width = it->owner->getWidth();
 
 		if (it->type == CollisionEntryType::Start) {
@@ -104,7 +110,9 @@ void CollisionManager::updateXList() {
 
 void CollisionManager::updateYList() {
 	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
-		float y = it->owner->getOwner().getPosition().y;
+		//float y = it->owner->getOwner().getPosition().y;
+		float y = it->owner->getTop();
+		//float height = it->owner->getHeight();
 		float height = it->owner->getHeight();
 
 		if (it->type == CollisionEntryType::Start) {
@@ -118,27 +126,31 @@ void CollisionManager::updateYList() {
 	sort(this->m_YList.begin(), this->m_YList.end());
 }
 
-unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisActiveList(vector<CollisionEntry>& axisList) {
+void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<Collider*>>& intersectionLists, list<int>& activeColliderIds) {
+	Collider* currCollider = entry.owner;
+	CollisionEntryType currType = entry.type;
+
+	if (currType == CollisionEntryType::Start) {
+		activeColliderIds.push_back(currCollider->getId());
+	}
+	else {
+		activeColliderIds.remove(currCollider->getId());
+	}
+
+	for (auto it2 = activeColliderIds.begin(); it2 != activeColliderIds.end(); ++it2) {
+		if (*it2 != currCollider->getId()) {
+			intersectionLists[*it2].push_back(currCollider);
+		}
+	}
+}
+
+unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisList(vector<CollisionEntry>& axisList) {
 	unordered_map<int, vector<Collider*>> intersectionLists;
-	list<int> activeColliders;
+	list<int> activeColliderIds;
 
-	Collider* currCollider = NULL;
-	CollisionEntryType currType = CollisionEntryType::Start;
 	for(int i = 0; i < axisList.size(); ++i) {
-		currCollider = axisList[i].owner;
-		currType = axisList[i].type;
-
-		if(currType == CollisionEntryType::Start) {
-			activeColliders.push_back(currCollider->getId());
-		}
-		else {
-			activeColliders.remove(currCollider->getId());
-		}
-
-		for (auto it2 = activeColliders.begin(); it2 != activeColliders.end(); ++it2) {
-			if (*it2 != currCollider->getId()) {
-				intersectionLists[*it2].push_back(currCollider);
-			}
+		if (axisList[i].owner->getOwner().isActive()) {
+			this->processCollisionEntry(axisList[i], intersectionLists, activeColliderIds);
 		}
 	}
 
@@ -148,7 +160,7 @@ unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisActiveLis
 void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*>& checkList) {
 	for (int i = 0; i < colList.size(); ++i) {
 		for (int j = 0; j < checkList.size(); ++j) {
-			if (colList[i] == checkList[j]
+			if ((colList[i] == checkList[j])
 					&& this->m_Colliders[id]->intersects(*colList[i]) ) {
 				this->m_CollisionLists[id].push_back(colList[i]);
 			}
@@ -157,8 +169,8 @@ void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colLi
 }
 
 void CollisionManager::buildCollisionLists() {
-	unordered_map<int, vector<Collider*>> xLists = this->buildSingleAxisActiveList(this->m_XList);
-	unordered_map<int, vector<Collider*>> yLists = this->buildSingleAxisActiveList(this->m_YList);
+	unordered_map<int, vector<Collider*>> xLists = this->buildSingleAxisList(this->m_XList);
+	unordered_map<int, vector<Collider*>> yLists = this->buildSingleAxisList(this->m_YList);
 
 	for (auto it = this->m_CollisionLists.begin(); it != this->m_CollisionLists.end(); ++it) {
 		it->second.clear();
@@ -172,11 +184,12 @@ void CollisionManager::buildCollisionLists() {
 void CollisionManager::updateSingleCollider(Collider& col) {
 	vector<Collider*> colList = this->getCollisionList(col);
 
-	if (colList.size() > 0 && !col.isStationary()) {
+	if (colList.size() > 0 
+		&& (!col.isStationary() && col.isSolid())) {
 		for (int i = 0; i < colList.size(); ++i) {
 			Collider* currCollider = colList[i];
 
-			if (currCollider) {
+			if (currCollider && currCollider->isSolid()) {
 				col.repositionAfterObjectCollision(*currCollider);
 			}
 		}

@@ -45,7 +45,8 @@ private:
 	void updateSingleCollider(Collider& collider);
 	void updateXList();
 	void updateYList();
-	unordered_map<int, vector<Collider*>> buildSingleAxisActiveList( vector<CollisionEntry>& axiList );
+	void processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<Collider*>>& intersectionLists, list<int>& activeColliderIds);
+	unordered_map<int, vector<Collider*>> buildSingleAxisList( vector<CollisionEntry>& axiList );
 	void buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*>& checkList);
 	void buildCollisionLists();
 

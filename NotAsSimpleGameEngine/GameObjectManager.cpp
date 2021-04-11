@@ -31,7 +31,7 @@ void GameObjectManager::add(GameObject& obj) {
 	this->m_Storage->add(obj, obj.getId());
 }
 
-GameObject& GameObjectManager::get(int i) inline const {
+GameObject& GameObjectManager::get(int i) const {
 	return this->m_Storage->get(i);
 }
 

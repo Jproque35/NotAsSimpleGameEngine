@@ -12,6 +12,8 @@ class DrawableObject :
     public GameObjectComponent {
 
 private:
+    static int m_CurrFreeId;
+
     DrawableObject() = delete;
     DrawableObject(const DrawableObject& obj) = delete; 
     DrawableObject& operator=(const DrawableObject& rhs) = delete;

@@ -4,11 +4,16 @@
 #include "SceneManager.h"
 #include "CollisionManager.h"
 
-Collider::Collider(GameObject& owner, const Vector2f& size, bool stationary)
+int Collider::m_CurrFreeId = 0;
+
+Collider::Collider(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary)
 	: GameObjectComponent(owner),
+	m_Solid(solid),
 	m_Stationary(stationary),
-	m_Height(size.y),
-	m_Width(size.x) {
+	m_Height(dimensions.y),
+	m_Width(dimensions.x) {
+	this->m_Id = m_CurrFreeId++;
+	cout << "Collider: Id set to " << this->m_Id << endl;
 	CollisionManager::getInstance()->add(*this);
 }
 
@@ -16,29 +21,41 @@ Collider::~Collider() {
 	cout << "Collider: Destroying Collider..." << endl;
 }
 
-bool Collider::isStationary() inline const {
+bool Collider::isSolid() const {
+	return this->m_Solid;
+}
+
+bool Collider::isStationary() const {
 	return this->m_Stationary;
 }
 
-float Collider::getWidth() inline const {
+float Collider::getTop() const {
+	return this->m_Owner->getPosition().y - this->m_Height / 2;
+}
+
+float Collider::getLeft() const {
+	return this->m_Owner->getPosition().x - this->m_Width / 2;
+}
+
+float Collider::getWidth() const {
 	return this->m_Width;
 }
 
-float Collider::getHeight() inline const {
+float Collider::getHeight() const {
 	return this->m_Height;
 }
 
-bool Collider::horizontalCollision(const Collider& other) inline const {
+bool Collider::horizontalCollision(const Collider& other) const {
 	return this->m_Owner->getPosition().x < other.m_Owner->getPosition().x + other.m_Width
 		&& other.m_Owner->getPosition().x < this->m_Owner->getPosition().x + this->m_Width;
 }
 
-bool Collider::verticalCollision(const Collider& other) inline const {
+bool Collider::verticalCollision(const Collider& other) const {
 	return this->m_Owner->getPosition().y < other.m_Owner->getPosition().y + other.m_Height
 		&& other.m_Owner->getPosition().y < this->m_Owner->getPosition().y + this->m_Height;
 }
 
-bool Collider::intersects(const Collider& other) inline const {
+bool Collider::intersects(const Collider& other) const {
 	return this->horizontalCollision(other) && this->verticalCollision(other);
 }
 
@@ -69,7 +86,7 @@ CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2
 	return (CollisionDirection)desire;
 }
 
-Collision Collider::getObjectCollisionData(const Collider& other) inline  const {
+Collision Collider::getObjectCollisionData(const Collider& other) const {
 	bool collided = this->intersects(other) && other.m_Owner->isActive();
 	Vector2f diff(other.m_Owner->getPosition().x - this->m_Owner->getPosition().x, 
 		other.m_Owner->getPosition().y - this->m_Owner->getPosition().y);

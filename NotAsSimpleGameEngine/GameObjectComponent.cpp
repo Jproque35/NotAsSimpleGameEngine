@@ -1,12 +1,8 @@
 #include "GameObjectComponent.h"
 #include "GameObject.h"
 
-int GameObjectComponent::m_CurrId = 0;
-
-GameObjectComponent::GameObjectComponent(GameObject& obj) {
-	this->m_Owner = &obj;
-	this->m_Id = m_CurrId++;
-}
+GameObjectComponent::GameObjectComponent(GameObject& obj) :
+	m_Owner(&obj) {}
 
 GameObjectComponent::~GameObjectComponent() {
 	cout << "Destroying GameObjectComponent..." << endl;

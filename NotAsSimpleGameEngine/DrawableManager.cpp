@@ -35,11 +35,11 @@ void DrawableManager::add(DrawableObject& obj) {
 	this->m_Storage->add(obj, obj.getId());
 }
 
-DrawableObject& DrawableManager::get(int id) inline const {
+DrawableObject& DrawableManager::get(int id) const {
 	return this->m_Storage->get(id);
 }
 
-int DrawableManager::size() inline const {
+int DrawableManager::size() const {
 	return this->m_Storage->size();
 }
 

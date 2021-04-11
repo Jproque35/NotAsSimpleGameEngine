@@ -21,7 +21,7 @@ Container<T>::~Container() {
 }
 
 template<class T>
-int Container<T>::size() inline const {
+int Container<T>::size() const {
 	return this->m_Size;
 }
 
@@ -33,7 +33,7 @@ void Container<T>::add(T& obj, int id) {
 }
 
 template<class T>
-T& Container<T>::get(int id) inline const {
+T& Container<T>::get(int id) const {
 	try {
 		return *this->m_Arr[this->m_IdMap.at(id)];
 	}

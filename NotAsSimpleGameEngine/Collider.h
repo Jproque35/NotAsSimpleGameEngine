@@ -23,8 +23,9 @@ class GameObject;
 class Collider 
 	: public GameObjectComponent {
 private:
-	//FloatRect m_RectCol;
+	static int m_CurrFreeId;
 	bool m_Stationary;
+	bool m_Solid;
 	float m_Height;
 	float m_Width;
 
@@ -32,20 +33,23 @@ private:
 	Collider(const Collider& other) = delete;
 	Collider& operator=(const Collider& rhs) = delete;
 
-	bool horizontalCollision(const Collider& other) inline const;
-	bool verticalCollision(const Collider& other) inline const;
+	bool horizontalCollision(const Collider& other) const;
+	bool verticalCollision(const Collider& other) const;
 	CollisionDirection getRelativeDirection(const Collider& other, Vector2f diff) const;
 
 public:
-	Collider(GameObject& owner, const Vector2f& size, bool stationary);
+	Collider(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary);
 	~Collider();
 
-	bool isStationary() inline const;
-	float getWidth() inline const;
-	float getHeight() inline const;
-	bool intersects(const Collider& other) inline const ;
+	bool isStationary() const;
+	bool isSolid() const;
+	float getTop() const;
+	float getLeft() const;
+	float getWidth() const;
+	float getHeight() const;
+	bool intersects(const Collider& other) const ;
 	vector<Collider*> getCollisionList() const;
-	Collision getObjectCollisionData(const Collider& other) inline const ;
+	Collision getObjectCollisionData(const Collider& other) const ;
 	vector<CollisionDirection> getBoundaryCollisionData() const;
 	void repositionAfterObjectCollision(const Collider& other);
 	void update(float dtAsSeconds);

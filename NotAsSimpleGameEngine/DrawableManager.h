@@ -26,9 +26,9 @@ public:
 	static void resetInstance();
 
 	void add(DrawableObject& obj);
-	DrawableObject& get(int id) inline const;
+	DrawableObject& get(int id) const;
 	vector<int> getIdList() const;
-	int size() inline const;
+	int size() const;
 	void cleanUp();
 };
 
