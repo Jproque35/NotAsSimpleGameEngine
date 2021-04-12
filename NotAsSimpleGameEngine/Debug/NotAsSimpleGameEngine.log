@@ -1,2 +1,19 @@
-﻿  DrawableObject.cpp
+﻿  Draw.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Draw.cpp(16,20): warning C4018: '<': signed/unsigned mismatch
+  Engine.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(22,58): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(22,44): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  SoundFileManager.cpp
+  TestScene.cpp
+  TextManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\TextManager.cpp(34,20): warning C4101: 'e': unreferenced local variable
+  Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

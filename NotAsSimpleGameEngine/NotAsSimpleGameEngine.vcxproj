@@ -159,6 +159,7 @@
     <ClCompile Include="Container.cpp" />
     <ClCompile Include="DrawableManager.cpp" />
     <ClCompile Include="DrawableObject.cpp" />
+    <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameObjectComponent.cpp" />
     <ClCompile Include="Mover.cpp" />
     <ClCompile Include="RectangleGraphic.cpp" />
@@ -174,7 +175,9 @@
     <ClCompile Include="MathLib.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SoundFileManager.cpp" />
     <ClCompile Include="TestScene.cpp" />
+    <ClCompile Include="TextManager.cpp" />
     <ClCompile Include="Update.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +188,7 @@
     <ClInclude Include="Container.h" />
     <ClInclude Include="DrawableManager.h" />
     <ClInclude Include="DrawableObject.h" />
+    <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameObjectComponent.h" />
     <ClInclude Include="Mover.h" />
     <ClInclude Include="RectangleGraphic.h" />
@@ -198,7 +202,9 @@
     <ClInclude Include="MathLib.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SoundFileManager.h" />
     <ClInclude Include="TestScene.h" />
+    <ClInclude Include="TextManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

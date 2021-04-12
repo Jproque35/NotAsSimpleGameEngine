@@ -4,6 +4,9 @@
 #include "InputManager.h"
 #include "CollisionManager.h"
 #include "DrawableManager.h"
+#include "FontManager.h"
+#include "SoundFileManager.h"
+#include "TextManager.h"
 #include "TestScene.h"
 
 Engine* Engine::instance = NULL;
@@ -25,6 +28,9 @@ Engine::~Engine() {
 	InputManager::resetInstance();
 	CollisionManager::resetInstance();
 	DrawableManager::resetInstance();
+	FontManager::resetInstance();
+	SoundFileManager::resetInstance();
+	TextManager::resetInstance();
 }
 
 Engine* Engine::getInstance() {
@@ -44,11 +50,12 @@ void Engine::resetInstance() {
 }
 
 void Engine::start() {
-
 	Clock clock;
 
 	TestScene* testScene = new TestScene();
 	SceneManager::getInstance()->add(*testScene);
+
+	FontManager::getInstance()->loadFile("assets/fonts/game_over.ttf");
 
 	while (this->m_Window.isOpen()) {
 		Event event;

@@ -13,228 +13,249 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\GameObjects">
-      <UniqueIdentifier>{1e32a184-7436-487a-88f5-2dbebf9efc46}</UniqueIdentifier>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{cd0f98ef-e102-4b30-8a20-ed81060ffd5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\GameObjects">
-      <UniqueIdentifier>{3691898a-712e-4e54-ac62-d931bb373908}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Scenes">
+    <Filter Include="Header Files\Core\Scenes">
       <UniqueIdentifier>{c881e64c-82cd-46da-ad24-96635cb3605e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Scenes">
-      <UniqueIdentifier>{9bb93e23-47bb-418c-8a4c-1550490ebbc2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Managers">
+    <Filter Include="Header Files\Core\Managers">
       <UniqueIdentifier>{1f99543f-e59c-4d26-a7a9-fefd12d00590}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Managers">
-      <UniqueIdentifier>{a7e30fae-858c-470b-9b75-72b4a85b4038}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine">
-      <UniqueIdentifier>{5193f151-3500-4b4d-8868-81d831aff24f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine">
-      <UniqueIdentifier>{9616702f-4f96-4977-b4bd-7203793b212f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Base">
-      <UniqueIdentifier>{5947d220-a5d6-4b31-81d8-f41403cf1165}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\Base">
-      <UniqueIdentifier>{4cc5700f-39f7-4119-93c0-4c792bfd035c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\TestObjects">
-      <UniqueIdentifier>{5bc5bf2e-5863-4842-a6b7-043a56e2de5c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\TestObjects">
-      <UniqueIdentifier>{66518f6e-e18f-4082-8f0d-ecbcb0837a0c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\Event">
-      <UniqueIdentifier>{ca220214-2b96-4650-92ac-d1093b94f811}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Components">
-      <UniqueIdentifier>{f3c40c5b-2d60-457b-b261-dd9bea1444d3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Components\Command">
-      <UniqueIdentifier>{eae3c28a-7dc4-40ca-abb1-1d3483a9a710}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\Components">
-      <UniqueIdentifier>{3a13bcad-c80c-4cc4-8bdc-3dbc29fcd17a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\GameObjects\Components\Command">
-      <UniqueIdentifier>{84217007-2786-447d-a18c-24b5625fd0a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\Library">
-      <UniqueIdentifier>{ebcac4b2-85b3-4217-ae53-cfad6c284bfc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine\Library">
-      <UniqueIdentifier>{17fdd63f-d920-4c0a-bfe3-e361df035ac2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Engine\Main">
-      <UniqueIdentifier>{fde29a94-5f8e-46f5-949c-d2b5d5dce214}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Engine\Main">
-      <UniqueIdentifier>{8056601d-ff69-4768-b996-88237077810f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Components\Base">
-      <UniqueIdentifier>{c84ef073-a7c7-4364-9d21-74dcb3dde6e8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Components\Graphics">
-      <UniqueIdentifier>{c92581d6-b82e-4da6-a54c-d92d9559c1d9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\GameObjects\Components\Collision">
-      <UniqueIdentifier>{339f5fcd-ec72-4552-a269-f4e709e89d5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Managers\CollisionManagers">
+    <Filter Include="Header Files\Core\Managers\CollisionManagers">
       <UniqueIdentifier>{8919a997-6520-4c35-a14e-32f598f6f8c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Managers\CollisionManagers">
-      <UniqueIdentifier>{a7b3e7d0-9686-4578-9b5e-353b1818edb7}</UniqueIdentifier>
+    <Filter Include="Header Files\Core\GameObjects">
+      <UniqueIdentifier>{1e32a184-7436-487a-88f5-2dbebf9efc46}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Engine\Library\CollisionMap">
+    <Filter Include="Header Files\Core\GameObjects\Base">
+      <UniqueIdentifier>{5947d220-a5d6-4b31-81d8-f41403cf1165}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\TestObjects">
+      <UniqueIdentifier>{5bc5bf2e-5863-4842-a6b7-043a56e2de5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\Components">
+      <UniqueIdentifier>{f3c40c5b-2d60-457b-b261-dd9bea1444d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\Components\Command">
+      <UniqueIdentifier>{eae3c28a-7dc4-40ca-abb1-1d3483a9a710}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\Components\Base">
+      <UniqueIdentifier>{c84ef073-a7c7-4364-9d21-74dcb3dde6e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\Components\Graphics">
+      <UniqueIdentifier>{c92581d6-b82e-4da6-a54c-d92d9559c1d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\Components\Collision">
+      <UniqueIdentifier>{339f5fcd-ec72-4552-a269-f4e709e89d5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Engine">
+      <UniqueIdentifier>{5193f151-3500-4b4d-8868-81d831aff24f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Engine\Library">
+      <UniqueIdentifier>{ebcac4b2-85b3-4217-ae53-cfad6c284bfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Engine\Library\CollisionMap">
       <UniqueIdentifier>{ca553f6b-378c-48ab-99ad-830358e4354a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Library\CollisionMap">
-      <UniqueIdentifier>{48690eea-3517-4df9-b716-914ad9b6da29}</UniqueIdentifier>
+    <Filter Include="Header Files\Core\Engine\Main">
+      <UniqueIdentifier>{8056601d-ff69-4768-b996-88237077810f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{6d8b25b7-5a8f-4651-a6f8-172f19c7131b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Scenes">
+      <UniqueIdentifier>{9bb93e23-47bb-418c-8a4c-1550490ebbc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Managers">
+      <UniqueIdentifier>{a7e30fae-858c-470b-9b75-72b4a85b4038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Managers\CollisionManagers">
+      <UniqueIdentifier>{a7b3e7d0-9686-4578-9b5e-353b1818edb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GameObjects">
+      <UniqueIdentifier>{3691898a-712e-4e54-ac62-d931bb373908}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GameObjects\Base">
+      <UniqueIdentifier>{4cc5700f-39f7-4119-93c0-4c792bfd035c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GameObjects\TestObjects">
+      <UniqueIdentifier>{66518f6e-e18f-4082-8f0d-ecbcb0837a0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GameObjects\Event">
+      <UniqueIdentifier>{ca220214-2b96-4650-92ac-d1093b94f811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GameObjects\Components">
+      <UniqueIdentifier>{3a13bcad-c80c-4cc4-8bdc-3dbc29fcd17a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\GameObjects\Components\Command">
+      <UniqueIdentifier>{84217007-2786-447d-a18c-24b5625fd0a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Engine">
+      <UniqueIdentifier>{9616702f-4f96-4977-b4bd-7203793b212f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Engine\Library">
+      <UniqueIdentifier>{17fdd63f-d920-4c0a-bfe3-e361df035ac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Engine\Main">
+      <UniqueIdentifier>{fde29a94-5f8e-46f5-949c-d2b5d5dce214}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjectManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Source Files\Core\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="TestScene.cpp">
-      <Filter>Source Files\Scenes</Filter>
+      <Filter>Source Files\Core\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>Source Files\GameObjects\Base</Filter>
+      <Filter>Source Files\Core\GameObjects\Base</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\GameObjects\Base</Filter>
+      <Filter>Source Files\Core\GameObjects\Base</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="BasicPlayer.cpp">
-      <Filter>Source Files\GameObjects\TestObjects</Filter>
+      <Filter>Source Files\Core\GameObjects\TestObjects</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>Source Files\GameObjects\Components</Filter>
+      <Filter>Source Files\Core\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
-      <Filter>Source Files\GameObjects\TestObjects</Filter>
+      <Filter>Source Files\Core\GameObjects\TestObjects</Filter>
     </ClCompile>
     <ClCompile Include="Mover.cpp">
-      <Filter>Source Files\GameObjects\TestObjects</Filter>
+      <Filter>Source Files\Core\GameObjects\TestObjects</Filter>
     </ClCompile>
     <ClCompile Include="Container.cpp">
-      <Filter>Source Files\Engine\Library</Filter>
+      <Filter>Source Files\Core\Engine\Library</Filter>
     </ClCompile>
     <ClCompile Include="MathLib.cpp">
-      <Filter>Source Files\Engine\Library</Filter>
+      <Filter>Source Files\Core\Engine\Library</Filter>
     </ClCompile>
     <ClCompile Include="Draw.cpp">
-      <Filter>Source Files\Engine\Main</Filter>
+      <Filter>Source Files\Core\Engine\Main</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>Source Files\Engine\Main</Filter>
+      <Filter>Source Files\Core\Engine\Main</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>Source Files\Engine\Main</Filter>
+      <Filter>Source Files\Core\Engine\Main</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files\Engine\Main</Filter>
+      <Filter>Source Files\Core\Engine\Main</Filter>
     </ClCompile>
     <ClCompile Include="Update.cpp">
-      <Filter>Source Files\Engine\Main</Filter>
+      <Filter>Source Files\Core\Engine\Main</Filter>
     </ClCompile>
     <ClCompile Include="DrawableManager.cpp">
-      <Filter>Source Files\Managers</Filter>
+      <Filter>Source Files\Core\Managers</Filter>
     </ClCompile>
     <ClCompile Include="GameObjectComponent.cpp">
-      <Filter>Source Files\GameObjects\Components</Filter>
+      <Filter>Source Files\Core\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="DrawableObject.cpp">
-      <Filter>Source Files\GameObjects\Components</Filter>
+      <Filter>Source Files\Core\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="RectangleGraphic.cpp">
-      <Filter>Source Files\GameObjects\Components</Filter>
+      <Filter>Source Files\Core\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
-      <Filter>Source Files\Managers\CollisionManagers</Filter>
+      <Filter>Source Files\Core\Managers\CollisionManagers</Filter>
     </ClCompile>
     <ClCompile Include="SimpleCollisionManager.cpp">
-      <Filter>Source Files\Managers\CollisionManagers</Filter>
+      <Filter>Source Files\Core\Managers\CollisionManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundFileManager.cpp">
+      <Filter>Source Files\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Source Files\Core\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="TextManager.cpp">
+      <Filter>Source Files\Core\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Header Files\Core\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="SceneManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files\GameObjects\Base</Filter>
+      <Filter>Header Files\Core\GameObjects\Base</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
-      <Filter>Header Files\GameObjects\Base</Filter>
+      <Filter>Header Files\Core\GameObjects\Base</Filter>
     </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Header Files\GameObjects\Components\Command</Filter>
+      <Filter>Header Files\Core\GameObjects\Components\Command</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="BasicPlayer.h">
-      <Filter>Header Files\GameObjects\TestObjects</Filter>
+      <Filter>Header Files\Core\GameObjects\TestObjects</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
-      <Filter>Header Files\GameObjects\TestObjects</Filter>
+      <Filter>Header Files\Core\GameObjects\TestObjects</Filter>
     </ClInclude>
     <ClInclude Include="Mover.h">
-      <Filter>Header Files\GameObjects\TestObjects</Filter>
+      <Filter>Header Files\Core\GameObjects\TestObjects</Filter>
     </ClInclude>
     <ClInclude Include="TestScene.h">
-      <Filter>Header Files\Scenes</Filter>
+      <Filter>Header Files\Core\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="Container.h">
-      <Filter>Header Files\Engine\Library</Filter>
+      <Filter>Header Files\Core\Engine\Library</Filter>
     </ClInclude>
     <ClInclude Include="MathLib.h">
-      <Filter>Header Files\Engine\Library</Filter>
+      <Filter>Header Files\Core\Engine\Library</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>Header Files\Engine\Main</Filter>
+      <Filter>Header Files\Core\Engine\Main</Filter>
     </ClInclude>
     <ClInclude Include="DrawableManager.h">
-      <Filter>Header Files\Managers</Filter>
+      <Filter>Header Files\Core\Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameObjectComponent.h">
-      <Filter>Header Files\GameObjects\Components\Base</Filter>
+      <Filter>Header Files\Core\GameObjects\Components\Base</Filter>
     </ClInclude>
     <ClInclude Include="DrawableObject.h">
-      <Filter>Header Files\GameObjects\Components\Graphics</Filter>
+      <Filter>Header Files\Core\GameObjects\Components\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="RectangleGraphic.h">
-      <Filter>Header Files\GameObjects\Components\Graphics</Filter>
+      <Filter>Header Files\Core\GameObjects\Components\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Header Files\GameObjects\Components\Collision</Filter>
+      <Filter>Header Files\Core\GameObjects\Components\Collision</Filter>
     </ClInclude>
     <ClInclude Include="SimpleCollisionManager.h">
-      <Filter>Header Files\Managers\CollisionManagers</Filter>
+      <Filter>Header Files\Core\Managers\CollisionManagers</Filter>
     </ClInclude>
     <ClInclude Include="CollisionManager.h">
-      <Filter>Header Files\Managers\CollisionManagers</Filter>
+      <Filter>Header Files\Core\Managers\CollisionManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundFileManager.h">
+      <Filter>Header Files\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Header Files\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextManager.h">
+      <Filter>Header Files\Core\Managers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

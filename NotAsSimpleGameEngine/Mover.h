@@ -1,5 +1,6 @@
 #pragma once
 #include "Entity.h"
+#include <SFML/Audio.hpp>
 
 class RectangleGraphic;
 
@@ -9,6 +10,8 @@ private:
     float m_Speed;
     Vector2f m_TravelDirection;
     RectangleGraphic* m_Graphic;
+    string m_BounceSoundFile;
+    Sound m_BounceSound;
 
     Mover(const Mover& other) = delete;
     Mover& operator=(const Mover& rhs) = delete;

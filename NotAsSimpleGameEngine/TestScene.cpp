@@ -6,6 +6,8 @@
 #include <iostream>
 #include "Collider.h"
 #include "CollisionManager.h"
+#include "FontManager.h"
+#include "TextManager.h"
 //#include "Engine.h"
 
 TestScene::TestScene() : 
@@ -23,6 +25,15 @@ void TestScene::enter(float dtAsSeconds) {
 	testPlayer->init(200.0f, 200.0f);
 	testBox->init(300.0f, 300.0f);
 	testMover->init(0.0f, 0.0f);
+
+	Text* helloText = new Text();
+	helloText->setFont(FontManager::getInstance()->get("assets/fonts/game_over.ttf"));
+	helloText->setString("Hello World!");
+	helloText->setCharacterSize(72);
+	helloText->setFillColor(Color::White);
+	helloText->setPosition(Vector2f(0.0f, 0.0f));
+
+	TextManager::getInstance()->add(*helloText);
 }
 
 void TestScene::update(float dtAsSeconds) {
