@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class SceneManager {
+class SceneManager final {
 private:
 	static SceneManager* instance;
 	vector<Scene*> m_Scenes;

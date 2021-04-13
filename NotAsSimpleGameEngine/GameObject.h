@@ -6,6 +6,7 @@
 #include "InputManager.h"
 #include "Collider.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 using namespace std;
 using namespace sf;
@@ -34,6 +35,7 @@ protected:
 	int m_Id;
 
 	void addComponent(GameObjectComponent& component);
+	virtual void update(float dtAsSeconds) = 0;
 
 public:
 	GameObject();
@@ -44,8 +46,7 @@ public:
 	bool isActive() const;
 	void setActive(bool isActive);
 	const Vector2f& getPosition() const;
-	void setPosition(float x, float y);
-	virtual void update(float dtAsSeconds) = 0;
+	void setPosition(const Vector2f& position);
 	void process(float dtAsSeconds);
 };
 

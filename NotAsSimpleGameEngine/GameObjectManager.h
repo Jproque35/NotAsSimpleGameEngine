@@ -8,7 +8,7 @@
 using namespace std;
 using namespace sf;
 
-class GameObjectManager {
+class GameObjectManager final {
 
 private:
 	static GameObjectManager* instance;

@@ -11,7 +11,7 @@ Entity::~Entity() {
 	cout << this << ": Deleting Entity..." << endl;
 }
 
-void Entity::Move(float x, float y) {
-	this->m_Position.x += x;
-	this->m_Position.y += y;
+void Entity::Move(const Vector2f& direction) {
+	this->m_Position.x += direction.x;
+	this->m_Position.y += direction.y;
 }

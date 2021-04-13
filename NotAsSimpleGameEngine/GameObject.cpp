@@ -49,9 +49,8 @@ const Vector2f& GameObject::getPosition()  const {
 	return this->m_Position;
 }
 
-void GameObject::setPosition(float x, float y) {
-	this->m_Position.x = x;
-	this->m_Position.y = y;
+void GameObject::setPosition(const Vector2f& position) {
+	this->m_Position = position;
 }
 
 void GameObject::addComponent(GameObjectComponent& component) {

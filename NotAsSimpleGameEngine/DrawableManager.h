@@ -10,7 +10,7 @@
 using namespace sf;
 using namespace std;
 
-class DrawableManager {
+class DrawableManager final {
 private:
 	static DrawableManager* instance;
 	Container<DrawableObject>* m_Storage;

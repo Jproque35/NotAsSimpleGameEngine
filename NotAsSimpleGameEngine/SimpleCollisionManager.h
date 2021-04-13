@@ -11,7 +11,7 @@ using namespace std;
 
 class Collider;
 
-class SimpleCollisionManager
+class SimpleCollisionManager final
 {
 
 private:

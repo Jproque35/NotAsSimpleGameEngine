@@ -83,7 +83,8 @@ void Mover::changeDirectionAfterBoundaryCollision(vector<CollisionDirection> dir
 }
 
 void Mover::update(float dtAsSeconds) {
-	this->Move(this->m_TravelDirection.x * dtAsSeconds, this->m_TravelDirection.y * dtAsSeconds);
+	//this->Move(this->m_TravelDirection.x * dtAsSeconds, this->m_TravelDirection.y * dtAsSeconds);
+	this->Move(this->m_TravelDirection * dtAsSeconds);
 	this->changeDirectionAfterObjectCollision(dtAsSeconds);
 
 	vector<CollisionDirection> screenCollisions = this->m_Collider->getBoundaryCollisionData();

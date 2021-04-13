@@ -5,7 +5,7 @@
 
 class RectangleGraphic;
 
-class BasicPlayer :
+class BasicPlayer final :
     public Entity {
 private:
     float m_Speed;

@@ -162,6 +162,10 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="GameObjectComponent.cpp" />
     <ClCompile Include="Mover.cpp" />
+    <ClCompile Include="PongBall.cpp" />
+    <ClCompile Include="PongBlock.cpp" />
+    <ClCompile Include="PongBlockManager.cpp" />
+    <ClCompile Include="PongScene.cpp" />
     <ClCompile Include="RectangleGraphic.cpp" />
     <ClCompile Include="SimpleCollisionManager.cpp" />
     <ClCompile Include="Draw.cpp" />
@@ -191,6 +195,10 @@
     <ClInclude Include="FontManager.h" />
     <ClInclude Include="GameObjectComponent.h" />
     <ClInclude Include="Mover.h" />
+    <ClInclude Include="PongBall.h" />
+    <ClInclude Include="PongBlock.h" />
+    <ClInclude Include="PongBlockManager.h" />
+    <ClInclude Include="PongScene.h" />
     <ClInclude Include="RectangleGraphic.h" />
     <ClInclude Include="SimpleCollisionManager.h" />
     <ClInclude Include="Command.h" />

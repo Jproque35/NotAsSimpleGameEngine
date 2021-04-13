@@ -2,7 +2,7 @@
 #include "MathLib.h"
 #include "GameObject.h"
 #include "SceneManager.h"
-#include "CollisionManager.h"
+#include "SimpleCollisionManager.h"
 
 int Collider::m_CurrFreeId = 0;
 
@@ -14,7 +14,7 @@ Collider::Collider(GameObject& owner, const Vector2f& dimensions, bool solid, bo
 	m_Width(dimensions.x) {
 	this->m_Id = m_CurrFreeId++;
 	cout << "Collider: Id set to " << this->m_Id << endl;
-	CollisionManager::getInstance()->add(*this);
+	SimpleCollisionManager::getInstance()->add(*this);
 }
 
 Collider::~Collider() {
@@ -60,8 +60,8 @@ bool Collider::intersects(const Collider& other) const {
 }
 
 vector<Collider*> Collider::getCollisionList() const {
-	//return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
-	return CollisionManager::getInstance()->getCollisionList(*this);
+	return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
+	//return CollisionManager::getInstance()->getCollisionList(*this);
 }
 
 CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2f diff) const {
@@ -145,7 +145,7 @@ void Collider::repositionAfterObjectCollision(const Collider& other) {
 			xPos = xPos + other.getWidth() - abs(colVector.x);
 		}
 
-		this->m_Owner->setPosition(xPos, yPos);
+		this->m_Owner->setPosition(Vector2f(xPos, yPos));
 	}
 }
 

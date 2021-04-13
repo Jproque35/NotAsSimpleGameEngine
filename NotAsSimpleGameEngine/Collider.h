@@ -20,7 +20,7 @@ typedef std::tuple<bool, CollisionDirection, Vector2f> Collision;
 
 class GameObject;
 
-class Collider 
+class Collider final
 	: public GameObjectComponent {
 private:
 	static int m_CurrFreeId;

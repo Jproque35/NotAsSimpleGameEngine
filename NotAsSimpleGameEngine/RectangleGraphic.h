@@ -8,7 +8,7 @@
 using namespace std;
 using namespace sf;
 
-class RectangleGraphic :
+class RectangleGraphic final :
     public DrawableObject {
 
 private:

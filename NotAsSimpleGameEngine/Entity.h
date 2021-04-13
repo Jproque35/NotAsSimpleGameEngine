@@ -37,7 +37,7 @@ public:
     Entity();
     virtual ~Entity();
 
-    void Move(float x, float y);
+    void Move(const Vector2f& direction);
 };
 
 #endif

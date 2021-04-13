@@ -8,11 +8,12 @@
 using namespace std;
 using namespace sf;
 
-class SoundFileManager {
+class SoundFileManager final {
 private:
+	static const int maxSize = 128;
 	static SoundFileManager* instance;
 	unordered_map<string, int> m_IdMap;
-	SoundBuffer m_Bufs[128];
+	SoundBuffer m_Bufs[maxSize];
 	int m_CurrFreeId;
 
 	SoundFileManager();

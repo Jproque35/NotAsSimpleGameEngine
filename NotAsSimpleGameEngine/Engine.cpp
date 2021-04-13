@@ -8,6 +8,8 @@
 #include "SoundFileManager.h"
 #include "TextManager.h"
 #include "TestScene.h"
+#include "PongScene.h"
+#include "SimpleCollisionManager.h"
 
 Engine* Engine::instance = NULL;
 
@@ -31,6 +33,7 @@ Engine::~Engine() {
 	FontManager::resetInstance();
 	SoundFileManager::resetInstance();
 	TextManager::resetInstance();
+	SimpleCollisionManager::resetInstance();
 }
 
 Engine* Engine::getInstance() {
@@ -52,8 +55,9 @@ void Engine::resetInstance() {
 void Engine::start() {
 	Clock clock;
 
-	TestScene* testScene = new TestScene();
-	SceneManager::getInstance()->add(*testScene);
+	//TestScene* testScene = new TestScene();
+	PongScene* pongScene = new PongScene();
+	SceneManager::getInstance()->add(*pongScene);
 
 	FontManager::getInstance()->loadFile("assets/fonts/game_over.ttf");
 

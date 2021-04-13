@@ -55,9 +55,6 @@
     <Filter Include="Header Files\Core\Engine\Library">
       <UniqueIdentifier>{ebcac4b2-85b3-4217-ae53-cfad6c284bfc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Engine\Library\CollisionMap">
-      <UniqueIdentifier>{ca553f6b-378c-48ab-99ad-830358e4354a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Engine\Main">
       <UniqueIdentifier>{8056601d-ff69-4768-b996-88237077810f}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,12 @@
     </Filter>
     <Filter Include="Source Files\Core\Engine\Main">
       <UniqueIdentifier>{fde29a94-5f8e-46f5-949c-d2b5d5dce214}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Pong">
+      <UniqueIdentifier>{4aa4a711-498c-46ae-b626-2dc0deee4aa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pong">
+      <UniqueIdentifier>{30b5be9b-e19a-48d1-bc9b-ba9c1cd3262f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +186,18 @@
     <ClCompile Include="TextManager.cpp">
       <Filter>Source Files\Core\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="PongScene.cpp">
+      <Filter>Source Files\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="PongBlock.cpp">
+      <Filter>Source Files\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="PongBlockManager.cpp">
+      <Filter>Source Files\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="PongBall.cpp">
+      <Filter>Source Files\Pong</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -256,6 +271,18 @@
     </ClInclude>
     <ClInclude Include="TextManager.h">
       <Filter>Header Files\Core\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="PongScene.h">
+      <Filter>Header Files\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="PongBlock.h">
+      <Filter>Header Files\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="PongBlockManager.h">
+      <Filter>Header Files\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="PongBall.h">
+      <Filter>Header Files\Pong</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

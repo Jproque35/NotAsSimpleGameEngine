@@ -54,7 +54,7 @@ Vector2f BasicPlayer::inputToVector() {
 }
 
 void BasicPlayer::update(float dtAsSeconds) {
-	Vector2f moveDir = this->inputToVector();
+	Vector2f moveDir = this->inputToVector() * dtAsSeconds;
 
-	this->Move(moveDir.x * dtAsSeconds, moveDir.y * dtAsSeconds);
+	this->Move(moveDir);
 }

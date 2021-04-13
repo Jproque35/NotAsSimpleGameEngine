@@ -17,7 +17,7 @@ enum class Button {
 	Fire
 };
 
-class InputManager {
+class InputManager final {
 private:
 	static InputManager* instance;
 	unordered_map<Button, Keyboard::Key> m_Keys;

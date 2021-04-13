@@ -17,6 +17,7 @@ GameObjectManager* GameObjectManager::getInstance() {
 	if (!instance) {
 		instance = new GameObjectManager();
 	}
+
 	return instance;
 }
 

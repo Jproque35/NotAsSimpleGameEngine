@@ -9,7 +9,7 @@ using namespace std;
 
 class Collider;
 
-enum CollisionEntryType {
+enum class CollisionEntryType {
 	Start,
 	End
 };
@@ -25,7 +25,7 @@ struct CollisionEntry {
 };
 
 
-class CollisionManager {
+class CollisionManager final {
 private:
 	static CollisionManager* instance;
 	unordered_map<int, Collider*> m_Colliders;

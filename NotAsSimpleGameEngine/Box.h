@@ -3,7 +3,7 @@
 
 class RectangleGraphic;
 
-class Box 
+class Box final
 	: public Entity {
 
 private:

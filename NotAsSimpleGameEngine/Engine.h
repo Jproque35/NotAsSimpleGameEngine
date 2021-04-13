@@ -11,7 +11,7 @@ enum class EngineState {
 	Exit
 };
 
-class Engine {
+class Engine final {
 private:
 	static Engine* instance;
 	RenderWindow m_Window;

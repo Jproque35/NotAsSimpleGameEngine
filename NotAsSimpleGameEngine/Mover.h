@@ -1,10 +1,9 @@
 #pragma once
 #include "Entity.h"
-#include <SFML/Audio.hpp>
 
 class RectangleGraphic;
 
-class Mover :
+class Mover final :
     public Entity {
 private:
     float m_Speed;

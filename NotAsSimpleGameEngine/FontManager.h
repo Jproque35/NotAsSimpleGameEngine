@@ -7,11 +7,12 @@
 using namespace std;
 using namespace sf;
 
-class FontManager {
+class FontManager final {
 private:
+	static const int maxSize = 128;
 	static FontManager* instance;
 	unordered_map<string, int> m_IdMap;
-	Font m_Fonts[128];
+	Font m_Fonts[maxSize];
 	int m_CurrFreeId;
 
 	FontManager();

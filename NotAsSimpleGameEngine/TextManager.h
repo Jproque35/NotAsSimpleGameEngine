@@ -7,10 +7,11 @@
 using namespace sf;
 using namespace std;
 
-class TextManager {
+class TextManager  final {
 private:
+	static const int maxSize = 128;
 	static TextManager* instance;
-	Text* m_Texts[128];
+	Text* m_Texts[maxSize];
 	int m_CurrFreeId;
 
 	TextManager();

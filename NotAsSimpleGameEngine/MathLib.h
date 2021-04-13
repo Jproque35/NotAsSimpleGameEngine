@@ -5,8 +5,7 @@
 
 using namespace sf;
 
-class MathLib
-{
+class MathLib final {
 public:
 	static float dot(const Vector2f& first, const Vector2f& second);
 	static Vector2f normalize(const Vector2f& v);
