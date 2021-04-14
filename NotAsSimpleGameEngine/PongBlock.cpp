@@ -32,6 +32,7 @@ void PongBlock::update(float dtAsSeconds) {
 	vector<Collider*> colList = this->m_Collider->getCollisionList();
 
 	for (int i = 0; i < colList.size(); ++i) {
+		cout << "Collision detected" << endl;
 		if (colList[i]->getOwner().m_Tag == GameObjectTag::Enemy) {
 			this->destroy();
 		}

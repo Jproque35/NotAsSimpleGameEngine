@@ -14,7 +14,7 @@ PongBall::PongBall()
 	SoundFileManager::getInstance()->loadFile(this->m_BounceSoundFile);
 	this->m_BounceSound.setBuffer(SoundFileManager::getInstance()->get(this->m_BounceSoundFile));
 
-	Vector2f rectSize(32.0f, 32.0f);
+	Vector2f rectSize(24.0f, 24.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Red);
 	this->m_Collider = new Collider(*this, rectSize, true, false);
 	this->m_TravelDirection.x = this->m_Speed;
@@ -45,15 +45,19 @@ void PongBall::changeDirectionAfterObjectCollision(float dtAsSeconds) {
 
 			if (colDir == CollisionDirection::Up && this->m_TravelDirection.y < 0.0f) {
 				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
+				//cout << "Ball: Up Collision" << endl;
 			}
 			else if (colDir == CollisionDirection::Down && this->m_TravelDirection.y > 0.0f) {
 				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
+				//cout << "Ball: Down Collision" << endl;
 			}
 			else if (colDir == CollisionDirection::Left && this->m_TravelDirection.x < 0.0f) {
 				this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
+				//cout << "Ball: Left Collision" << endl;
 			}
 			else if (colDir == CollisionDirection::Right && this->m_TravelDirection.x > 0.0f) {
 				this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
+				//cout << "Ball: Right Collision" << endl;
 			}
 		}
 
@@ -88,6 +92,14 @@ void PongBall::update(float dtAsSeconds) {
 	//this->Move(this->m_TravelDirection.x * dtAsSeconds, this->m_TravelDirection.y * dtAsSeconds);
 	this->Move(this->m_TravelDirection * dtAsSeconds);
 	this->changeDirectionAfterObjectCollision(dtAsSeconds);
+
+	vector<Collider*> colList = this->m_Collider->getCollisionList();
+	if (colList.size() > 0) {
+		cout << "Ball: Collision Detected" << endl;
+	}
+	else {
+		//cout << "no" << endl;
+	}
 
 	vector<CollisionDirection> screenCollisions = this->m_Collider->getBoundaryCollisionData();
 	if (screenCollisions.size() > 0) {

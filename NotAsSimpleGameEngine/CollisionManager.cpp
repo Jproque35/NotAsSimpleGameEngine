@@ -131,6 +131,10 @@ void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map
 	CollisionEntryType currType = entry.type;
 
 	if (currType == CollisionEntryType::Start) {
+		for (auto it = activeColliderIds.begin(); it != activeColliderIds.end(); ++it) {
+			intersectionLists[currCollider->getId()].push_back(this->m_Colliders[*it]);
+		}
+
 		activeColliderIds.push_back(currCollider->getId());
 	}
 	else {

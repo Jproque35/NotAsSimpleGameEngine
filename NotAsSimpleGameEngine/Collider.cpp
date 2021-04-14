@@ -48,15 +48,11 @@ float Collider::getHeight() const {
 }
 
 bool Collider::horizontalCollision(const Collider& other) const {
-	//return this->m_Owner->getPosition().x < other.m_Owner->getPosition().x + other.m_Width
-	//	&& other.m_Owner->getPosition().x < this->m_Owner->getPosition().x + this->m_Width;
 	return this->getLeft() < other.getLeft() + other.m_Width
 		&& other.getLeft() < this->getLeft() + this->m_Width;
 }
 
 bool Collider::verticalCollision(const Collider& other) const {
-	//return this->m_Owner->getPosition().y < other.m_Owner->getPosition().y + other.m_Height
-	//	&& other.m_Owner->getPosition().y < this->m_Owner->getPosition().y + this->m_Height;
 	return this->getTop() < other.getTop() + other.m_Height
 		&& other.getTop() < this->getTop() + this->m_Height;
 }
@@ -66,7 +62,6 @@ bool Collider::intersects(const Collider& other) const {
 }
 
 vector<Collider*> Collider::getCollisionList() const {
-	//return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
 	return CollisionManager::getInstance()->getCollisionList(*this);
 }
 
@@ -79,17 +74,59 @@ CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2
 	};
 
 	float max = 0;
-	unsigned int desire = 0;
+	//unsigned int desire = 0;
+	CollisionDirection desire = CollisionDirection::Up;
 	for (int i = 0; i < 4; ++i) {
 		float dot = MathLib::dot(compass[i], MathLib::normalize(diff));
 
 		if (dot > max) {
 			max = dot;
-			desire = i;
+			desire = (CollisionDirection)i;
 		}
 	}
 
-	return (CollisionDirection)desire;
+	
+	if (desire == CollisionDirection::Left || desire == CollisionDirection::Right) {
+		cout << "Side Check" << endl;
+		if (other.getHeight() / other.getWidth() < 1
+			&& abs(diff.y) > other.getHeight() / 2) {
+			//cout << "Calculating..." << endl;
+			cout << diff.y << endl;
+			if (desire == CollisionDirection::Left && diff.y > 0) {
+				return CollisionDirection::Down;
+			}
+			else if (desire == CollisionDirection::Left && diff.y < 0) {
+				return CollisionDirection::Up;
+			}
+			else if (desire == CollisionDirection::Right && diff.y > 0) {
+				return CollisionDirection::Down;
+			}
+			else if (desire == CollisionDirection::Right && diff.y < 0) {
+				return CollisionDirection::Up;
+			}
+		}
+	}
+
+	if (desire == CollisionDirection::Up || desire == CollisionDirection::Down) {
+		cout << "Verical Check" << endl;
+		if (other.getHeight() / other.getWidth() > 1
+				&& abs(diff.x) > other.getWidth() / 2) {
+			if (desire == CollisionDirection::Up && diff.x > 0) {
+				return CollisionDirection::Right;
+			}
+			else if (desire == CollisionDirection::Up && diff.x < 0) {
+				return CollisionDirection::Left;
+			}
+			else if (desire == CollisionDirection::Down && diff.x > 0) {
+				return CollisionDirection::Right;
+			}
+			else if (desire == CollisionDirection::Up && diff.x < 0) {
+				return CollisionDirection::Left;
+			}
+		}
+	}
+
+	return desire;
 }
 
 Collision Collider::getObjectCollisionData(const Collider& other) const {
@@ -104,23 +141,19 @@ Collision Collider::getObjectCollisionData(const Collider& other) const {
 vector<CollisionDirection> Collider::getBoundaryCollisionData() const {
 	vector<CollisionDirection> desire;
 
-	//if (this->m_Owner->getPosition().x < 0) {
 	if(this->getLeft() < 0) {
 		desire.push_back(CollisionDirection::Left);
 	}
 
-	//if (this->m_Owner->getPosition().y < 0) {
 	if(this->getTop() < 0) {
 		desire.push_back(CollisionDirection::Up);
 	}
 
-	//if (this->m_Owner->getPosition().x + this->m_Width > SceneManager::getInstance()->getCurrentScene().getWidth()) {
 	if(this->getLeft() + this->m_Width
 		> SceneManager::getInstance()->getCurrentScene().getWidth()) {
 		desire.push_back(CollisionDirection::Right);
 	}
 
-	//if (this->m_Owner->getPosition().y + this->m_Height > SceneManager::getInstance()->getCurrentScene().getHeight()) {
 	if(this->getTop() + this->m_Height
 		> SceneManager::getInstance()->getCurrentScene().getHeight()) {
 		desire.push_back(CollisionDirection::Down);
@@ -132,29 +165,24 @@ vector<CollisionDirection> Collider::getBoundaryCollisionData() const {
 void Collider::repositionAfterObjectCollision(const Collider& other) {
 	Collision col = this->getObjectCollisionData(other);
 
-	//cout << "Collider: Resolving collision..." << endl;
-
 	if (std::get<0>(col)) {
 		CollisionDirection colDir = std::get<1>(col);
 		Vector2f colVector = std::get<2>(col);
-
-		//cout << "Collision Vector is " << colVector.x << " " << colVector.y << endl;
-
 		Vector2f ownerPos = this->m_Owner->getPosition(); 
 		float xPos = ownerPos.x;
 		float yPos = ownerPos.y;
 
 		if (colDir == CollisionDirection::Down) {
-			yPos = yPos - (this->getHeight() - abs(colVector.y));
+			yPos -= this->getTop() + this->getHeight() - other.getTop();
 		}
 		else if (colDir == CollisionDirection::Right) {
-			xPos = xPos - (this->getWidth() - abs(colVector.x));
+			xPos -= abs(this->getLeft() + this->getWidth() - other.getLeft());
 		}
 		else if (colDir == CollisionDirection::Up) {
-			yPos = yPos + other.getHeight() - abs(colVector.y);
+			yPos += other.getTop() + other.getHeight() - this->getTop();
 		}
 		else if (colDir == CollisionDirection::Left) {
-			xPos = xPos + other.getWidth() - abs(colVector.x);
+			xPos += other.getLeft() + other.getWidth() - this->getLeft();
 		}
 
 		this->m_Owner->setPosition(Vector2f(xPos, yPos));

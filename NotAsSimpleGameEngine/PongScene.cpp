@@ -6,7 +6,7 @@
 #include "PongBall.h"
 
 PongScene::PongScene() :
-	Scene(640.0, 640.0) {
+	Scene(640.0, 720.0) {
 	this->blockManager = PongBlockManager::getInstance();
 }
 
@@ -37,8 +37,10 @@ void PongScene::enter(float dtAsSeconds) {
 		}
 	}
 
+	//this->blockManager->getFreeBlock().init(this->getWidth() / 2, this->getHeight() / 2);
+
 	this->ball = new PongBall();
-	this->ball->init(this->getWidth() / 2, this->getHeight());
+	this->ball->init(this->getWidth() * 0.4 , this->getHeight());
 
 }
 

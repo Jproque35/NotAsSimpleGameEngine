@@ -19,7 +19,7 @@ Engine::Engine() {
 	//this->resolution.y = VideoMode::getDesktopMode().height;
 
 	this->resolution.x = 640.0f;
-	this->resolution.y = 640.0f;
+	this->resolution.y = 720.0f;
 
 	this->m_Window.create(VideoMode(resolution.x, resolution.y), "Simple Game Engine");
 }
