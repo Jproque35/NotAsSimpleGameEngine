@@ -5,9 +5,11 @@
 
 PongBall::PongBall()
 	: Entity(),
-	m_Speed(100.0f),
+	m_Speed(300.0f),
 	m_TravelDirection(0.0f, 0.0f),
 	m_BounceSoundFile("assets/sounds/VUX-Bite.wav") {
+
+	this->m_Tag = GameObjectTag::Enemy;
 
 	SoundFileManager::getInstance()->loadFile(this->m_BounceSoundFile);
 	this->m_BounceSound.setBuffer(SoundFileManager::getInstance()->get(this->m_BounceSoundFile));

@@ -25,14 +25,14 @@ void PongScene::enter(float dtAsSeconds) {
 	scoreText->setCharacterSize(72.0f);
 	TextManager::getInstance()->add(*scoreText);
 	
-	float xPos = 0.0f, yPos = 0.0f;
+	float xPos = 40.0f, yPos = 16.0f;
 	//for (int i = 0; i < 32; ++i) {
 	while(this->blockManager->getAmountFree() > 0) {
 		this->blockManager->getFreeBlock().init(xPos, yPos);
 
 		xPos += 80.f;
 		if (xPos >= this->getWidth()) {
-			xPos = 0.0f;
+			xPos = 40.0f;
 			yPos += 32.0f;
 		}
 	}

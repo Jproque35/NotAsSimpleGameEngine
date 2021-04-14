@@ -11,7 +11,7 @@
 using namespace std;
 using namespace sf;
 
-enum class Tag {
+enum class GameObjectTag {
 	Generic,
 	Player,
 	Enemy,
@@ -38,6 +38,8 @@ protected:
 	virtual void update(float dtAsSeconds) = 0;
 
 public:
+	GameObjectTag m_Tag = GameObjectTag::Generic;
+
 	GameObject();
 	virtual ~GameObject();
 

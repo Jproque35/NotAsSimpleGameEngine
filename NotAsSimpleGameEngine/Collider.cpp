@@ -2,6 +2,7 @@
 #include "MathLib.h"
 #include "GameObject.h"
 #include "SceneManager.h"
+#include "CollisionManager.h"
 #include "SimpleCollisionManager.h"
 
 int Collider::m_CurrFreeId = 0;
@@ -14,7 +15,8 @@ Collider::Collider(GameObject& owner, const Vector2f& dimensions, bool solid, bo
 	m_Width(dimensions.x) {
 	this->m_Id = m_CurrFreeId++;
 	cout << "Collider: Id set to " << this->m_Id << endl;
-	SimpleCollisionManager::getInstance()->add(*this);
+	//SimpleCollisionManager::getInstance()->add(*this);
+	CollisionManager::getInstance()->add(*this);
 }
 
 Collider::~Collider() {
@@ -46,13 +48,17 @@ float Collider::getHeight() const {
 }
 
 bool Collider::horizontalCollision(const Collider& other) const {
-	return this->m_Owner->getPosition().x < other.m_Owner->getPosition().x + other.m_Width
-		&& other.m_Owner->getPosition().x < this->m_Owner->getPosition().x + this->m_Width;
+	//return this->m_Owner->getPosition().x < other.m_Owner->getPosition().x + other.m_Width
+	//	&& other.m_Owner->getPosition().x < this->m_Owner->getPosition().x + this->m_Width;
+	return this->getLeft() < other.getLeft() + other.m_Width
+		&& other.getLeft() < this->getLeft() + this->m_Width;
 }
 
 bool Collider::verticalCollision(const Collider& other) const {
-	return this->m_Owner->getPosition().y < other.m_Owner->getPosition().y + other.m_Height
-		&& other.m_Owner->getPosition().y < this->m_Owner->getPosition().y + this->m_Height;
+	//return this->m_Owner->getPosition().y < other.m_Owner->getPosition().y + other.m_Height
+	//	&& other.m_Owner->getPosition().y < this->m_Owner->getPosition().y + this->m_Height;
+	return this->getTop() < other.getTop() + other.m_Height
+		&& other.getTop() < this->getTop() + this->m_Height;
 }
 
 bool Collider::intersects(const Collider& other) const {
@@ -60,8 +66,8 @@ bool Collider::intersects(const Collider& other) const {
 }
 
 vector<Collider*> Collider::getCollisionList() const {
-	return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
-	//return CollisionManager::getInstance()->getCollisionList(*this);
+	//return SimpleCollisionManager::getInstance()->getCollisionList(this->m_Id);
+	return CollisionManager::getInstance()->getCollisionList(*this);
 }
 
 CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2f diff) const {
@@ -98,19 +104,25 @@ Collision Collider::getObjectCollisionData(const Collider& other) const {
 vector<CollisionDirection> Collider::getBoundaryCollisionData() const {
 	vector<CollisionDirection> desire;
 
-	if (this->m_Owner->getPosition().x < 0) {
+	//if (this->m_Owner->getPosition().x < 0) {
+	if(this->getLeft() < 0) {
 		desire.push_back(CollisionDirection::Left);
 	}
 
-	if (this->m_Owner->getPosition().y < 0) {
+	//if (this->m_Owner->getPosition().y < 0) {
+	if(this->getTop() < 0) {
 		desire.push_back(CollisionDirection::Up);
 	}
 
-	if (this->m_Owner->getPosition().x + this->m_Width > SceneManager::getInstance()->getCurrentScene().getWidth()) {
+	//if (this->m_Owner->getPosition().x + this->m_Width > SceneManager::getInstance()->getCurrentScene().getWidth()) {
+	if(this->getLeft() + this->m_Width
+		> SceneManager::getInstance()->getCurrentScene().getWidth()) {
 		desire.push_back(CollisionDirection::Right);
 	}
 
-	if (this->m_Owner->getPosition().y + this->m_Height > SceneManager::getInstance()->getCurrentScene().getHeight()) {
+	//if (this->m_Owner->getPosition().y + this->m_Height > SceneManager::getInstance()->getCurrentScene().getHeight()) {
+	if(this->getTop() + this->m_Height
+		> SceneManager::getInstance()->getCurrentScene().getHeight()) {
 		desire.push_back(CollisionDirection::Down);
 	}
 

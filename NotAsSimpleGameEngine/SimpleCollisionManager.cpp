@@ -77,7 +77,7 @@ vector<Collider*> SimpleCollisionManager::getCollisionList(int id) {
 
 			for (int i = 0; i < this->m_Colliders.size(); ++i) {
 
-				if (currCollider != this->m_Colliders[i]
+				if ((currCollider != this->m_Colliders[i] && this->m_Colliders[i]->getOwner().isActive())
 					&& currCollider->intersects(*this->m_Colliders[i])) {
 					desire.push_back(this->m_Colliders[i]);
 				}

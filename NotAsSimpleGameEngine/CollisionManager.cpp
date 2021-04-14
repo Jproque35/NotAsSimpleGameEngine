@@ -40,13 +40,13 @@ void CollisionManager::addXEntries(Collider& col) {
 	CollisionEntry xEnd;
 
 	xStart.owner = &col;
-	xStart.value = col.getOwner().getPosition().x;
-	//xStart.value = col.getLeft();
+	//xStart.value = col.getOwner().getPosition().x;
+	xStart.value = col.getLeft();
 	xStart.type = CollisionEntryType::Start;
 
 	xEnd.owner = &col;
-	xEnd.value = col.getOwner().getPosition().x + col.getWidth();
-	//xEnd.value = col.getLeft() + col.getWidth();
+	//xEnd.value = col.getOwner().getPosition().x + col.getWidth();
+	xEnd.value = col.getLeft() + col.getWidth();
 	xEnd.type = CollisionEntryType::End;
 
 	this->m_XList.push_back(xStart);
@@ -60,13 +60,13 @@ void CollisionManager::addYEntries(Collider& col) {
 	CollisionEntry yEnd;
 
 	yStart.owner = &col;
-	yStart.value = col.getOwner().getPosition().y;
-	//yStart.value = col.getTop();
+	//yStart.value = col.getOwner().getPosition().y;
+	yStart.value = col.getTop();
 	yStart.type = CollisionEntryType::Start;
 
 	yEnd.owner = &col;
-	yEnd.value = col.getOwner().getPosition().y + col.getHeight();
-	//yEnd.value = col.getTop() + col.getHeight();
+	//yEnd.value = col.getOwner().getPosition().y + col.getHeight();
+	yEnd.value = col.getTop() + col.getHeight();
 	yEnd.type = CollisionEntryType::End;
 
 	this->m_YList.push_back(yStart);
@@ -92,10 +92,10 @@ vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
 
 void CollisionManager::updateXList() {
 	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
-		float x = it->owner->getOwner().getPosition().x;
-		//float x = it->owner->getLeft();
-		float width = it->owner->getWidth();
+		//float x = it->owner->getOwner().getPosition().x;
+		float x = it->owner->getLeft();
 		//float width = it->owner->getWidth();
+		float width = it->owner->getWidth();
 
 		if (it->type == CollisionEntryType::Start) {
 			it->value = x;
@@ -110,10 +110,10 @@ void CollisionManager::updateXList() {
 
 void CollisionManager::updateYList() {
 	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
-		float y = it->owner->getOwner().getPosition().y;
-		//float y = it->owner->getTop();
-		float height = it->owner->getHeight();
+		//float y = it->owner->getOwner().getPosition().y;
+		float y = it->owner->getTop();
 		//float height = it->owner->getHeight();
+		float height = it->owner->getHeight();
 
 		if (it->type == CollisionEntryType::Start) {
 			it->value = y;

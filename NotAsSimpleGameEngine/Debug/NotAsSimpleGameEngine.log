@@ -1,4 +1,11 @@
-﻿  PongBall.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(39,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(65,21): warning C4018: '<': signed/unsigned mismatch
+﻿  Collider.cpp
+  CollisionManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(151,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(161,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(162,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(189,21): warning C4018: '<': signed/unsigned mismatch
+  PongBlock.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlock.cpp(34,20): warning C4018: '<': signed/unsigned mismatch
+  Update.cpp
+  Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

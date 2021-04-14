@@ -16,5 +16,7 @@ Drawable& RectangleGraphic::getGraphic() {
 }
 
 void RectangleGraphic::update(float dtAsSeconds) {
-	this->m_Rectangle.setPosition(this->m_Owner->getPosition());
+	float xPos = this->getX() - this->m_Rectangle.getSize().x / 2;
+	float yPos = this->getY() - this->m_Rectangle.getSize().y / 2;
+	this->m_Rectangle.setPosition(Vector2f(xPos, yPos));
 }
