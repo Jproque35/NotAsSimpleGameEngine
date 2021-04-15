@@ -41,6 +41,7 @@ public:
 
 	PongBlock& getFreeBlock();
 	void addFreeBlock(PongBlock& block);
+	void deactivateAll();
 };
 
 #endif

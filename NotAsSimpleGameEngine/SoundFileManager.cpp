@@ -1,5 +1,6 @@
 #include "SoundFileManager.h"
 #include <iostream>
+#include <sstream>
 
 SoundFileManager* SoundFileManager::instance = NULL;
 
@@ -12,11 +13,14 @@ SoundFileManager::~SoundFileManager() {
 
 void SoundFileManager::loadFile(const string filename) {
 	int currId = this->m_CurrFreeId++;
+	ostringstream ss;
+	ss << "assets/sounds/" << filename;
 
 	this->m_IdMap[filename] = currId;
-	this->m_Bufs[currId].loadFromFile(filename);
 
-	cout << "SoundFileManager: Loaded file " << filename << endl;
+	this->m_Bufs[currId].loadFromFile(ss.str());
+
+	cout << "SoundFileManager: Loaded file " << ss.str() << endl;
 }
 
 SoundBuffer& SoundFileManager::get(const string filename) {

@@ -1,5 +1,6 @@
 #include "FontManager.h"
 #include <iostream>
+#include <sstream>
 
 FontManager* FontManager::instance = NULL;
 
@@ -12,9 +13,11 @@ FontManager::~FontManager() {
 
 void FontManager::loadFile(const string& filename) {
 	int currId = m_CurrFreeId++;
-
 	this->m_IdMap[filename] = currId;
-	this->m_Fonts[currId].loadFromFile(filename);
+
+	ostringstream ss;
+	ss << "assets/fonts/" << filename << ".ttf";
+	this->m_Fonts[currId].loadFromFile(ss.str());
 
 	cout << "FontManager: Loaded from file " << filename << endl;
 }

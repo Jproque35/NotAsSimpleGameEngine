@@ -59,7 +59,7 @@ void Engine::start() {
 	PongScene* pongScene = new PongScene();
 	SceneManager::getInstance()->add(*pongScene);
 
-	FontManager::getInstance()->loadFile("assets/fonts/game_over.ttf");
+	FontManager::getInstance()->loadFile("game_over");
 
 	while (this->m_Window.isOpen()) {
 		Event event;

@@ -9,12 +9,7 @@ PongBlockManager::PongBlockManager() :
 		this->m_Blocks[i] = new PongBlock();
 	}
 
-	for (int i = 0; i < maxSize - 1; ++i) {
-		this->m_Blocks[i]->setNext( this->m_Blocks[i + 1] );
-		cout << "BlockManager: Next for block with id " << i << " set to " << i + 1 << endl;
-	}
-
-	this->m_FreeBlock = this->m_Blocks[0];
+	this->deactivateAll();
 }
 
 PongBlockManager::~PongBlockManager() {
@@ -38,4 +33,17 @@ void PongBlockManager::addFreeBlock(PongBlock& block) {
 	block.setNext(this->m_FreeBlock);
 	this->m_FreeBlock = &block;
 	++this->m_AmountFree;
+}
+
+void PongBlockManager::deactivateAll() {
+	for (int i = 0; i < maxSize - 1; ++i) {
+		this->m_Blocks[i]->setActive(false);
+		this->m_Blocks[i]->setNext(this->m_Blocks[i + 1]);
+		//cout << "BlockManager: Block with id " << i << " is " << this->m_Blocks[i]->isActive() << endl;
+		//cout << "BlockManager: Next for block with id " << i << " set to " << i + 1 << endl;
+	}
+
+	this->m_AmountFree = maxSize;
+	this->m_Blocks[maxSize - 1]->setNext(NULL);
+	this->m_FreeBlock = this->m_Blocks[0];
 }

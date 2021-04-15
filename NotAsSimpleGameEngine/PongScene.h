@@ -5,6 +5,7 @@
 
 class PongBlockManager;
 class PongBall;
+class PongPaddle;
 
 enum class PongType {
 	Paddle,
@@ -16,9 +17,6 @@ class PongScene final
 	: public Scene {
 
 private:
-	PongBlockManager* blockManager;
-	PongBall* ball;
-
 	PongScene(const PongScene& other) = delete;
 	PongScene& operator=(const PongScene& rhs) = delete;
 

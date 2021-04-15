@@ -2,12 +2,14 @@
 #include "DrawableManager.h"
 #include "RectangleGraphic.h"
 #include "SoundFileManager.h"
+#include "PongGameManager.h"
 
 PongBall::PongBall()
 	: Entity(),
 	m_Speed(300.0f),
 	m_TravelDirection(0.0f, 0.0f),
-	m_BounceSoundFile("assets/sounds/VUX-Bite.wav") {
+	m_BounceSoundFile("boom1.wav"),
+	m_InitPosition(0.0f, 0.0f) {
 
 	this->m_Tag = GameObjectTag::Enemy;
 
@@ -30,6 +32,16 @@ PongBall::~PongBall() {
 
 void PongBall::init(float x, float y) {
 	GameObject::init(x, y);
+	this->m_InitPosition = Vector2f(x, y);
+	this->m_TravelDirection.x = -this->m_Speed;
+	this->m_TravelDirection.y = -this->m_Speed;
+
+	int randomChance = rand() % 2;
+
+	if (randomChance == 0) {
+		this->m_TravelDirection.x *= -1;
+	}
+
 	cout << "Mover: Initialized at position " << x << ", " << y << endl;
 }
 
@@ -43,6 +55,7 @@ void PongBall::changeDirectionAfterObjectCollision(float dtAsSeconds) {
 
 			CollisionDirection colDir = std::get<1>(currCollision);
 
+			this->m_BounceSound.play();
 			if (colDir == CollisionDirection::Up && this->m_TravelDirection.y < 0.0f) {
 				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
 				//cout << "Ball: Up Collision" << endl;
@@ -65,45 +78,37 @@ void PongBall::changeDirectionAfterObjectCollision(float dtAsSeconds) {
 
 }
 
-void PongBall::changeDirectionAfterBoundaryCollision(vector<CollisionDirection> directionList) {
-	if (directionList.size() > 0) {
+void PongBall::handleBoundaryCollision(vector<CollisionDirection> directionList) {
+	for (int i = 0; i < directionList.size(); ++i) {
+		CollisionDirection colDir = directionList[i];
 
-		for (int i = 0; i < directionList.size(); ++i) {
-			CollisionDirection colDir = directionList[i];
-
-			if (colDir == CollisionDirection::Up && this->m_TravelDirection.y < 0.0f) {
-				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
-			}
-			else if (colDir == CollisionDirection::Down && this->m_TravelDirection.y > 0.0f) {
-				this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
-			}
-			else if (colDir == CollisionDirection::Left && this->m_TravelDirection.x < 0.0f) {
-				this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
-			}
-			else if (colDir == CollisionDirection::Right && this->m_TravelDirection.x > 0.0f) {
-				this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
-			}
+		if (colDir == CollisionDirection::Up && this->m_TravelDirection.y < 0.0f) {
+			this->m_TravelDirection.y = -1 * this->m_TravelDirection.y;
 		}
-
+		else if (colDir == CollisionDirection::Left && this->m_TravelDirection.x < 0.0f) {
+			this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
+		}
+		else if (colDir == CollisionDirection::Right && this->m_TravelDirection.x > 0.0f) {
+			this->m_TravelDirection.x = -1 * this->m_TravelDirection.x;
+		}
+		else if (colDir == CollisionDirection::Down && this->m_TravelDirection.y > 0.0f) {
+			//this->init(this->m_InitPosition.x, this->m_InitPosition.y);
+			PongGameManager::getInstance()->restStartCount();
+			PongGameManager::getInstance()->resetPaddleAndBall();
+		}
 	}
 }
 
 void PongBall::update(float dtAsSeconds) {
-	//this->Move(this->m_TravelDirection.x * dtAsSeconds, this->m_TravelDirection.y * dtAsSeconds);
-	this->Move(this->m_TravelDirection * dtAsSeconds);
-	this->changeDirectionAfterObjectCollision(dtAsSeconds);
 
-	vector<Collider*> colList = this->m_Collider->getCollisionList();
-	if (colList.size() > 0) {
-		cout << "Ball: Collision Detected" << endl;
-	}
-	else {
-		//cout << "no" << endl;
-	}
+	if (PongGameManager::getInstance()->getStartCount() <= 0.0f) {
+		this->Move(this->m_TravelDirection * dtAsSeconds);
+		this->changeDirectionAfterObjectCollision(dtAsSeconds);
 
-	vector<CollisionDirection> screenCollisions = this->m_Collider->getBoundaryCollisionData();
-	if (screenCollisions.size() > 0) {
-		this->m_BounceSound.play();
-		this->changeDirectionAfterBoundaryCollision(screenCollisions);
+		vector<CollisionDirection> screenCollisions = this->m_Collider->getBoundaryCollisionData();
+		if (screenCollisions.size() > 0) {
+			this->m_BounceSound.play();
+			this->handleBoundaryCollision(screenCollisions);
+		}
 	}
 }

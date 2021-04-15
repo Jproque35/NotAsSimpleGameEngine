@@ -198,6 +198,12 @@
     <ClCompile Include="PongBall.cpp">
       <Filter>Source Files\Pong</Filter>
     </ClCompile>
+    <ClCompile Include="PongPaddle.cpp">
+      <Filter>Source Files\Pong</Filter>
+    </ClCompile>
+    <ClCompile Include="PongGameManager.cpp">
+      <Filter>Source Files\Pong</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -282,6 +288,12 @@
       <Filter>Header Files\Pong</Filter>
     </ClInclude>
     <ClInclude Include="PongBall.h">
+      <Filter>Header Files\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="PongPaddle.h">
+      <Filter>Header Files\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="PongGameManager.h">
       <Filter>Header Files\Pong</Filter>
     </ClInclude>
   </ItemGroup>

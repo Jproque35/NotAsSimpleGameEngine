@@ -1,6 +1,7 @@
 #include "BasicPlayer.h"
 #include "DrawableManager.h"
 #include "RectangleGraphic.h"
+#include "SceneManager.h"
 
 BasicPlayer::BasicPlayer()
 	: Entity(),

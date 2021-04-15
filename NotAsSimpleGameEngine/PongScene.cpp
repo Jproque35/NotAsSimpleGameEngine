@@ -4,48 +4,26 @@
 #include "PongBlock.h"
 #include "PongBlockManager.h"
 #include "PongBall.h"
+#include "Engine.h"
+#include "PongPaddle.h"
+#include "PongGameManager.h"
 
 PongScene::PongScene() :
-	Scene(640.0, 720.0) {
-	this->blockManager = PongBlockManager::getInstance();
+	Scene(Engine::getInstance()->resolution.x, Engine::getInstance()->resolution.y) {
 }
 
 PongScene::~PongScene() {
-	PongBlockManager::resetInstance();
+	PongGameManager::resetInstance();
 }
 
 void PongScene::enter(float dtAsSeconds) {
 	Scene::enter(dtAsSeconds);
-
-	Text* scoreText = new Text();
-	scoreText->setFont(FontManager::getInstance()->get("assets/fonts/game_over.ttf"));
-	scoreText->setPosition(Vector2f(0.0f, 0.0f));
-	scoreText->setFillColor(Color::White);
-	scoreText->setString("Score: ");
-	scoreText->setCharacterSize(72.0f);
-	TextManager::getInstance()->add(*scoreText);
-	
-	float xPos = 40.0f, yPos = 16.0f;
-	//for (int i = 0; i < 32; ++i) {
-	while(this->blockManager->getAmountFree() > 0) {
-		this->blockManager->getFreeBlock().init(xPos, yPos);
-
-		xPos += 80.f;
-		if (xPos >= this->getWidth()) {
-			xPos = 40.0f;
-			yPos += 32.0f;
-		}
-	}
-
-	//this->blockManager->getFreeBlock().init(this->getWidth() / 2, this->getHeight() / 2);
-
-	this->ball = new PongBall();
-	this->ball->init(this->getWidth() * 0.4 , this->getHeight());
-
+	PongGameManager::getInstance()->reset();
 }
 
 void PongScene::update(float dtAsSeconds) {
 	Scene::update(dtAsSeconds);
+	PongGameManager::getInstance()->update(dtAsSeconds);
 }
 
 void PongScene::exit(float dtAsSeconds) {

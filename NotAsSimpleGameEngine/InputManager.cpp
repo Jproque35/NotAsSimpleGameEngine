@@ -7,6 +7,7 @@ InputManager::InputManager() {
 	this->initializeKey(Button::Down, Keyboard::S);
 	this->initializeKey(Button::Left, Keyboard::A);
 	this->initializeKey(Button::Right, Keyboard::D);
+	this->initializeKey(Button::Fire, Keyboard::Space);
 }
 
 void InputManager::initializeKey(Button key, Keyboard::Key value) {
