@@ -95,6 +95,7 @@ void PongBall::handleBoundaryCollision(vector<CollisionDirection> directionList)
 			//this->init(this->m_InitPosition.x, this->m_InitPosition.y);
 			PongGameManager::getInstance()->restStartCount();
 			PongGameManager::getInstance()->resetPaddleAndBall();
+			PongGameManager::getInstance()->decrementLives();
 		}
 	}
 }

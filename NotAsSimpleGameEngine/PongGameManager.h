@@ -20,9 +20,12 @@ private:
 	PongBlockManager* m_Blocks;
 	Text* m_ScoreText;
 	Text* m_CountdownText;
+	Text* m_WinText;
+	Text* m_LoseText;
 	float m_StartCount;
 	float m_SceneWidth;
 	float m_SceneHeight;
+	int m_Lives;
 
 	PongGameManager();
 	~PongGameManager();
@@ -64,6 +67,18 @@ public:
 
 	inline PongBlockManager& getBlocks() const {
 		return *this->m_Blocks;
+	}
+
+	inline int getLives() const {
+		return this->m_Lives;
+	}
+
+	inline void restLives() {
+		this->m_Lives = 3;
+	}
+
+	inline void decrementLives() {
+		--this->m_Lives;
 	}
 
 	void reset();

@@ -39,6 +39,10 @@ public:
 		return this->m_AmountFree;
 	}
 
+	inline int getMaxSize() const {
+		return maxSize;
+	}
+
 	PongBlock& getFreeBlock();
 	void addFreeBlock(PongBlock& block);
 	void deactivateAll();
