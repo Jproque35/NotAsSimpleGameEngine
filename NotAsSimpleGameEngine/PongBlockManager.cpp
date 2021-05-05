@@ -33,6 +33,7 @@ void PongBlockManager::addFreeBlock(PongBlock& block) {
 	block.setNext(this->m_FreeBlock);
 	this->m_FreeBlock = &block;
 	++this->m_AmountFree;
+	cout << "PongBlockManager: Current have " << this->m_AmountFree << " free blocks." << endl;
 }
 
 void PongBlockManager::deactivateAll() {

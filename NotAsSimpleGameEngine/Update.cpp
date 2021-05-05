@@ -8,14 +8,15 @@ void Engine::update(float dtAsSeconds) {
 	SceneManager::getInstance()->getCurrentScene().process(dtAsSeconds);
 	GameObjectManager* gm = GameObjectManager::getInstance();
 
+	GameObject* currObj = NULL;
 	for (int i = 0; i < gm->size(); ++i) {
-		GameObject* currObj = &gm->get(i);
+		currObj = &gm->get(i);
+
 		if (currObj != NULL && currObj->isActive()) {
 			currObj->process(dtAsSeconds);
 		}
 	}
 
 	GameObjectManager::getInstance()->cleanUp();
-	//SimpleCollisionManager::getInstance()->update(dtAsSeconds);
 	CollisionManager::getInstance()->update(dtAsSeconds);
 }

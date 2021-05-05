@@ -4,8 +4,13 @@
 
 GameObjectManager* GameObjectManager::instance = NULL;
 
-GameObjectManager::GameObjectManager() {
+GameObjectManager::GameObjectManager() :
+	m_CurrFreeSlot(0) {
 	this->m_Storage = new Container<GameObject>(128);
+
+	for (int i = 0; i < maxSize; ++i) {
+		this->m_Objs[i] = NULL;
+	}
 }
 
 GameObjectManager::~GameObjectManager() {

@@ -91,11 +91,10 @@ vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
 }
 
 void CollisionManager::updateXList() {
+	float x, width;
 	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
-		//float x = it->owner->getOwner().getPosition().x;
-		float x = it->owner->getLeft();
-		//float width = it->owner->getWidth();
-		float width = it->owner->getWidth();
+		x = it->owner->getLeft();
+		width = it->owner->getWidth();
 
 		if (it->type == CollisionEntryType::Start) {
 			it->value = x;
@@ -109,11 +108,10 @@ void CollisionManager::updateXList() {
 }
 
 void CollisionManager::updateYList() {
+	float y, height;
 	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
-		//float y = it->owner->getOwner().getPosition().y;
-		float y = it->owner->getTop();
-		//float height = it->owner->getHeight();
-		float height = it->owner->getHeight();
+		y = it->owner->getTop();
+		height = it->owner->getHeight();
 
 		if (it->type == CollisionEntryType::Start) {
 			it->value = y;

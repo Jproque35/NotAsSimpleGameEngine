@@ -58,7 +58,31 @@ bool Collider::verticalCollision(const Collider& other) const {
 }
 
 bool Collider::intersects(const Collider& other) const {
-	return this->horizontalCollision(other) && this->verticalCollision(other);
+	//return this->horizontalCollision(other) && this->verticalCollision(other);
+
+	
+	float widthA = this->m_Width / 2;
+	float heightA = this->m_Height / 2;
+	Vector2f horizontalA = this->getOwner().getHorizontalAxis();
+	Vector2f verticalA = this->getOwner().getVerticalAxis();
+
+	float widthB = other.m_Width / 2;
+	float heightB = other.m_Height / 2;
+	Vector2f horizontalB = other.getOwner().getHorizontalAxis();
+	Vector2f verticalB = other.getOwner().getVerticalAxis();
+
+	Vector2f dist = other.getOwner().getPosition() - this->getOwner().getPosition();
+
+	bool intersect1 = abs(MathLib::dot(dist, verticalA)) < heightA 
+		+ abs(MathLib::dot(widthB * horizontalB, verticalA)) + abs(MathLib::dot(heightB * verticalB, verticalA));
+	bool intersect2 = abs(MathLib::dot(dist, horizontalA)) < widthA
+		+ abs(MathLib::dot(widthB * horizontalB, horizontalA)) + abs(MathLib::dot(heightB * verticalB, horizontalA));
+	bool intersect3 = abs(MathLib::dot(dist, verticalB)) < heightB
+		+ abs(MathLib::dot(widthA * horizontalA, verticalB)) + abs(MathLib::dot(heightA * verticalA, verticalB));
+	bool intersect4 = abs(MathLib::dot(dist, horizontalB)) < widthB
+		+ abs(MathLib::dot(widthA * horizontalA, horizontalB)) + abs(MathLib::dot(heightA * verticalA, horizontalA));
+
+	return (intersect1 && intersect2) && (intersect3 && intersect4);
 }
 
 vector<Collider*> Collider::getCollisionList() const {
@@ -76,8 +100,9 @@ CollisionDirection Collider::getRelativeDirection(const Collider& other, Vector2
 	float max = 0;
 	//unsigned int desire = 0;
 	CollisionDirection desire = CollisionDirection::Up;
+	float dot;
 	for (int i = 0; i < 4; ++i) {
-		float dot = MathLib::dot(compass[i], MathLib::normalize(diff));
+		dot = MathLib::dot(compass[i], MathLib::normalize(diff));
 
 		if (dot > max) {
 			max = dot;

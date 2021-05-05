@@ -35,8 +35,9 @@ void PongBlock::update(float dtAsSeconds) {
 	vector<Collider*> colList = this->m_Collider->getCollisionList();
 
 	for (int i = 0; i < colList.size(); ++i) {
-		cout << "Collision detected" << endl;
-		if (colList[i]->getOwner().m_Tag == GameObjectTag::Enemy) {
+		cout << "Collision detected at time " << dtAsSeconds << endl;
+		if (colList[i]->getOwner().m_Tag == GameObjectTag::Enemy
+			&& this->m_Active) {
 			this->destroy();
 		}
 	}
@@ -44,6 +45,6 @@ void PongBlock::update(float dtAsSeconds) {
 }
 
 void PongBlock::destroy() {
-	cout << "PongBlock: Destroyed object" << endl;
+	cout << "PongBlock: Destroyed object " << this->m_Id << endl;
 	PongBlockManager::getInstance()->addFreeBlock(*this);
 }

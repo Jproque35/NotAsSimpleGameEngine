@@ -12,6 +12,9 @@ class GameObjectManager final {
 
 private:
 	static GameObjectManager* instance;
+	static const int maxSize = 128;
+	int m_CurrFreeSlot;
+	GameObject* m_Objs[maxSize];
 	Container<GameObject>* m_Storage;
 
 	GameObjectManager();

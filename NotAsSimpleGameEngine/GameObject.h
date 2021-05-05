@@ -31,6 +31,8 @@ private:
 protected:
 	bool m_Active;
 	Vector2f m_Position;
+	Vector2f m_UpAxis;
+	Vector2f m_RightAxis;
 	InputManager* input;
 	int m_Id;
 
@@ -48,6 +50,8 @@ public:
 	bool isActive() const;
 	void setActive(bool isActive);
 	const Vector2f& getPosition() const;
+	const Vector2f& getVerticalAxis() const;
+	const Vector2f& getHorizontalAxis() const;
 	void setPosition(const Vector2f& position);
 	void process(float dtAsSeconds);
 };

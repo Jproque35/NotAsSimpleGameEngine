@@ -1,5 +1,3 @@
-﻿  PongGameManager.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongGameManager.cpp(25,32): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongGameManager.cpp(32,36): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongGameManager.cpp(40,42): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+﻿  PongBlock.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlock.cpp(37,20): warning C4018: '<': signed/unsigned mismatch
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe
