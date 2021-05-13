@@ -46,9 +46,6 @@
     <Filter Include="Header Files\Core\GameObjects\Components\Graphics">
       <UniqueIdentifier>{c92581d6-b82e-4da6-a54c-d92d9559c1d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\GameObjects\Components\Collision">
-      <UniqueIdentifier>{339f5fcd-ec72-4552-a269-f4e709e89d5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core\Engine">
       <UniqueIdentifier>{5193f151-3500-4b4d-8868-81d831aff24f}</UniqueIdentifier>
     </Filter>
@@ -103,6 +100,12 @@
     <Filter Include="Source Files\Pong">
       <UniqueIdentifier>{30b5be9b-e19a-48d1-bc9b-ba9c1cd3262f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\GameObjects\Components\Colliders">
+      <UniqueIdentifier>{18d8eab7-493c-4bff-b9af-e818f3704c13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\GameObjects\Components\Colliders">
+      <UniqueIdentifier>{339f5fcd-ec72-4552-a269-f4e709e89d5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObjectManager.cpp">
@@ -128,9 +131,6 @@
     </ClCompile>
     <ClCompile Include="BasicPlayer.cpp">
       <Filter>Source Files\Core\GameObjects\TestObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>Source Files\Core\GameObjects\Components</Filter>
     </ClCompile>
     <ClCompile Include="Box.cpp">
       <Filter>Source Files\Core\GameObjects\TestObjects</Filter>
@@ -204,6 +204,12 @@
     <ClCompile Include="PongGameManager.cpp">
       <Filter>Source Files\Pong</Filter>
     </ClCompile>
+    <ClCompile Include="RectangleCollider.cpp">
+      <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -260,8 +266,8 @@
     <ClInclude Include="RectangleGraphic.h">
       <Filter>Header Files\Core\GameObjects\Components\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>Header Files\Core\GameObjects\Components\Collision</Filter>
+    <ClInclude Include="RectangleCollider.h">
+      <Filter>Header Files\Core\GameObjects\Components\Colliders</Filter>
     </ClInclude>
     <ClInclude Include="SimpleCollisionManager.h">
       <Filter>Header Files\Core\Managers\CollisionManagers</Filter>
@@ -295,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="PongGameManager.h">
       <Filter>Header Files\Pong</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Core\GameObjects\Components\Colliders</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

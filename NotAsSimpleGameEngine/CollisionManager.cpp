@@ -1,4 +1,4 @@
-#include "Collider.h"
+#include "RectangleCollider.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
 
@@ -35,7 +35,7 @@ void CollisionManager::resetInstance() {
 	instance = NULL;
 }
 
-void CollisionManager::addXEntries(Collider& col) {
+void CollisionManager::addXEntries(RectangleCollider& col) {
 	CollisionEntry xStart;
 	CollisionEntry xEnd;
 
@@ -55,7 +55,7 @@ void CollisionManager::addXEntries(Collider& col) {
 	cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << xEnd.value << endl;
 }
 
-void CollisionManager::addYEntries(Collider& col) {
+void CollisionManager::addYEntries(RectangleCollider& col) {
 	CollisionEntry yStart;
 	CollisionEntry yEnd;
 
@@ -75,18 +75,18 @@ void CollisionManager::addYEntries(Collider& col) {
 	cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << yEnd.value << endl;
 }
 
-void CollisionManager::add(Collider& col) {
+void CollisionManager::add(RectangleCollider& col) {
 	this->m_Colliders[col.getId()] = &col;
 
 	this->addXEntries(col);
 	this->addYEntries(col);
 }
 
-Collider& CollisionManager::get(int id) {
+RectangleCollider& CollisionManager::get(int id) {
 	return *this->m_Colliders[id];
 }
 
-vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
+vector<RectangleCollider*> CollisionManager::getCollisionList(const RectangleCollider& col) {
 	return this->m_CollisionLists[col.getId()];
 }
 
@@ -124,8 +124,8 @@ void CollisionManager::updateYList() {
 	sort(this->m_YList.begin(), this->m_YList.end());
 }
 
-void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<Collider*>>& intersectionLists, list<int>& activeColliderIds) {
-	Collider* currCollider = entry.owner;
+void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<RectangleCollider*>>& intersectionLists, list<int>& activeColliderIds) {
+	RectangleCollider* currCollider = entry.owner;
 	CollisionEntryType currType = entry.type;
 
 	if (currType == CollisionEntryType::Start) {
@@ -146,8 +146,8 @@ void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map
 	}
 }
 
-unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisList(vector<CollisionEntry>& axisList) {
-	unordered_map<int, vector<Collider*>> intersectionLists;
+unordered_map<int, vector<RectangleCollider*>> CollisionManager::buildSingleAxisList(vector<CollisionEntry>& axisList) {
+	unordered_map<int, vector<RectangleCollider*>> intersectionLists;
 	list<int> activeColliderIds;
 
 	for(int i = 0; i < axisList.size(); ++i) {
@@ -159,7 +159,7 @@ unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisList(vect
 	return intersectionLists;
 }
 
-void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colList, vector<Collider*>& checkList) {
+void CollisionManager::buildSingleCollisionList(int id, vector<RectangleCollider*>& colList, vector<RectangleCollider*>& checkList) {
 	for (int i = 0; i < colList.size(); ++i) {
 		for (int j = 0; j < checkList.size(); ++j) {
 			if ((colList[i] == checkList[j])
@@ -171,8 +171,8 @@ void CollisionManager::buildSingleCollisionList(int id, vector<Collider*>& colLi
 }
 
 void CollisionManager::buildCollisionLists() {
-	unordered_map<int, vector<Collider*>> xLists = this->buildSingleAxisList(this->m_XList);
-	unordered_map<int, vector<Collider*>> yLists = this->buildSingleAxisList(this->m_YList);
+	unordered_map<int, vector<RectangleCollider*>> xLists = this->buildSingleAxisList(this->m_XList);
+	unordered_map<int, vector<RectangleCollider*>> yLists = this->buildSingleAxisList(this->m_YList);
 
 	for (auto it = this->m_CollisionLists.begin(); it != this->m_CollisionLists.end(); ++it) {
 		it->second.clear();
@@ -183,13 +183,13 @@ void CollisionManager::buildCollisionLists() {
 	}
 }
 
-void CollisionManager::updateSingleCollider(Collider& col) {
-	vector<Collider*> colList = this->getCollisionList(col);
+void CollisionManager::updateSingleCollider(RectangleCollider& col) {
+	vector<RectangleCollider*> colList = this->getCollisionList(col);
 
 	if (colList.size() > 0 
 		&& (!col.isStationary() && col.isSolid())) {
 		for (int i = 0; i < colList.size(); ++i) {
-			Collider* currCollider = colList[i];
+			RectangleCollider* currCollider = colList[i];
 
 			if (currCollider && currCollider->isSolid()) {
 				col.repositionAfterObjectCollision(*currCollider);

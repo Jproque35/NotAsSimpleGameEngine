@@ -4,7 +4,7 @@
 #include "Box.h"
 #include "Mover.h"
 #include <iostream>
-#include "Collider.h"
+#include "RectangleCollider.h"
 #include "CollisionManager.h"
 #include "FontManager.h"
 #include "TextManager.h"

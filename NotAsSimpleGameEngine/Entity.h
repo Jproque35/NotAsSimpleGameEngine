@@ -2,7 +2,7 @@
 #define ENTITY_H
 #pragma once
 #include "GameObject.h"
-#include "Collider.h"
+#include "RectangleCollider.h"
 #include <math.h>
 
 enum class Direction {
@@ -29,7 +29,7 @@ private:
 protected:
     Direction m_CurrDir;
     EntityType m_Type;
-    Collider* m_Collider;
+    RectangleCollider* m_Collider;
 
     virtual void update(float dtAsSeconds) = 0;
 

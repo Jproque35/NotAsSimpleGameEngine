@@ -6,7 +6,7 @@ Box::Box()
 	: Entity() {
 	Vector2f rectSize(32.0f, 32.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Blue);
-	this->m_Collider = new Collider(*this, rectSize, true, true);
+	this->m_Collider = new RectangleCollider(*this, rectSize, true, true);
 
 	this->addComponent(*this->m_Graphic);
 	this->addComponent(*this->m_Collider);

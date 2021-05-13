@@ -1,3 +1,2 @@
-﻿  PongBlock.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlock.cpp(37,20): warning C4018: '<': signed/unsigned mismatch
+﻿  Collider.cpp
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

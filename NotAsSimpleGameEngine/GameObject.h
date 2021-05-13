@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 #include "InputManager.h"
-#include "Collider.h"
+#include "RectangleCollider.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 
