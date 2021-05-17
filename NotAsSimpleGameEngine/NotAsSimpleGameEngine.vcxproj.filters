@@ -210,6 +210,9 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
     </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObjectManager.h">
@@ -303,6 +306,9 @@
       <Filter>Header Files\Pong</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
+      <Filter>Header Files\Core\GameObjects\Components\Colliders</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
       <Filter>Header Files\Core\GameObjects\Components\Colliders</Filter>
     </ClInclude>
   </ItemGroup>

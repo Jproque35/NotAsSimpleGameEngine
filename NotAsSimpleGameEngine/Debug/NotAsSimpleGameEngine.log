@@ -1,2 +1,78 @@
-﻿  Collider.cpp
+﻿  BasicPlayer.cpp
+  Box.cpp
+  CircleCollider.cpp
+  Collider.cpp
+  CollisionManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(153,19): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(166,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(167,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\CollisionManager.cpp(194,21): warning C4018: '<': signed/unsigned mismatch
+  Draw.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Draw.cpp(16,20): warning C4018: '<': signed/unsigned mismatch
+  Engine.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(24,58): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(24,44): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+  Entity.cpp
+  GameObject.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObject.cpp(21,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObject.cpp(73,20): warning C4018: '<': signed/unsigned mismatch
+  GameObjectComponent.cpp
+  GameObjectManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(12,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(8): message : while compiling class template member function 'Container<GameObject>::~Container(void)'
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(19): message : see reference to function template instantiation 'Container<GameObject>::~Container(void)' being compiled
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(9): message : see reference to class template instantiation 'Container<GameObject>' being compiled
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(40,20): warning C4101: 'e': unreferenced local variable
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(36): message : while compiling class template member function 'T &Container<T>::get(int) const'
+          with
+          [
+              T=GameObject
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\GameObjectManager.cpp(41): message : see reference to function template instantiation 'T &Container<T>::get(int) const' being compiled
+          with
+          [
+              T=GameObject
+          ]
+  Mover.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(39,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Mover.cpp(65,21): warning C4018: '<': signed/unsigned mismatch
+  PongBall.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(53,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(82,20): warning C4018: '<': signed/unsigned mismatch
+  PongBlock.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlock.cpp(36,20): warning C4018: '<': signed/unsigned mismatch
+  PongBlockManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlockManager.cpp(26,20): warning C4101: 'e': unreferenced local variable
+  PongGameManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongGameManager.cpp(25,32): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongGameManager.cpp(32,36): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongGameManager.cpp(40,42): warning C4244: 'argument': conversion from 'float' to 'unsigned int', possible loss of data
+  PongPaddle.cpp
+  PongScene.cpp
+  RectangleCollider.cpp
+  RectangleGraphic.cpp
+  Generating Code...
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlockManager.cpp(29): warning C4715: 'PongBlockManager::getFreeBlock': not all control paths return a value
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Container.cpp(43): warning C4715: 'Container<GameObject>::get': not all control paths return a value
+  Compiling...
+  SimpleCollisionManager.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(15,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(66,20): warning C4101: 'e': unreferenced local variable
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(75,10): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(78,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(89,20): warning C4101: 'e': unreferenced local variable
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(98,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(109,20): warning C4018: '<': signed/unsigned mismatch
+  TestScene.cpp
+  Update.cpp
+  Generating Code...
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\SimpleCollisionManager.cpp(92): warning C4715: 'SimpleCollisionManager::getCollisionList': not all control paths return a value
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

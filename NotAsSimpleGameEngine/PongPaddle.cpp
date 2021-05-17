@@ -11,7 +11,7 @@ PongPaddle::PongPaddle() :
 	Vector2f rectSize(60.0f, 16.0f);
 
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
-	this->m_Collider = new RectangleCollider(*this, rectSize, true, true);
+	this->m_Collider = new RectangleColliderOld(*this, rectSize, true, true);
 
 	this->addComponent(*this->m_Graphic);
 	this->addComponent(*this->m_Collider);

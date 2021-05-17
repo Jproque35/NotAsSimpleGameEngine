@@ -1,5 +1,5 @@
-#ifndef COLLISIONMANAGER_H
-#define COLLISIONMANAGER_H
+#ifndef SSCOLLISIONMANAGER_H
+#define SSCOLLISIONMANAGER_H
 #pragma once
 #include <list>
 #include <iostream>
@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class RectangleCollider;
+class RectangleColliderOld;
 
 enum class CollisionEntryType {
 	Start,
@@ -15,7 +15,7 @@ enum class CollisionEntryType {
 };
 
 struct CollisionEntry {
-	RectangleCollider* owner = NULL;
+	RectangleColliderOld* owner = NULL;
 	float value = 0.0f;
 	CollisionEntryType type = CollisionEntryType::Start;
 
@@ -25,37 +25,37 @@ struct CollisionEntry {
 };
 
 
-class CollisionManager final {
+class SSCollisionManager final {
 private:
-	static CollisionManager* instance;
-	unordered_map<int, RectangleCollider*> m_Colliders;
-	unordered_map<int, vector<RectangleCollider*>> m_CollisionLists;
+	static SSCollisionManager* instance;
+	unordered_map<int, RectangleColliderOld*> m_Colliders;
+	unordered_map<int, vector<RectangleColliderOld*>> m_CollisionLists;
 	vector<CollisionEntry> m_XList;
 	vector<CollisionEntry> m_YList;
 	float currTime;
 
-	CollisionManager();
-	~CollisionManager();
-	CollisionManager(const CollisionManager& other) = delete;
-	CollisionManager& operator=(const CollisionManager& rhs) = delete;
+	SSCollisionManager();
+	~SSCollisionManager();
+	SSCollisionManager(const SSCollisionManager& other) = delete;
+	SSCollisionManager& operator=(const SSCollisionManager& rhs) = delete;
 
 
-	void addXEntries(RectangleCollider& col);
-	void addYEntries(RectangleCollider& col);
-	void updateSingleCollider(RectangleCollider& collider);
+	void addXEntries(RectangleColliderOld& col);
+	void addYEntries(RectangleColliderOld& col);
+	void updateSingleCollider(RectangleColliderOld& collider);
 	void updateXList();
 	void updateYList();
-	void processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<RectangleCollider*>>& intersectionLists, list<int>& activeColliderIds);
-	unordered_map<int, vector<RectangleCollider*>> buildSingleAxisList( vector<CollisionEntry>& axiList );
-	void buildSingleCollisionList(int id, vector<RectangleCollider*>& colList, vector<RectangleCollider*>& checkList);
+	void processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<RectangleColliderOld*>>& intersectionLists, list<int>& activeColliderIds);
+	unordered_map<int, vector<RectangleColliderOld*>> buildSingleAxisList( vector<CollisionEntry>& axiList );
+	void buildSingleCollisionList(int id, vector<RectangleColliderOld*>& colList, vector<RectangleColliderOld*>& checkList);
 	void buildCollisionLists();
 
 public:
-	static CollisionManager* getInstance();
+	static SSCollisionManager* getInstance();
 	static void resetInstance();
-	void add(RectangleCollider& col);
-	RectangleCollider& get(int id);
-	vector<RectangleCollider*> getCollisionList(const RectangleCollider& col);
+	void add(RectangleColliderOld& col);
+	RectangleColliderOld& get(int id);
+	vector<RectangleColliderOld*> getCollisionList(const RectangleColliderOld& col);
 	void update(float dtAsSeconds);
 	void cleanUp();
 	void print();

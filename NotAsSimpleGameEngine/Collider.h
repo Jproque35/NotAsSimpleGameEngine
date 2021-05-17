@@ -12,11 +12,13 @@ enum class ColliderType {
 	RECTANGLE
 };
 
+class CircleCollider;
 class GameObject;
 
 class Collider
 	: public GameObjectComponent {
 private:
+	Collider();
 	Collider(const Collider& other) = delete;
 	Collider& operator=(const Collider& rhs) = delete;
 
@@ -26,7 +28,7 @@ protected:
 	bool m_Stationary;
 
 	virtual bool intersectsRectangle() const = 0;
-	virtual bool intersectsCircle() const = 0;
+	virtual bool intersectsCircle(const CircleCollider& col) const = 0;
 
 public:
 	Collider(GameObject& owner, ColliderType type, bool solid, bool stationary);

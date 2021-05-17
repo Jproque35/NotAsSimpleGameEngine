@@ -5,9 +5,9 @@
 #include "CollisionManager.h"
 #include "SimpleCollisionManager.h"
 
-int RectangleCollider::m_CurrFreeId = 0;
+int RectangleColliderOld::m_CurrFreeId = 0;
 
-RectangleCollider::RectangleCollider(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary)
+RectangleColliderOld::RectangleColliderOld(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary)
 	: GameObjectComponent(owner),
 	m_Solid(solid),
 	m_Stationary(stationary),
@@ -16,48 +16,48 @@ RectangleCollider::RectangleCollider(GameObject& owner, const Vector2f& dimensio
 	this->m_Id = m_CurrFreeId++;
 	cout << "Collider: Id set to " << this->m_Id << endl;
 	//SimpleCollisionManager::getInstance()->add(*this);
-	CollisionManager::getInstance()->add(*this);
+	SSCollisionManager::getInstance()->add(*this);
 }
 
-RectangleCollider::~RectangleCollider() {
+RectangleColliderOld::~RectangleColliderOld() {
 	cout << "Collider: Destroying Rectangle Collider..." << endl;
 }
 
-bool RectangleCollider::isSolid() const {
+bool RectangleColliderOld::isSolid() const {
 	return this->m_Solid;
 }
 
-bool RectangleCollider::isStationary() const {
+bool RectangleColliderOld::isStationary() const {
 	return this->m_Stationary;
 }
 
-float RectangleCollider::getTop() const {
+float RectangleColliderOld::getTop() const {
 	return this->m_Owner->getPosition().y - this->m_Height / 2;
 }
 
-float RectangleCollider::getLeft() const {
+float RectangleColliderOld::getLeft() const {
 	return this->m_Owner->getPosition().x - this->m_Width / 2;
 }
 
-float RectangleCollider::getWidth() const {
+float RectangleColliderOld::getWidth() const {
 	return this->m_Width;
 }
 
-float RectangleCollider::getHeight() const {
+float RectangleColliderOld::getHeight() const {
 	return this->m_Height;
 }
 
-bool RectangleCollider::horizontalCollision(const RectangleCollider& other) const {
+bool RectangleColliderOld::horizontalCollision(const RectangleColliderOld& other) const {
 	return this->getLeft() < other.getLeft() + other.m_Width
 		&& other.getLeft() < this->getLeft() + this->m_Width;
 }
 
-bool RectangleCollider::verticalCollision(const RectangleCollider& other) const {
+bool RectangleColliderOld::verticalCollision(const RectangleColliderOld& other) const {
 	return this->getTop() < other.getTop() + other.m_Height
 		&& other.getTop() < this->getTop() + this->m_Height;
 }
 
-bool RectangleCollider::intersects(const RectangleCollider& other) const {
+bool RectangleColliderOld::intersects(const RectangleColliderOld& other) const {
 	//return this->horizontalCollision(other) && this->verticalCollision(other);
 
 	
@@ -85,11 +85,11 @@ bool RectangleCollider::intersects(const RectangleCollider& other) const {
 	return (intersect1 && intersect2) && (intersect3 && intersect4);
 }
 
-vector<RectangleCollider*> RectangleCollider::getCollisionList() const {
-	return CollisionManager::getInstance()->getCollisionList(*this);
+vector<RectangleColliderOld*> RectangleColliderOld::getCollisionList() const {
+	return SSCollisionManager::getInstance()->getCollisionList(*this);
 }
 
-CollisionDirection RectangleCollider::getRelativeDirection(const RectangleCollider& other, Vector2f diff) const {
+CollisionDirection RectangleColliderOld::getRelativeDirection(const RectangleColliderOld& other, Vector2f diff) const {
 	Vector2f compass[] = {
 		Vector2f(0.0f, 1.0f),
 		Vector2f(1.0f, 0.0f),
@@ -154,7 +154,7 @@ CollisionDirection RectangleCollider::getRelativeDirection(const RectangleCollid
 	return desire;
 }
 
-Collision RectangleCollider::getObjectCollisionData(const RectangleCollider& other) const {
+Collision RectangleColliderOld::getObjectCollisionData(const RectangleColliderOld& other) const {
 	bool collided = this->intersects(other) && other.m_Owner->isActive();
 	Vector2f diff(other.m_Owner->getPosition().x - this->m_Owner->getPosition().x, 
 		other.m_Owner->getPosition().y - this->m_Owner->getPosition().y);
@@ -163,7 +163,7 @@ Collision RectangleCollider::getObjectCollisionData(const RectangleCollider& oth
 	return std::make_tuple(collided, colDir, diff);
 }
 
-vector<CollisionDirection> RectangleCollider::getBoundaryCollisionData() const {
+vector<CollisionDirection> RectangleColliderOld::getBoundaryCollisionData() const {
 	vector<CollisionDirection> desire;
 
 	if(this->getLeft() < 0) {
@@ -187,7 +187,7 @@ vector<CollisionDirection> RectangleCollider::getBoundaryCollisionData() const {
 	return desire;
 }
 
-void RectangleCollider::repositionAfterObjectCollision(const RectangleCollider& other) {
+void RectangleColliderOld::repositionAfterObjectCollision(const RectangleColliderOld& other) {
 	Collision col = this->getObjectCollisionData(other);
 
 	if (std::get<0>(col)) {
@@ -214,9 +214,9 @@ void RectangleCollider::repositionAfterObjectCollision(const RectangleCollider& 
 	}
 }
 
-void RectangleCollider::update(float dtAsSeconds) {
+void RectangleColliderOld::update(float dtAsSeconds) {
 }
 
-void RectangleCollider::destroy() const {
+void RectangleColliderOld::destroy() const {
 	//SimpleCollisionManager::getInstance()->erase(this->m_Id);
 }

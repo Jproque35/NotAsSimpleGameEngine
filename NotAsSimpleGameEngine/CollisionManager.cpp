@@ -2,12 +2,12 @@
 #include "GameObject.h"
 #include "CollisionManager.h"
 
-CollisionManager* CollisionManager::instance = NULL;
+SSCollisionManager* SSCollisionManager::instance = NULL;
 
-CollisionManager::CollisionManager() :
+SSCollisionManager::SSCollisionManager() :
 	currTime(0.0f) {}
 
-CollisionManager::~CollisionManager() {
+SSCollisionManager::~SSCollisionManager() {
 
 	cout << "***CollisionManager: Destroying CollisionManager.." << endl;
 
@@ -19,15 +19,15 @@ CollisionManager::~CollisionManager() {
 	}
 }
 
-CollisionManager* CollisionManager::getInstance() {
+SSCollisionManager* SSCollisionManager::getInstance() {
 	if (!instance) {
-		instance = new CollisionManager();
+		instance = new SSCollisionManager();
 	}
 
 	return instance;
 }
 
-void CollisionManager::resetInstance() {
+void SSCollisionManager::resetInstance() {
 	if (instance) {
 		delete(instance);
 	}
@@ -35,62 +35,58 @@ void CollisionManager::resetInstance() {
 	instance = NULL;
 }
 
-void CollisionManager::addXEntries(RectangleCollider& col) {
+void SSCollisionManager::addXEntries(RectangleColliderOld& col) {
 	CollisionEntry xStart;
 	CollisionEntry xEnd;
 
 	xStart.owner = &col;
-	//xStart.value = col.getOwner().getPosition().x;
 	xStart.value = col.getLeft();
 	xStart.type = CollisionEntryType::Start;
 
 	xEnd.owner = &col;
-	//xEnd.value = col.getOwner().getPosition().x + col.getWidth();
 	xEnd.value = col.getLeft() + col.getWidth();
 	xEnd.type = CollisionEntryType::End;
 
 	this->m_XList.push_back(xStart);
-	cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << xStart.value << endl;
+	//cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << xStart.value << endl;
 	this->m_XList.push_back(xEnd);
-	cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << xEnd.value << endl;
+	//cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << xEnd.value << endl;
 }
 
-void CollisionManager::addYEntries(RectangleCollider& col) {
+void SSCollisionManager::addYEntries(RectangleColliderOld& col) {
 	CollisionEntry yStart;
 	CollisionEntry yEnd;
 
 	yStart.owner = &col;
-	//yStart.value = col.getOwner().getPosition().y;
 	yStart.value = col.getTop();
 	yStart.type = CollisionEntryType::Start;
 
 	yEnd.owner = &col;
-	//yEnd.value = col.getOwner().getPosition().y + col.getHeight();
 	yEnd.value = col.getTop() + col.getHeight();
 	yEnd.type = CollisionEntryType::End;
 
 	this->m_YList.push_back(yStart);
-	cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << yStart.value << endl;
+	//cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << yStart.value << endl;
 	this->m_YList.push_back(yEnd);
-	cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << yEnd.value << endl;
+	//cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << yEnd.value << endl;
 }
 
-void CollisionManager::add(RectangleCollider& col) {
+void SSCollisionManager::add(RectangleColliderOld& col) {
 	this->m_Colliders[col.getId()] = &col;
 
 	this->addXEntries(col);
 	this->addYEntries(col);
 }
 
-RectangleCollider& CollisionManager::get(int id) {
+RectangleColliderOld& SSCollisionManager::get(int id) {
 	return *this->m_Colliders[id];
 }
 
-vector<RectangleCollider*> CollisionManager::getCollisionList(const RectangleCollider& col) {
+vector<RectangleColliderOld*> SSCollisionManager::getCollisionList(const RectangleColliderOld& col) {
 	return this->m_CollisionLists[col.getId()];
 }
 
-void CollisionManager::updateXList() {
+void SSCollisionManager::updateXList() {
 	float x, width;
 	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
 		x = it->owner->getLeft();
@@ -107,7 +103,7 @@ void CollisionManager::updateXList() {
 	sort(this->m_XList.begin(), this->m_XList.end());
 }
 
-void CollisionManager::updateYList() {
+void SSCollisionManager::updateYList() {
 	float y, height;
 	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
 		y = it->owner->getTop();
@@ -124,8 +120,11 @@ void CollisionManager::updateYList() {
 	sort(this->m_YList.begin(), this->m_YList.end());
 }
 
-void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map<int, vector<RectangleCollider*>>& intersectionLists, list<int>& activeColliderIds) {
-	RectangleCollider* currCollider = entry.owner;
+void SSCollisionManager::processCollisionEntry(
+	CollisionEntry entry, 
+	unordered_map<int, vector<RectangleColliderOld*>>& intersectionLists, 
+	list<int>& activeColliderIds) {
+	RectangleColliderOld* currCollider = entry.owner;
 	CollisionEntryType currType = entry.type;
 
 	if (currType == CollisionEntryType::Start) {
@@ -146,8 +145,9 @@ void CollisionManager::processCollisionEntry(CollisionEntry entry, unordered_map
 	}
 }
 
-unordered_map<int, vector<RectangleCollider*>> CollisionManager::buildSingleAxisList(vector<CollisionEntry>& axisList) {
-	unordered_map<int, vector<RectangleCollider*>> intersectionLists;
+unordered_map<int, vector<RectangleColliderOld*>> SSCollisionManager::buildSingleAxisList(
+	vector<CollisionEntry>& axisList) {
+	unordered_map<int, vector<RectangleColliderOld*>> intersectionLists;
 	list<int> activeColliderIds;
 
 	for(int i = 0; i < axisList.size(); ++i) {
@@ -159,7 +159,10 @@ unordered_map<int, vector<RectangleCollider*>> CollisionManager::buildSingleAxis
 	return intersectionLists;
 }
 
-void CollisionManager::buildSingleCollisionList(int id, vector<RectangleCollider*>& colList, vector<RectangleCollider*>& checkList) {
+void SSCollisionManager::buildSingleCollisionList(
+	int id, 
+	vector<RectangleColliderOld*>& colList, 
+	vector<RectangleColliderOld*>& checkList) {
 	for (int i = 0; i < colList.size(); ++i) {
 		for (int j = 0; j < checkList.size(); ++j) {
 			if ((colList[i] == checkList[j])
@@ -170,9 +173,9 @@ void CollisionManager::buildSingleCollisionList(int id, vector<RectangleCollider
 	}
 }
 
-void CollisionManager::buildCollisionLists() {
-	unordered_map<int, vector<RectangleCollider*>> xLists = this->buildSingleAxisList(this->m_XList);
-	unordered_map<int, vector<RectangleCollider*>> yLists = this->buildSingleAxisList(this->m_YList);
+void SSCollisionManager::buildCollisionLists() {
+	unordered_map<int, vector<RectangleColliderOld*>> xLists = this->buildSingleAxisList(this->m_XList);
+	unordered_map<int, vector<RectangleColliderOld*>> yLists = this->buildSingleAxisList(this->m_YList);
 
 	for (auto it = this->m_CollisionLists.begin(); it != this->m_CollisionLists.end(); ++it) {
 		it->second.clear();
@@ -183,13 +186,13 @@ void CollisionManager::buildCollisionLists() {
 	}
 }
 
-void CollisionManager::updateSingleCollider(RectangleCollider& col) {
-	vector<RectangleCollider*> colList = this->getCollisionList(col);
+void SSCollisionManager::updateSingleCollider(RectangleColliderOld& col) {
+	vector<RectangleColliderOld*> colList = this->getCollisionList(col);
 
 	if (colList.size() > 0 
 		&& (!col.isStationary() && col.isSolid())) {
 		for (int i = 0; i < colList.size(); ++i) {
-			RectangleCollider* currCollider = colList[i];
+			RectangleColliderOld* currCollider = colList[i];
 
 			if (currCollider && currCollider->isSolid()) {
 				col.repositionAfterObjectCollision(*currCollider);
@@ -198,7 +201,7 @@ void CollisionManager::updateSingleCollider(RectangleCollider& col) {
 	}
 }
 
-void CollisionManager::update(float dtAsSeconds) {
+void SSCollisionManager::update(float dtAsSeconds) {
 	this->updateXList();
 	this->updateYList();
 
@@ -211,10 +214,10 @@ void CollisionManager::update(float dtAsSeconds) {
 	this->cleanUp();
 }
 
-void CollisionManager::cleanUp() {
+void SSCollisionManager::cleanUp() {
 
 }
 
-void CollisionManager::print() {
+void SSCollisionManager::print() {
 
 }

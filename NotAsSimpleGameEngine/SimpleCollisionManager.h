@@ -9,7 +9,7 @@
 using namespace sf;
 using namespace std;
 
-class RectangleCollider;
+class RectangleColliderOld;
 
 class SimpleCollisionManager final
 {
@@ -17,8 +17,8 @@ class SimpleCollisionManager final
 private:
 	static SimpleCollisionManager* instance;
 	queue<int> m_FreeIds;
-	vector<RectangleCollider*> m_Colliders;
-	queue<RectangleCollider*> m_DeletionQueue;
+	vector<RectangleColliderOld*> m_Colliders;
+	queue<RectangleColliderOld*> m_DeletionQueue;
 	int m_Size;
 
 	SimpleCollisionManager();
@@ -26,14 +26,14 @@ private:
 	SimpleCollisionManager& operator=(const SimpleCollisionManager& rhs) = delete;
 	~SimpleCollisionManager();
 
-	void updateSingleCollider(RectangleCollider& collider);
+	void updateSingleCollider(RectangleColliderOld& collider);
 
 public:
 	static SimpleCollisionManager* getInstance();
 	static void resetInstance();
-	int add(RectangleCollider& col);
+	int add(RectangleColliderOld& col);
 	void erase(int id);
-	vector<RectangleCollider*> getCollisionList(int id);
+	vector<RectangleColliderOld*> getCollisionList(int id);
 	void update(float dtAsSeconds);
 	void cleanUp();
 

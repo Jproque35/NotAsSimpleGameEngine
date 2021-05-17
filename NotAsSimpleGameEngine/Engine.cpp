@@ -28,7 +28,7 @@ Engine::~Engine() {
 	GameObjectManager::resetInstance();
 	SceneManager::resetInstance();
 	InputManager::resetInstance();
-	CollisionManager::resetInstance();
+	SSCollisionManager::resetInstance();
 	DrawableManager::resetInstance();
 	FontManager::resetInstance();
 	SoundFileManager::resetInstance();

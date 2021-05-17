@@ -20,7 +20,7 @@ typedef std::tuple<bool, CollisionDirection, Vector2f> Collision;
 
 class GameObject;
 
-class RectangleCollider final
+class RectangleColliderOld final
 	: public GameObjectComponent {
 private:
 	static int m_CurrFreeId;
@@ -29,17 +29,17 @@ private:
 	float m_Height;
 	float m_Width;
 
-	RectangleCollider() = delete;
-	RectangleCollider(const RectangleCollider& other) = delete;
-	RectangleCollider& operator=(const RectangleCollider& rhs) = delete;
+	RectangleColliderOld() = delete;
+	RectangleColliderOld(const RectangleColliderOld& other) = delete;
+	RectangleColliderOld& operator=(const RectangleColliderOld& rhs) = delete;
 
-	bool horizontalCollision(const RectangleCollider& other) const;
-	bool verticalCollision(const RectangleCollider& other) const;
-	CollisionDirection getRelativeDirection(const RectangleCollider& other, Vector2f diff) const;
+	bool horizontalCollision(const RectangleColliderOld& other) const;
+	bool verticalCollision(const RectangleColliderOld& other) const;
+	CollisionDirection getRelativeDirection(const RectangleColliderOld& other, Vector2f diff) const;
 
 public:
-	RectangleCollider(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary);
-	~RectangleCollider();
+	RectangleColliderOld(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary);
+	~RectangleColliderOld();
 
 	bool isStationary() const;
 	bool isSolid() const;
@@ -47,11 +47,11 @@ public:
 	float getLeft() const;
 	float getWidth() const;
 	float getHeight() const;
-	bool intersects(const RectangleCollider& other) const ;
-	vector<RectangleCollider*> getCollisionList() const;
-	Collision getObjectCollisionData(const RectangleCollider& other) const ;
+	bool intersects(const RectangleColliderOld& other) const ;
+	vector<RectangleColliderOld*> getCollisionList() const;
+	Collision getObjectCollisionData(const RectangleColliderOld& other) const ;
 	vector<CollisionDirection> getBoundaryCollisionData() const;
-	void repositionAfterObjectCollision(const RectangleCollider& other);
+	void repositionAfterObjectCollision(const RectangleColliderOld& other);
 	void update(float dtAsSeconds);
 	void destroy() const;
 };

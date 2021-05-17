@@ -29,7 +29,7 @@ private:
 protected:
     Direction m_CurrDir;
     EntityType m_Type;
-    RectangleCollider* m_Collider;
+    RectangleColliderOld* m_Collider;
 
     virtual void update(float dtAsSeconds) = 0;
 
