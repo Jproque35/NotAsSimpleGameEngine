@@ -3,13 +3,13 @@
 #pragma once
 #include "Entity.h"
 
-class RectangleColliderOld;
+class RectangleCollider;
 class RectangleGraphic;
 
 class PongBlock final :
     public Entity {
 private:
-    RectangleColliderOld* m_Collider;
+    RectangleCollider* m_Collider;
     RectangleGraphic* m_Rectangle;
     PongBlock* m_Next;
 

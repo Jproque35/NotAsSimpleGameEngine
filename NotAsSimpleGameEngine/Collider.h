@@ -12,12 +12,24 @@ enum class ColliderType {
 	RECTANGLE
 };
 
+enum class CollisionDirection {
+	Down,
+	Right,
+	Up,
+	Left
+};
+
+typedef std::tuple<bool, CollisionDirection, Vector2f> Collision;
+
 class CircleCollider;
+class RectangleCollider;
 class GameObject;
 
 class Collider
 	: public GameObjectComponent {
 private:
+	static int currFreeId;
+
 	Collider();
 	Collider(const Collider& other) = delete;
 	Collider& operator=(const Collider& rhs) = delete;
@@ -27,8 +39,9 @@ protected:
 	bool m_Solid;
 	bool m_Stationary;
 
-	virtual bool intersectsRectangle() const = 0;
+	virtual bool intersectsRectangle(const RectangleCollider& col) const = 0;
 	virtual bool intersectsCircle(const CircleCollider& col) const = 0;
+	virtual CollisionDirection getCollisionDirection(const Collider& col, const Vector2f& diff) const = 0;
 
 public:
 	Collider(GameObject& owner, ColliderType type, bool solid, bool stationary);
@@ -46,6 +59,10 @@ public:
 		return this->m_Stationary;
 	}
 
+	Collision getCollisionData(const Collider& col) const;
+	vector<CollisionDirection> getBoundaryCollisionData() const;
+	void repositionAfterObjectCollision(const Collider& col);
+	void repositionAfterBoundaryCollision();
 	virtual float getMinX() const = 0;
 	virtual float getMinY() const = 0;
 	virtual float getMaxX() const = 0;
@@ -53,6 +70,7 @@ public:
 	bool intersects(const Collider& col) const;
 	vector<Collider*> getCollisionList() const;
 	virtual void update(float dtAsSeconds) = 0;
+	void destroy() const;
 };
 
 #endif

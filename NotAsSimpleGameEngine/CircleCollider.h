@@ -19,6 +19,10 @@ public:
     CircleCollider(GameObject& owner, float radius, bool solid, bool stationary);
     ~CircleCollider();
 
+    inline float getRadius() const {
+        return this->m_Radius;
+    }
+
     float getMinX() const;
     float getMinY() const;
     float getMaxX() const;

@@ -1,7 +1,7 @@
 #ifndef RECTANGLECOLLIDER_H
 #define RECTANGLECOLLIDER_H
 #pragma once
-#include "GameObjectComponent.h"
+#include "Collider.h"
 #include <iostream>
 #include <vector>
 #include <SFML/Graphics.hpp>
@@ -9,50 +9,40 @@
 using namespace std;
 using namespace sf;
 
-enum class CollisionDirection {
-	Down,
-	Right,
-	Up,
-	Left
-};
-
-typedef std::tuple<bool, CollisionDirection, Vector2f> Collision;
-
 class GameObject;
 
-class RectangleColliderOld final
-	: public GameObjectComponent {
+class RectangleCollider final
+	: public Collider {
 private:
 	static int m_CurrFreeId;
-	bool m_Stationary;
-	bool m_Solid;
-	float m_Height;
 	float m_Width;
+	float m_Height;
 
-	RectangleColliderOld() = delete;
-	RectangleColliderOld(const RectangleColliderOld& other) = delete;
-	RectangleColliderOld& operator=(const RectangleColliderOld& rhs) = delete;
+	RectangleCollider() = delete;
+	RectangleCollider(const RectangleCollider& other) = delete;
+	RectangleCollider& operator=(const RectangleCollider& rhs) = delete;
 
-	bool horizontalCollision(const RectangleColliderOld& other) const;
-	bool verticalCollision(const RectangleColliderOld& other) const;
-	CollisionDirection getRelativeDirection(const RectangleColliderOld& other, Vector2f diff) const;
+protected:
+	bool intersectsCircle(const CircleCollider& col) const;
+	bool intersectsRectangle(const RectangleCollider& col) const;
+	CollisionDirection getCollisionDirection(const Collider& col, const Vector2f& diff) const;
 
 public:
-	RectangleColliderOld(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary);
-	~RectangleColliderOld();
+	RectangleCollider(GameObject& owner, const Vector2f& dimensions, bool solid, bool stationary);
+	~RectangleCollider();
 
-	bool isStationary() const;
-	bool isSolid() const;
-	float getTop() const;
-	float getLeft() const;
-	float getWidth() const;
-	float getHeight() const;
-	bool intersects(const RectangleColliderOld& other) const ;
-	vector<RectangleColliderOld*> getCollisionList() const;
-	Collision getObjectCollisionData(const RectangleColliderOld& other) const ;
-	vector<CollisionDirection> getBoundaryCollisionData() const;
-	void repositionAfterObjectCollision(const RectangleColliderOld& other);
+	inline float getWidth() const {
+		return this->m_Width;
+	}
+
+	inline float getHeight() const {
+		return this->m_Height;
+	}
+
+	float getMinX() const;
+	float getMinY() const;
+	float getMaxX() const;
+	float getMaxY() const;
 	void update(float dtAsSeconds);
-	void destroy() const;
 };
 #endif;

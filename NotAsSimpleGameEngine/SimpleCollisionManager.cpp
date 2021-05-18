@@ -38,7 +38,7 @@ void SimpleCollisionManager::resetInstance() {
 	}
 }
 
-int SimpleCollisionManager::add(RectangleColliderOld& col) {
+int SimpleCollisionManager::add(RectangleCollider& col) {
 	std::cout << "Adding Collider to Manager..." << std::endl;
 
 	if (this->m_FreeIds.size() <= 0) {
@@ -57,7 +57,7 @@ int SimpleCollisionManager::add(RectangleColliderOld& col) {
 
 void SimpleCollisionManager::erase(int id) {
 	try {
-		RectangleColliderOld* desire = this->m_Colliders[id];
+		RectangleCollider* desire = this->m_Colliders[id];
 		this->m_Colliders[id] = NULL;
 		--this->m_Size;
 		this->m_FreeIds.push(id);
@@ -68,12 +68,12 @@ void SimpleCollisionManager::erase(int id) {
 	}
 }
 
-vector<RectangleColliderOld*> SimpleCollisionManager::getCollisionList(int id) {
+vector<RectangleCollider*> SimpleCollisionManager::getCollisionList(int id) {
 	try {
-		vector<RectangleColliderOld*> desire;
+		vector<RectangleCollider*> desire;
 
 		if (id < this->m_Colliders.size() && this->m_Colliders[id] != NULL) {
-			RectangleColliderOld* currCollider = this->m_Colliders[id];
+			RectangleCollider* currCollider = this->m_Colliders[id];
 
 			for (int i = 0; i < this->m_Colliders.size(); ++i) {
 
@@ -91,12 +91,12 @@ vector<RectangleColliderOld*> SimpleCollisionManager::getCollisionList(int id) {
 	}
 }
 
-void SimpleCollisionManager::updateSingleCollider(RectangleColliderOld& collider) {
-	vector<RectangleColliderOld*> colList = this->getCollisionList(collider.getId());
+void SimpleCollisionManager::updateSingleCollider(RectangleCollider& collider) {
+	vector<RectangleCollider*> colList = this->getCollisionList(collider.getId());
 
 	if (colList.size() > 0 && !collider.isStationary()) {
 		for (int j = 0; j < colList.size(); ++j) {
-			RectangleColliderOld* currCollider = colList[j];
+			RectangleCollider* currCollider = colList[j];
 
 			if (currCollider) {
 				collider.repositionAfterObjectCollision(*currCollider);
@@ -107,7 +107,7 @@ void SimpleCollisionManager::updateSingleCollider(RectangleColliderOld& collider
 
 void SimpleCollisionManager::update(float dtAsSeconds) {
 	for (int i = 0; i < this->m_Colliders.size(); ++i) {
-		RectangleColliderOld* currCollider = this->m_Colliders[i];
+		RectangleCollider* currCollider = this->m_Colliders[i];
 		
 		if (currCollider && currCollider->getOwner().isActive()) {
 			updateSingleCollider(*currCollider);
@@ -119,7 +119,7 @@ void SimpleCollisionManager::update(float dtAsSeconds) {
 
 void SimpleCollisionManager::cleanUp() {
 	while (this->m_DeletionQueue.size() > 0) {
-		RectangleColliderOld* desire = this->m_DeletionQueue.front();
+		RectangleCollider* desire = this->m_DeletionQueue.front();
 		this->m_DeletionQueue.pop();
 		delete(desire);
 		desire = NULL;

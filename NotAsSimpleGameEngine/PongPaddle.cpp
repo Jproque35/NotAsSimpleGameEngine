@@ -11,7 +11,7 @@ PongPaddle::PongPaddle() :
 	Vector2f rectSize(60.0f, 16.0f);
 
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
-	this->m_Collider = new RectangleColliderOld(*this, rectSize, true, true);
+	this->m_Collider = new RectangleCollider(*this, rectSize, true, true);
 
 	this->addComponent(*this->m_Graphic);
 	this->addComponent(*this->m_Collider);
@@ -54,10 +54,10 @@ void PongPaddle::update(float dtAsSeconds) {
 	if (PongGameManager::getInstance()->getStartCount() <= 0.0f) {
 		Vector2f moveDir = this->inputToVector() * dtAsSeconds;
 
-		if (moveDir.x < 0 && this->m_Collider->getLeft() < 0) {
+		if (moveDir.x < 0 && this->m_Collider->getMinX() < 0) {
 		}
-		else if (moveDir.x > 0 && this->m_Collider->getLeft()
-			+ this->m_Collider->getWidth() > SceneManager::getInstance()->getCurrentScene().getWidth()) {
+		else if (moveDir.x > 0 && this->m_Collider->getMaxX() 
+			> SceneManager::getInstance()->getCurrentScene().getWidth()) {
 		}
 		else {
 			this->Move(moveDir);

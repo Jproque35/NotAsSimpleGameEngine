@@ -10,7 +10,7 @@ BasicPlayer::BasicPlayer()
 	this->m_Type = EntityType::Player;
 
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
-	this->m_Collider = new RectangleColliderOld(*this, rectSize, true, false);
+	this->m_Collider = new RectangleCollider(*this, rectSize, true, false);
 
 	this->addComponent(*m_Collider);
 	this->addComponent(*m_Graphic);

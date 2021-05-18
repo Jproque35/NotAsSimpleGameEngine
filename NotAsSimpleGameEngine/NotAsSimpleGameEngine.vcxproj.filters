@@ -204,13 +204,13 @@
     <ClCompile Include="PongGameManager.cpp">
       <Filter>Source Files\Pong</Filter>
     </ClCompile>
-    <ClCompile Include="RectangleCollider.cpp">
-      <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
-    </ClCompile>
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
     </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
+      <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
+    </ClCompile>
+    <ClCompile Include="RectangleCollider.cpp">
       <Filter>Source Files\Core\GameObjects\Components\Colliders</Filter>
     </ClCompile>
   </ItemGroup>

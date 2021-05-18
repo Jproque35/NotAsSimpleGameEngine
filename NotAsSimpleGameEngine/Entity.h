@@ -3,6 +3,7 @@
 #pragma once
 #include "GameObject.h"
 #include "RectangleCollider.h"
+#include "CircleCollider.h"
 #include <math.h>
 
 enum class Direction {
@@ -29,7 +30,7 @@ private:
 protected:
     Direction m_CurrDir;
     EntityType m_Type;
-    RectangleColliderOld* m_Collider;
+    RectangleCollider* m_Collider;
 
     virtual void update(float dtAsSeconds) = 0;
 

@@ -7,7 +7,7 @@ PongBlock::PongBlock() {
 
 	Vector2f shape(80.0f, 32.0f);
 	this->m_Rectangle = new RectangleGraphic(*this, shape, Color::Blue);
-	this->m_Collider = new RectangleColliderOld(*this, shape, true, true);
+	this->m_Collider = new RectangleCollider(*this, shape, true, true);
 
 	this->addComponent(*this->m_Rectangle);
 	this->addComponent(*this->m_Collider);
@@ -31,7 +31,7 @@ PongBlock& PongBlock::getNext() {
 }
 
 void PongBlock::update(float dtAsSeconds) {
-	vector<RectangleColliderOld*> colList = this->m_Collider->getCollisionList();
+	vector<Collider*> colList = this->m_Collider->getCollisionList();
 
 	for (int i = 0; i < colList.size(); ++i) {
 		cout << "Collision detected at time " << dtAsSeconds << endl;

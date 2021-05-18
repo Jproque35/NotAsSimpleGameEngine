@@ -18,7 +18,7 @@ PongBall::PongBall()
 
 	Vector2f rectSize(24.0f, 24.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Red);
-	this->m_Collider = new RectangleColliderOld(*this, rectSize, true, false);
+	this->m_Collider = new RectangleCollider(*this, rectSize, true, false);
 	this->m_TravelDirection.x = this->m_Speed;
 	this->m_TravelDirection.y = this->m_Speed;
 
@@ -46,12 +46,12 @@ void PongBall::init(float x, float y) {
 }
 
 void PongBall::changeDirectionAfterObjectCollision(float dtAsSeconds) {
-	vector<RectangleColliderOld*> collisionList = this->m_Collider->getCollisionList();
+	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
 
 	if (collisionList.size() > 0) {
 
 		for (int i = 0; i < collisionList.size(); ++i) {
-			Collision currCollision = this->m_Collider->getObjectCollisionData(*collisionList[i]);
+			Collision currCollision = this->m_Collider->getCollisionData(*collisionList[i]);
 
 			CollisionDirection colDir = std::get<1>(currCollision);
 
