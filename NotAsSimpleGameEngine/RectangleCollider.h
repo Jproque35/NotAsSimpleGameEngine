@@ -22,6 +22,11 @@ private:
 	RectangleCollider(const RectangleCollider& other) = delete;
 	RectangleCollider& operator=(const RectangleCollider& rhs) = delete;
 
+	CollisionDirection getRectangleCollisionDirection(
+		CollisionDirection& desire, 
+		const RectangleCollider& col, 
+		const Vector2f& diff) const;
+
 protected:
 	bool intersectsCircle(const CircleCollider& col) const;
 	bool intersectsRectangle(const RectangleCollider& col) const;

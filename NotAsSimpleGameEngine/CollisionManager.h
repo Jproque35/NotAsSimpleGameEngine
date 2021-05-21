@@ -25,21 +25,21 @@ struct CollisionEntry {
 };
 
 
-class SSCollisionManager final {
+class CollisionManager final {
 private:
-	static SSCollisionManager* instance;
+	static CollisionManager* instance;
 	unordered_map<int, Collider*> m_Colliders;
 	unordered_map<int, vector<Collider*>> m_CollisionLists;
 	vector<CollisionEntry> m_XList;
 	vector<CollisionEntry> m_YList;
 	float currTime;
 
-	SSCollisionManager();
-	~SSCollisionManager();
-	SSCollisionManager(const SSCollisionManager& other) = delete;
-	SSCollisionManager& operator=(const SSCollisionManager& rhs) = delete;
+	CollisionManager();
+	~CollisionManager();
+	CollisionManager(const CollisionManager& other) = delete;
+	CollisionManager& operator=(const CollisionManager& rhs) = delete;
 
-
+	void add(Collider& col);
 	void addXEntries(Collider& col);
 	void addYEntries(Collider& col);
 	void updateSingleCollider(Collider& collider);
@@ -57,9 +57,16 @@ private:
 	void buildCollisionLists();
 
 public:
-	static SSCollisionManager* getInstance();
+	static CollisionManager* getInstance();
 	static void resetInstance();
-	void add(Collider& col);
+	RectangleCollider* createRectangleCollider(GameObject& owner,
+		const Vector2f& dimensions,
+		bool solid,
+		bool stationary);
+	CircleCollider* createCircleCollider(GameObject& owner,
+		float radius,
+		bool solid,
+		bool stationary);
 	Collider& get(int id);
 	vector<Collider*> getCollisionList(const Collider& col);
 	void update(float dtAsSeconds);

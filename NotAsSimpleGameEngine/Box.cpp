@@ -1,12 +1,13 @@
 #include "Box.h"
 #include "DrawableManager.h"
 #include "RectangleGraphic.h"
+#include "CollisionManager.h"
 
 Box::Box()
 	: Entity() {
-	Vector2f rectSize(32.0f, 32.0f);
+	Vector2f rectSize(128.0f, 256.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Blue);
-	this->m_Collider = new RectangleCollider(*this, rectSize, true, true);
+	this->m_Collider = CollisionManager::getInstance()->createRectangleCollider(*this, rectSize, true, false);
 
 	this->addComponent(*this->m_Graphic);
 	this->addComponent(*this->m_Collider);

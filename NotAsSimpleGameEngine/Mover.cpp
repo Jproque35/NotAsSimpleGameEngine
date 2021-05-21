@@ -2,10 +2,11 @@
 #include "DrawableManager.h"
 #include "RectangleGraphic.h"
 #include "SoundFileManager.h"
+#include "CollisionManager.h"
 
 Mover::Mover()
 	: Entity(),
-	m_Speed(50.0f),
+	m_Speed(100.0f),
 	m_TravelDirection(0.0f, 0.0f),
 	m_BounceSoundFile("VUX-Bite.wav"){
 
@@ -14,7 +15,7 @@ Mover::Mover()
 
 	Vector2f rectSize(32.0f, 32.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Red);
-	this->m_Collider = new RectangleCollider(*this, rectSize, true, false);
+	this->m_Collider = CollisionManager::getInstance()->createRectangleCollider(*this, rectSize, true, false);
 	this->m_TravelDirection.x = this->m_Speed;
 	this->m_TravelDirection.y = this->m_Speed;
 
@@ -33,6 +34,8 @@ void Mover::init(float x, float y) {
 
 void Mover::changeDirectionAfterObjectCollision(float dtAsSeconds) {
 	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
+
+	cout << "Mover: Collision List has size " << collisionList.size() << endl;
 
 	if (collisionList.size() > 0) {
 

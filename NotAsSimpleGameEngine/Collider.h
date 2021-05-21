@@ -13,10 +13,10 @@ enum class ColliderType {
 };
 
 enum class CollisionDirection {
-	Down,
-	Right,
-	Up,
-	Left
+Up,
+Right,
+Down,
+Left
 };
 
 typedef std::tuple<bool, CollisionDirection, Vector2f> Collision;

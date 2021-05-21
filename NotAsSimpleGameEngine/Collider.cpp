@@ -12,6 +12,8 @@ Collider::Collider(GameObject& owner, ColliderType type, bool solid, bool statio
 	m_Solid(solid),
 	m_Stationary(stationary) {
 	this->m_Id = currFreeId++;
+	//SSCollisionManager::getInstance()->add(*this);
+	//cout << "Collider: Sent collider with id " << this->m_Id << " to collision manager" << endl;
 }
 
 Collider::~Collider() {
@@ -36,6 +38,14 @@ Collision Collider::getCollisionData(const Collider& col) const {
 	CollisionDirection colDir = this->getCollisionDirection(col, diff);
 
 	return std::make_tuple(collided, colDir, diff);
+}
+
+void Collider::repositionAfterObjectCollision(const Collider& col) {
+
+}
+
+void Collider::repositionAfterBoundaryCollision() {
+
 }
 
 vector<CollisionDirection> Collider::getBoundaryCollisionData() const {
@@ -64,7 +74,7 @@ vector<CollisionDirection> Collider::getBoundaryCollisionData() const {
 
 vector<Collider*> Collider::getCollisionList() const {
 	//return vector<Collider*>();
-	return SSCollisionManager::getInstance()->getCollisionList(*this);
+	return CollisionManager::getInstance()->getCollisionList(*this);
 }
 
 void Collider::destroy() const {

@@ -1,14 +1,15 @@
 #include "Collider.h"
 #include "GameObject.h"
 #include "CollisionManager.h"
+#include "RectangleCollider.h"
+#include "CircleCollider.h"
 
-SSCollisionManager* SSCollisionManager::instance = NULL;
+CollisionManager* CollisionManager::instance = NULL;
 
-SSCollisionManager::SSCollisionManager() :
+CollisionManager::CollisionManager() :
 	currTime(0.0f) {}
 
-SSCollisionManager::~SSCollisionManager() {
-
+CollisionManager::~CollisionManager() {
 	cout << "***CollisionManager: Destroying CollisionManager.." << endl;
 
 	for (auto it = this->m_Colliders.begin(); it != this->m_Colliders.end(); ++it) {
@@ -19,15 +20,15 @@ SSCollisionManager::~SSCollisionManager() {
 	}
 }
 
-SSCollisionManager* SSCollisionManager::getInstance() {
+CollisionManager* CollisionManager::getInstance() {
 	if (!instance) {
-		instance = new SSCollisionManager();
+		instance = new CollisionManager();
 	}
 
 	return instance;
 }
 
-void SSCollisionManager::resetInstance() {
+void CollisionManager::resetInstance() {
 	if (instance) {
 		delete(instance);
 	}
@@ -35,7 +36,25 @@ void SSCollisionManager::resetInstance() {
 	instance = NULL;
 }
 
-void SSCollisionManager::addXEntries(Collider& col) {
+RectangleCollider* CollisionManager::createRectangleCollider(GameObject& owner,
+	const Vector2f& dimensions,
+	bool solid,
+	bool stationary) {
+
+	RectangleCollider* desire = new RectangleCollider(owner, dimensions, solid, stationary);
+	this->add(*desire);
+	return desire;
+}
+
+CircleCollider* CollisionManager::createCircleCollider(
+	GameObject& owner,
+	float radius,
+	bool solid,
+	bool stationary) {
+	return NULL;
+}
+
+void CollisionManager::addXEntries(Collider& col) {
 	CollisionEntry xStart;
 	CollisionEntry xEnd;
 
@@ -48,12 +67,10 @@ void SSCollisionManager::addXEntries(Collider& col) {
 	xEnd.type = CollisionEntryType::End;
 
 	this->m_XList.push_back(xStart);
-	//cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << xStart.value << endl;
 	this->m_XList.push_back(xEnd);
-	//cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << xEnd.value << endl;
 }
 
-void SSCollisionManager::addYEntries(Collider& col) {
+void CollisionManager::addYEntries(Collider& col) {
 	CollisionEntry yStart;
 	CollisionEntry yEnd;
 
@@ -66,27 +83,27 @@ void SSCollisionManager::addYEntries(Collider& col) {
 	yEnd.type = CollisionEntryType::End;
 
 	this->m_YList.push_back(yStart);
-	//cout << "CollisionManager: Added start entry for Collider with id " << col.getId() << " and value " << yStart.value << endl;
 	this->m_YList.push_back(yEnd);
-	//cout << "CollisionManager: Added end entry for Collider with id " << col.getId() << " and value " << yEnd.value << endl;
 }
 
-void SSCollisionManager::add(Collider& col) {
+void CollisionManager::add(Collider& col) {
 	this->m_Colliders[col.getId()] = &col;
 
 	this->addXEntries(col);
 	this->addYEntries(col);
+
+	cout << "CollisionManager: Added Collider with id " << col.getId() << " to CollisionManager" << endl;
 }
 
-Collider& SSCollisionManager::get(int id) {
+Collider& CollisionManager::get(int id) {
 	return *this->m_Colliders[id];
 }
 
-vector<Collider*> SSCollisionManager::getCollisionList(const Collider& col) {
+vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
 	return this->m_CollisionLists[col.getId()];
 }
 
-void SSCollisionManager::updateXList() {
+void CollisionManager::updateXList() {
 	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
 		if (it->type == CollisionEntryType::Start) {
 			it->value = it->owner->getMinX();
@@ -99,7 +116,7 @@ void SSCollisionManager::updateXList() {
 	sort(this->m_XList.begin(), this->m_XList.end());
 }
 
-void SSCollisionManager::updateYList() {
+void CollisionManager::updateYList() {
 	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
 		if (it->type == CollisionEntryType::Start) {
 			it->value = it->owner->getMinY();
@@ -112,7 +129,7 @@ void SSCollisionManager::updateYList() {
 	sort(this->m_YList.begin(), this->m_YList.end());
 }
 
-void SSCollisionManager::processCollisionEntry(
+void CollisionManager::processCollisionEntry(
 	CollisionEntry entry, 
 	unordered_map<int, vector<Collider*>>& intersectionLists, 
 	list<int>& activeColliderIds) {
@@ -137,7 +154,7 @@ void SSCollisionManager::processCollisionEntry(
 	}
 }
 
-unordered_map<int, vector<Collider*>> SSCollisionManager::buildSingleAxisList(
+unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisList(
 	vector<CollisionEntry>& axisList) {
 	unordered_map<int, vector<Collider*>> intersectionLists;
 	list<int> activeColliderIds;
@@ -151,7 +168,7 @@ unordered_map<int, vector<Collider*>> SSCollisionManager::buildSingleAxisList(
 	return intersectionLists;
 }
 
-void SSCollisionManager::buildSingleCollisionList(
+void CollisionManager::buildSingleCollisionList(
 	int id, 
 	vector<Collider*>& colList, 
 	vector<Collider*>& checkList) {
@@ -165,7 +182,7 @@ void SSCollisionManager::buildSingleCollisionList(
 	}
 }
 
-void SSCollisionManager::buildCollisionLists() {
+void CollisionManager::buildCollisionLists() {
 	unordered_map<int, vector<Collider*>> xLists = this->buildSingleAxisList(this->m_XList);
 	unordered_map<int, vector<Collider*>> yLists = this->buildSingleAxisList(this->m_YList);
 
@@ -178,7 +195,7 @@ void SSCollisionManager::buildCollisionLists() {
 	}
 }
 
-void SSCollisionManager::updateSingleCollider(Collider& col) {
+void CollisionManager::updateSingleCollider(Collider& col) {
 	vector<Collider*> colList = this->getCollisionList(col);
 
 	if (colList.size() > 0 
@@ -194,7 +211,7 @@ void SSCollisionManager::updateSingleCollider(Collider& col) {
 	}
 }
 
-void SSCollisionManager::update(float dtAsSeconds) {
+void CollisionManager::update(float dtAsSeconds) {
 	this->updateXList();
 	this->updateYList();
 
@@ -207,10 +224,10 @@ void SSCollisionManager::update(float dtAsSeconds) {
 	this->cleanUp();
 }
 
-void SSCollisionManager::cleanUp() {
+void CollisionManager::cleanUp() {
 
 }
 
-void SSCollisionManager::print() {
+void CollisionManager::print() {
 
 }
