@@ -35,7 +35,7 @@ void Mover::init(float x, float y) {
 void Mover::changeDirectionAfterObjectCollision(float dtAsSeconds) {
 	vector<Collider*> collisionList = this->m_Collider->getCollisionList();
 
-	cout << "Mover: Collision List has size " << collisionList.size() << endl;
+	//cout << "Mover: Collision List has size " << collisionList.size() << endl;
 
 	if (collisionList.size() > 0) {
 

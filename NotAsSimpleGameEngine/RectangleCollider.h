@@ -27,6 +27,9 @@ private:
 		const RectangleCollider& col, 
 		const Vector2f& diff) const;
 
+	void repositionAfterRectangleCollision(const RectangleCollider& col) const;
+	void repositionAfterCircleCollision(const CircleCollider& col) const;
+
 protected:
 	bool intersectsCircle(const CircleCollider& col) const;
 	bool intersectsRectangle(const RectangleCollider& col) const;

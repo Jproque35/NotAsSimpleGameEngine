@@ -41,7 +41,12 @@ Collision Collider::getCollisionData(const Collider& col) const {
 }
 
 void Collider::repositionAfterObjectCollision(const Collider& col) {
-
+	if (col.m_Type == ColliderType::RECTANGLE) {
+		this->repositionAfterRectangleCollision(dynamic_cast<const RectangleCollider&>(col));
+	}
+	else if (col.m_Type == ColliderType::CIRCLE) {
+		this->repositionAfterCircleCollision(dynamic_cast<const CircleCollider&>(col));
+	}
 }
 
 void Collider::repositionAfterBoundaryCollision() {

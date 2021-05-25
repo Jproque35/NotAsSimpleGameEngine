@@ -41,6 +41,8 @@ protected:
 
 	virtual bool intersectsRectangle(const RectangleCollider& col) const = 0;
 	virtual bool intersectsCircle(const CircleCollider& col) const = 0;
+	virtual void repositionAfterRectangleCollision(const RectangleCollider& col) const = 0;
+	virtual void repositionAfterCircleCollision(const CircleCollider& col) const = 0;
 	virtual CollisionDirection getCollisionDirection(const Collider& col, const Vector2f& diff) const = 0;
 
 public:

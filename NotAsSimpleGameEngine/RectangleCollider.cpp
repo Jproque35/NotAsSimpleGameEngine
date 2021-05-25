@@ -27,6 +27,58 @@ bool RectangleCollider::intersectsRectangle(const RectangleCollider& col) const 
 	return xIntersection && yIntersection;
 }
 
+void RectangleCollider::repositionAfterRectangleCollision(const RectangleCollider& col) const {
+	/*
+	Vector2f diff = col.m_Owner->getPosition() - this->m_Owner->getPosition();
+	CollisionDirection dir = this->getCollisionDirection(col, diff);
+	Vector2f pos(this->m_Owner->getPosition());
+
+	if (dir == CollisionDirection::Right) {
+		pos.x -= this->getMaxX() - col.getMinX();
+	}
+	else if (dir == CollisionDirection::Up) {
+		pos.y += col.getMaxY() - this->getMinY();
+	}
+	else if (dir == CollisionDirection::Left) {
+		pos.x += col.getMaxX() - this->getMinX();
+	}
+	else if (dir == CollisionDirection::Down) {
+		pos.y -= this->getMaxY() - col.getMinY();
+	}
+
+	this->m_Owner->setPosition(pos);*/
+
+	Collision collision = this->getCollisionData(col);
+
+	if (std::get<0>(collision)) {
+		CollisionDirection colDir = std::get<1>(collision);
+		Vector2f colVector = std::get<2>(collision);
+		Vector2f ownerPos = this->m_Owner->getPosition();
+		float xPos = ownerPos.x;
+		float yPos = ownerPos.y;
+
+		if (colDir == CollisionDirection::Down) {
+			cout << "Collision Direction is Down" << endl;
+			yPos -= this->getMaxY() - col.getMinY();
+		}
+		else if (colDir == CollisionDirection::Right) {
+			xPos -= this->getMaxX() - col.getMinX();
+		}
+		else if (colDir == CollisionDirection::Up) {
+			yPos += col.getMaxY() - this->getMinY();
+		}
+		else if (colDir == CollisionDirection::Left) {
+			xPos += col.getMaxX() - this->getMinX();
+		}
+
+		this->m_Owner->setPosition(Vector2f(xPos, yPos));
+	}
+}
+
+void RectangleCollider::repositionAfterCircleCollision(const CircleCollider& col) const {
+
+}
+
 CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 	CollisionDirection& desire,
 	const RectangleCollider& col,
