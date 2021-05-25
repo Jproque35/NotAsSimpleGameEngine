@@ -87,35 +87,23 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 	if (desire == CollisionDirection::Left || desire == CollisionDirection::Right) {
 		cout << "Side Check" << endl;
 		if (col.getHeight() / col.getWidth() < 1
-			&& abs(diff.y) > col.getHeight() / 2) {
-			if (desire == CollisionDirection::Left && diff.y > 0) {
+			&& (abs(diff.x) > col.getHeight() / 2
+				&& abs(diff.x) < col.getWidth() / 2)) {
+			if (diff.y > 0) {
 				return CollisionDirection::Down;
 			}
-			else if (desire == CollisionDirection::Left && diff.y < 0) {
-				return CollisionDirection::Up;
-			}
-			else if (desire == CollisionDirection::Right && diff.y > 0) {
-				return CollisionDirection::Down;
-			}
-			else if (desire == CollisionDirection::Right && diff.y < 0) {
+			else {
 				return CollisionDirection::Up;
 			}
 		}
-	}
-
-	if (desire == CollisionDirection::Up || desire == CollisionDirection::Down) {
+	} else if (desire == CollisionDirection::Up || desire == CollisionDirection::Down) {
 		if (col.getHeight() / col.getWidth() > 1
-			&& abs(diff.x) > col.getWidth() / 2) {
-			if (desire == CollisionDirection::Up && diff.x > 0) {
+			&& (abs(diff.y) > col.getWidth() / 2
+				&& abs(diff.y) < col.getHeight()/2)) {
+			if (diff.x > 0) {
 				return CollisionDirection::Right;
 			}
-			else if (desire == CollisionDirection::Up && diff.x < 0) {
-				return CollisionDirection::Left;
-			}
-			else if (desire == CollisionDirection::Down && diff.x > 0) {
-				return CollisionDirection::Right;
-			}
-			else if (desire == CollisionDirection::Up && diff.x < 0) {
+			else {
 				return CollisionDirection::Left;
 			}
 		}

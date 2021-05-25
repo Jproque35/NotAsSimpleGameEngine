@@ -59,4 +59,30 @@ void BasicPlayer::update(float dtAsSeconds) {
 	Vector2f moveDir = this->inputToVector() * dtAsSeconds;
 
 	this->Move(moveDir);
+
+	vector<Collider*> colList = CollisionManager::getInstance()->getCollisionList(*this->m_Collider);
+
+	if (colList.size() > 0) {
+		for (int i = 0; i < colList.size(); ++i) {
+			Collision newCol = this->m_Collider->getCollisionData(*colList[i]);
+
+			string dir = "";
+			CollisionDirection colDir = std::get<1>(newCol);
+			if (colDir == CollisionDirection::Right) {
+				dir = "Right";
+			}
+			else if (colDir == CollisionDirection::Left) {
+				dir = "Left";
+			}
+			else if (colDir == CollisionDirection::Up) {
+				dir = "Up";
+			}
+			else if (colDir == CollisionDirection::Down) {
+				dir = "Down";
+			}
+
+			cout << "BasicPlayer: CollisionDirection is " << dir << endl;
+
+		}
+	}
 }
