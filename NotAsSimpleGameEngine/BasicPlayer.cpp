@@ -7,7 +7,7 @@
 BasicPlayer::BasicPlayer()
 	: Entity(),
 	m_Speed(150.0f) {
-	Vector2f rectSize(32.0f, 32.0f);
+	Vector2f rectSize(32.0f, 24.0f);
 	this->m_Type = EntityType::Player;
 
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);

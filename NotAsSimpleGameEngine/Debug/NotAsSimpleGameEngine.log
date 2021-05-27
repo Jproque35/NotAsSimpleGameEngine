@@ -1,2 +1,5 @@
-﻿  RectangleCollider.cpp
+﻿  BasicPlayer.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\BasicPlayer.cpp(66,21): warning C4018: '<': signed/unsigned mismatch
+  RectangleCollider.cpp
+  Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe
