@@ -3,6 +3,7 @@
 #include "RectangleGraphic.h"
 #include "SoundFileManager.h"
 #include "PongGameManager.h"
+#include "CollisionManager.h"
 
 PongBall::PongBall()
 	: Entity(),
@@ -18,7 +19,8 @@ PongBall::PongBall()
 
 	Vector2f rectSize(24.0f, 24.0f);
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Red);
-	this->m_Collider = new RectangleCollider(*this, rectSize, true, false);
+	//this->m_Collider = new RectangleCollider(*this, rectSize, true, false);
+	this->m_Collider = CollisionManager::getInstance()->createRectangleCollider(*this, rectSize, true, false);
 	this->m_TravelDirection.x = this->m_Speed;
 	this->m_TravelDirection.y = this->m_Speed;
 

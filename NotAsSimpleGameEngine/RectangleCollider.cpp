@@ -90,6 +90,7 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 		//Checking for Down Collision from Left
 		if (desire == CollisionDirection::Left && diff.y > 0) {
 			//cout << "RectangleCollider: Evaluating for down from left" << endl;
+			colUnitVector = MathLib::normalize(lowerLeft - otherPos);
 			ownerUnitVector = MathLib::normalize(otherUpperRight - otherPos);
 
 			if (MathLib::dot(compass[0], colUnitVector) > MathLib::dot(compass[0], ownerUnitVector)) {
@@ -98,6 +99,7 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 		}
 		//Checking for Up Collision from Left
 		else if (desire == CollisionDirection::Left && diff.y < 0) {
+			colUnitVector = MathLib::normalize(upperLeft - otherPos);
 			ownerUnitVector = MathLib::normalize(otherLowerRight - otherPos);
 
 			if (MathLib::dot(compass[2], colUnitVector) > MathLib::dot(compass[2], ownerUnitVector)) {
@@ -106,6 +108,8 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 		}
 		//Checking for Down Collision from Right
 		else if (desire == CollisionDirection::Right && diff.y > 0) {
+
+			colUnitVector = MathLib::normalize(lowerRight - otherPos);
 			ownerUnitVector = MathLib::normalize(otherUpperLeft - otherPos);
 
 			if (MathLib::dot(compass[0], colUnitVector) > MathLib::dot(compass[0], ownerUnitVector)) {
@@ -114,6 +118,8 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 		}
 		//Checking for Up Collision from Right
 		else if (desire == CollisionDirection::Right && diff.y < 0) {
+
+			colUnitVector = MathLib::normalize(upperRight - otherPos);
 			ownerUnitVector = MathLib::normalize(otherLowerLeft- otherPos);
 
 			if (MathLib::dot(compass[2], colUnitVector) > MathLib::dot(compass[2], ownerUnitVector)) {
@@ -123,6 +129,7 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 	} else if ((desire == CollisionDirection::Up || desire == CollisionDirection::Down)
 		&& col.getHeight() / col.getWidth() > 1) {
 		if (desire == CollisionDirection::Up && diff.x < 0) {
+			colUnitVector = MathLib::normalize(upperLeft - otherPos);
 			ownerUnitVector = MathLib::normalize(otherLowerRight - otherPos);
 
 			if (MathLib::dot(compass[1], colUnitVector) > MathLib::dot(compass[1], ownerUnitVector)) {
@@ -130,6 +137,7 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 			}
 		}
 		else if (desire == CollisionDirection::Up && diff.x > 0) {
+			colUnitVector = MathLib::normalize(upperRight - otherPos);
 			ownerUnitVector = MathLib::normalize(otherLowerLeft - otherPos);
 
 			if (MathLib::dot(compass[3], colUnitVector) > MathLib::dot(compass[3], ownerUnitVector)) {
@@ -137,6 +145,7 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 			}
 		}
 		else if (desire == CollisionDirection::Down && diff.x < 0) {
+			colUnitVector = MathLib::normalize(lowerLeft - otherPos);
 			ownerUnitVector = MathLib::normalize(otherUpperRight - otherPos);
 
 			if (MathLib::dot(compass[1], colUnitVector) > MathLib::dot(compass[1], ownerUnitVector)) {
@@ -144,6 +153,7 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 			}
 		}
 		else if (desire == CollisionDirection::Down && diff.x > 0) {
+			colUnitVector = MathLib::normalize(lowerRight - otherPos);
 			ownerUnitVector = MathLib::normalize(otherUpperLeft - otherPos);
 
 			if (MathLib::dot(compass[3], colUnitVector) > MathLib::dot(compass[3], ownerUnitVector)) {

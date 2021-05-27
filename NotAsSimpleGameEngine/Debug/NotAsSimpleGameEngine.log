@@ -1,5 +1,8 @@
-﻿  BasicPlayer.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\BasicPlayer.cpp(66,21): warning C4018: '<': signed/unsigned mismatch
-  RectangleCollider.cpp
+﻿  PongBall.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(55,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(84,20): warning C4018: '<': signed/unsigned mismatch
+  PongBlock.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlock.cpp(39,20): warning C4018: '<': signed/unsigned mismatch
+  PongPaddle.cpp
   Generating Code...
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

@@ -1,13 +1,16 @@
 #include "PongBlock.h"
 #include "RectangleGraphic.h"
 #include "PongBlockManager.h"
+#include "CollisionManager.h"
 
 PongBlock::PongBlock() {
 	this->m_Tag = GameObjectTag::Obstacle;
 
 	Vector2f shape(80.0f, 32.0f);
 	this->m_Rectangle = new RectangleGraphic(*this, shape, Color::Blue);
-	this->m_Collider = new RectangleCollider(*this, shape, true, true);
+	//this->m_Collider = new RectangleCollider(*this, shape, true, true);
+
+	this->m_Collider = CollisionManager::getInstance()->createRectangleCollider(*this, shape, true, true);
 
 	this->addComponent(*this->m_Rectangle);
 	this->addComponent(*this->m_Collider);
