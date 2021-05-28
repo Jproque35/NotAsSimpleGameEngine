@@ -22,13 +22,31 @@ private:
 	RectangleCollider(const RectangleCollider& other) = delete;
 	RectangleCollider& operator=(const RectangleCollider& rhs) = delete;
 
-	CollisionDirection getRectangleCollisionDirection(
-		CollisionDirection& desire, 
-		const RectangleCollider& col, 
-		const Vector2f& diff) const;
-
 	void repositionAfterRectangleCollision(const RectangleCollider& col) const;
 	void repositionAfterCircleCollision(const CircleCollider& col) const;
+
+	CollisionDirection correctRectangleCollisionDirection(
+		CollisionDirection& desire,
+		const RectangleCollider& col,
+		const Vector2f& diff) const;
+
+	CollisionDirection getRectangleCornerCollisionDirection(
+		CollisionDirection& desire,
+		const Vector2f& ownerCorner,
+		const Vector2f& colCorner,
+		const Vector2f& colPos,
+		const CollisionDirection& compDir
+		) const;
+
+	CollisionDirection correctRectangleHorizontalCollision(
+		CollisionDirection& desire,
+		const RectangleCollider& col,
+		const Vector2f& diff) const;
+
+	CollisionDirection correctRectangleVerticalCollision(
+		CollisionDirection& desire,
+		const RectangleCollider& col,
+		const Vector2f& diff) const;
 
 protected:
 	bool intersectsCircle(const CircleCollider& col) const;

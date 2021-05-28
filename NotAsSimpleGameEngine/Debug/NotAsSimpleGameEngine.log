@@ -1,8 +1,12 @@
-﻿  PongBall.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(55,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBall.cpp(84,20): warning C4018: '<': signed/unsigned mismatch
-  PongBlock.cpp
-C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\PongBlock.cpp(39,20): warning C4018: '<': signed/unsigned mismatch
-  PongPaddle.cpp
-  Generating Code...
+﻿  Engine.cpp
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(24,58): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\duren\source\repos\NotAsSimpleGameEngine\NotAsSimpleGameEngine\Engine.cpp(24,44): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
   NotAsSimpleGameEngine.vcxproj -> C:\Users\duren\source\repos\NotAsSimpleGameEngine\Debug\NotAsSimpleGameEngine.exe

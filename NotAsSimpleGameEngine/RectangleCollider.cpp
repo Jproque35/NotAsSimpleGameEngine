@@ -58,11 +58,12 @@ void RectangleCollider::repositionAfterCircleCollision(const CircleCollider& col
 
 }
 
-CollisionDirection RectangleCollider::getRectangleCollisionDirection(
+CollisionDirection RectangleCollider::getRectangleCornerCollisionDirection(
 	CollisionDirection& desire,
-	const RectangleCollider& col,
-	const Vector2f& diff
-	) const {
+	const Vector2f& ownerCorner,
+	const Vector2f& colCorner,
+	const Vector2f& colPos,
+	const CollisionDirection& compDir) const {
 
 	Vector2f compass[4] = {
 		Vector2f(0.0f, -1.0f),
@@ -70,6 +71,38 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 		Vector2f(0.0f, 1.0f),
 		Vector2f(-1.0f, 0.0f)
 	};
+
+	int compassIdx = 0;
+	switch (compDir) {
+	case(CollisionDirection::Up):
+		compassIdx = 2;
+		break;
+	case(CollisionDirection::Right):
+		compassIdx = 3;
+		break;
+	case(CollisionDirection::Down):
+		compassIdx = 0;
+		break;
+	case(CollisionDirection::Left):
+		compassIdx = 1;
+		break;
+	}
+
+	Vector2f ownerUnitVector = MathLib::normalize(ownerCorner - colPos);
+	Vector2f colUnitVector = MathLib::normalize(colCorner - colPos);
+
+	if (MathLib::dot(compass[compassIdx], ownerUnitVector) > MathLib::dot(compass[compassIdx], colUnitVector)) {
+		return compDir;
+	}
+	else {
+		return desire;
+	}
+}
+
+CollisionDirection RectangleCollider::correctRectangleHorizontalCollision(
+	CollisionDirection& desire,
+	const RectangleCollider& col,
+	const Vector2f& diff) const {
 
 	Vector2f ownerPos = this->m_Owner->getPosition();
 	Vector2f upperLeft(this->getMinX(), this->getMinY());
@@ -83,83 +116,72 @@ CollisionDirection RectangleCollider::getRectangleCollisionDirection(
 	Vector2f otherLowerLeft(col.getMinX(), col.getMaxY());
 	Vector2f otherLowerRight(col.getMaxX(), col.getMaxY());
 
-	Vector2f colUnitVector = MathLib::normalize(ownerPos-otherPos);
-	Vector2f ownerUnitVector;
+	if (desire == CollisionDirection::Left && diff.y > 0) {
+		return this->getRectangleCornerCollisionDirection(desire, lowerLeft, otherUpperRight, otherPos, CollisionDirection::Down);
+	}
+	//Checking for Up Collision from Left
+	else if (desire == CollisionDirection::Left && diff.y < 0) {
+		return this->getRectangleCornerCollisionDirection(desire, upperLeft, otherLowerRight, otherPos, CollisionDirection::Up);
+	}
+	//Checking for Down Collision from Right
+	else if (desire == CollisionDirection::Right && diff.y > 0) {
+		return this->getRectangleCornerCollisionDirection(desire, lowerRight, otherUpperLeft, otherPos, CollisionDirection::Down);
+	}
+	//Checking for Up Collision from Right
+	else if (desire == CollisionDirection::Right && diff.y < 0) {
+		return this->getRectangleCornerCollisionDirection(desire, upperRight, otherLowerLeft, otherPos, CollisionDirection::Up);
+	}
+	else {
+		return desire;
+	}
+}
+
+CollisionDirection RectangleCollider::correctRectangleVerticalCollision(
+	CollisionDirection& desire,
+	const RectangleCollider& col,
+	const Vector2f& diff) const {
+
+	Vector2f ownerPos = this->m_Owner->getPosition();
+	Vector2f upperLeft(this->getMinX(), this->getMinY());
+	Vector2f upperRight(this->getMaxX(), this->getMinY());
+	Vector2f lowerLeft(this->getMinX(), this->getMaxY());
+	Vector2f lowerRight(this->getMaxX(), this->getMaxY());
+
+	Vector2f otherPos = col.getOwner().getPosition();
+	Vector2f otherUpperLeft(col.getMinX(), col.getMinY());
+	Vector2f otherUpperRight(col.getMaxX(), col.getMinY());
+	Vector2f otherLowerLeft(col.getMinX(), col.getMaxY());
+	Vector2f otherLowerRight(col.getMaxX(), col.getMaxY());
+
+	if (desire == CollisionDirection::Up && diff.x < 0) {
+		return this->getRectangleCornerCollisionDirection(desire, upperLeft, otherLowerRight, otherPos, CollisionDirection::Left);
+	}
+	else if (desire == CollisionDirection::Up && diff.x > 0) {
+		return this->getRectangleCornerCollisionDirection(desire, upperRight, otherLowerLeft, otherPos, CollisionDirection::Right);
+	}
+	else if (desire == CollisionDirection::Down && diff.x < 0) {
+		return this->getRectangleCornerCollisionDirection(desire, lowerLeft, otherUpperRight, otherPos, CollisionDirection::Left);
+	}
+	else if (desire == CollisionDirection::Down && diff.x > 0) {
+		return this->getRectangleCornerCollisionDirection(desire, lowerRight, otherUpperLeft, otherPos, CollisionDirection::Right);
+	}
+	else {
+		return desire;
+	}
+}
+
+CollisionDirection RectangleCollider::correctRectangleCollisionDirection(
+	CollisionDirection& desire,
+	const RectangleCollider& col,
+	const Vector2f& diff
+	) const {
+
 	if ((desire == CollisionDirection::Left || desire == CollisionDirection::Right)
 		&& col.getWidth() / col.getHeight() > 1) {
-		//Checking for Down Collision from Left
-		if (desire == CollisionDirection::Left && diff.y > 0) {
-			//cout << "RectangleCollider: Evaluating for down from left" << endl;
-			colUnitVector = MathLib::normalize(lowerLeft - otherPos);
-			ownerUnitVector = MathLib::normalize(otherUpperRight - otherPos);
-
-			if (MathLib::dot(compass[0], colUnitVector) > MathLib::dot(compass[0], ownerUnitVector)) {
-				desire = CollisionDirection::Down;
-			}
-		}
-		//Checking for Up Collision from Left
-		else if (desire == CollisionDirection::Left && diff.y < 0) {
-			colUnitVector = MathLib::normalize(upperLeft - otherPos);
-			ownerUnitVector = MathLib::normalize(otherLowerRight - otherPos);
-
-			if (MathLib::dot(compass[2], colUnitVector) > MathLib::dot(compass[2], ownerUnitVector)) {
-				desire = CollisionDirection::Up;
-			}
-		}
-		//Checking for Down Collision from Right
-		else if (desire == CollisionDirection::Right && diff.y > 0) {
-
-			colUnitVector = MathLib::normalize(lowerRight - otherPos);
-			ownerUnitVector = MathLib::normalize(otherUpperLeft - otherPos);
-
-			if (MathLib::dot(compass[0], colUnitVector) > MathLib::dot(compass[0], ownerUnitVector)) {
-				desire = CollisionDirection::Down;
-			}
-		}
-		//Checking for Up Collision from Right
-		else if (desire == CollisionDirection::Right && diff.y < 0) {
-
-			colUnitVector = MathLib::normalize(upperRight - otherPos);
-			ownerUnitVector = MathLib::normalize(otherLowerLeft- otherPos);
-
-			if (MathLib::dot(compass[2], colUnitVector) > MathLib::dot(compass[2], ownerUnitVector)) {
-				desire = CollisionDirection::Up;
-			}
-		}
+		desire = this->correctRectangleHorizontalCollision(desire, col, diff);
 	} else if ((desire == CollisionDirection::Up || desire == CollisionDirection::Down)
 		&& col.getHeight() / col.getWidth() > 1) {
-		if (desire == CollisionDirection::Up && diff.x < 0) {
-			colUnitVector = MathLib::normalize(upperLeft - otherPos);
-			ownerUnitVector = MathLib::normalize(otherLowerRight - otherPos);
-
-			if (MathLib::dot(compass[1], colUnitVector) > MathLib::dot(compass[1], ownerUnitVector)) {
-				desire = CollisionDirection::Left;
-			}
-		}
-		else if (desire == CollisionDirection::Up && diff.x > 0) {
-			colUnitVector = MathLib::normalize(upperRight - otherPos);
-			ownerUnitVector = MathLib::normalize(otherLowerLeft - otherPos);
-
-			if (MathLib::dot(compass[3], colUnitVector) > MathLib::dot(compass[3], ownerUnitVector)) {
-				desire = CollisionDirection::Right;
-			}
-		}
-		else if (desire == CollisionDirection::Down && diff.x < 0) {
-			colUnitVector = MathLib::normalize(lowerLeft - otherPos);
-			ownerUnitVector = MathLib::normalize(otherUpperRight - otherPos);
-
-			if (MathLib::dot(compass[1], colUnitVector) > MathLib::dot(compass[1], ownerUnitVector)) {
-				desire = CollisionDirection::Left;
-			}
-		}
-		else if (desire == CollisionDirection::Down && diff.x > 0) {
-			colUnitVector = MathLib::normalize(lowerRight - otherPos);
-			ownerUnitVector = MathLib::normalize(otherUpperLeft - otherPos);
-
-			if (MathLib::dot(compass[3], colUnitVector) > MathLib::dot(compass[3], ownerUnitVector)) {
-				desire = CollisionDirection::Right;
-			}
-		}
+		desire = this->correctRectangleVerticalCollision(desire, col, diff);
 	}
 
 	return desire;
@@ -193,7 +215,7 @@ CollisionDirection RectangleCollider::getCollisionDirection(
 
 	if (col.getType() == ColliderType::RECTANGLE) {
 		
-		return this->getRectangleCollisionDirection(desire, 
+		return this->correctRectangleCollisionDirection(desire, 
 			dynamic_cast<const RectangleCollider&>(col), 
 			diff);
 	}
