@@ -46,13 +46,29 @@ public:
 	virtual ~GameObject();
 
 	virtual void init(float x, float y);
-	int getId() const;
-	bool isActive() const;
-	void setActive(bool isActive);
-	const Vector2f& getPosition() const;
+
+	inline int getId() const {
+		return this->m_Id;
+	}
+
+	inline bool isActive() const {
+		return this->m_Active;
+	}
+
+	inline void setActive(bool isActive) {
+		this->m_Active = isActive;
+	}
+
+	inline const Vector2f& getPosition()  const {
+		return this->m_Position;
+	}
+
+	inline void setPosition(const Vector2f& position) {
+		this->m_Position = position;
+	}
+
 	const Vector2f& getVerticalAxis() const;
 	const Vector2f& getHorizontalAxis() const;
-	void setPosition(const Vector2f& position);
 	void process(float dtAsSeconds);
 };
 

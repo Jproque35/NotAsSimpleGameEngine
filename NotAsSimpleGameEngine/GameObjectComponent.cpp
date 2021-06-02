@@ -15,11 +15,3 @@ float GameObjectComponent::getX() const {
 float GameObjectComponent::getY() const {
 	return this->m_Owner->getPosition().y;
 }
-
-int GameObjectComponent::getId() const {
-	return this->m_Id;
-}
-
-GameObject& GameObjectComponent::getOwner() const {
-	return *this->m_Owner;
-}

@@ -35,25 +35,7 @@ void GameObject::init(float x, float y) {
 	this->m_Active = true;
 }
 
-int GameObject::getId() const {
-	return this->m_Id;
-}
 
-bool GameObject::isActive() const {
-	return this->m_Active;
-}
-
-void GameObject::setActive(bool isActive) {
-	this->m_Active = isActive;
-}
-
-const Vector2f& GameObject::getPosition()  const {
-	return this->m_Position;
-}
-
-void GameObject::setPosition(const Vector2f& position) {
-	this->m_Position = position;
-}
 
 const Vector2f& GameObject::getVerticalAxis() const {
 	return this->m_UpAxis;

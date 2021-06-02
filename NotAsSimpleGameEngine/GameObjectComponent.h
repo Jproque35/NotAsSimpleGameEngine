@@ -1,5 +1,5 @@
 #ifndef GAMEOBJECTCOMPONENT_H
-#define GAMEOBJECTCOMPONENT
+#define GAMEOBJECTCOMPONENT_H
 #pragma once
 #include <iostream>
 
@@ -15,17 +15,23 @@ private:
 	GameObjectComponent& operator=(const GameObjectComponent& rhs) = delete;
 
 protected:
-	GameObject* m_Owner;
+	GameObject *const m_Owner;
 	int m_Id;
 
 public:
 	GameObjectComponent(GameObject& obj);
 	virtual ~GameObjectComponent();
 
-	int getId() const;
+	inline int getId() const {
+		return this->m_Id;
+	}
+
+	inline GameObject& getOwner() const {
+		return *this->m_Owner;
+	}
+
 	float getX() const;
 	float getY() const;
-	GameObject& getOwner() const;
 	virtual void update(float dtAsSeconds) = 0;
 	virtual void destroy() const = 0;
 };
