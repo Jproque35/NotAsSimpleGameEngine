@@ -20,27 +20,10 @@ CollisionManager::~CollisionManager() {
 	}
 }
 
-CollisionManager* CollisionManager::getInstance() {
-	if (!instance) {
-		instance = new CollisionManager();
-	}
-
-	return instance;
-}
-
-void CollisionManager::resetInstance() {
-	if (instance) {
-		delete(instance);
-	}
-
-	instance = NULL;
-}
-
 RectangleCollider* CollisionManager::createRectangleCollider(GameObject& owner,
 	const Vector2f& dimensions,
 	bool solid,
 	bool stationary) {
-
 	RectangleCollider* desire = new RectangleCollider(owner, dimensions, solid, stationary);
 	this->add(*desire);
 	return desire;
@@ -51,7 +34,9 @@ CircleCollider* CollisionManager::createCircleCollider(
 	float radius,
 	bool solid,
 	bool stationary) {
-	return NULL;
+	CircleCollider* desire = new CircleCollider(owner, radius, solid, stationary);
+	this->add(*desire);
+	return desire;
 }
 
 void CollisionManager::addXEntries(Collider& col) {
@@ -104,7 +89,7 @@ vector<Collider*> CollisionManager::getCollisionList(const Collider& col) {
 }
 
 void CollisionManager::updateXList() {
-	for (auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
+	for (register auto it = this->m_XList.begin(); it != this->m_XList.end(); ++it) {
 		if (it->type == CollisionEntryType::Start) {
 			it->value = it->owner->getMinX();
 		}
@@ -117,7 +102,7 @@ void CollisionManager::updateXList() {
 }
 
 void CollisionManager::updateYList() {
-	for (auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
+	for (register auto it = this->m_YList.begin(); it != this->m_YList.end(); ++it) {
 		if (it->type == CollisionEntryType::Start) {
 			it->value = it->owner->getMinY();
 		}
@@ -137,7 +122,7 @@ void CollisionManager::processCollisionEntry(
 	CollisionEntryType currType = entry.type;
 
 	if (currType == CollisionEntryType::Start) {
-		for (auto it = activeColliderIds.begin(); it != activeColliderIds.end(); ++it) {
+		for (register auto it = activeColliderIds.begin(); it != activeColliderIds.end(); ++it) {
 			intersectionLists[currCollider->getId()].push_back(this->m_Colliders[*it]);
 		}
 
@@ -147,7 +132,7 @@ void CollisionManager::processCollisionEntry(
 		activeColliderIds.remove(currCollider->getId());
 	}
 
-	for (auto it2 = activeColliderIds.begin(); it2 != activeColliderIds.end(); ++it2) {
+	for (register auto it2 = activeColliderIds.begin(); it2 != activeColliderIds.end(); ++it2) {
 		if (*it2 != currCollider->getId()) {
 			intersectionLists[*it2].push_back(currCollider);
 		}
@@ -159,7 +144,7 @@ unordered_map<int, vector<Collider*>> CollisionManager::buildSingleAxisList(
 	unordered_map<int, vector<Collider*>> intersectionLists;
 	list<int> activeColliderIds;
 
-	for(int i = 0; i < axisList.size(); ++i) {
+	for(register int i = 0; i < axisList.size(); ++i) {
 		if (axisList[i].owner->getOwner().isActive()) {
 			this->processCollisionEntry(axisList[i], intersectionLists, activeColliderIds);
 		}
@@ -172,8 +157,8 @@ void CollisionManager::buildSingleCollisionList(
 	int id, 
 	vector<Collider*>& colList, 
 	vector<Collider*>& checkList) {
-	for (int i = 0; i < colList.size(); ++i) {
-		for (int j = 0; j < checkList.size(); ++j) {
+	for (register int i = 0; i < colList.size(); ++i) {
+		for (register int j = 0; j < checkList.size(); ++j) {
 			if ((colList[i] == checkList[j])
 					&& this->m_Colliders[id]->intersects(*colList[i]) ) {
 				this->m_CollisionLists[id].push_back(colList[i]);
@@ -186,11 +171,11 @@ void CollisionManager::buildCollisionLists() {
 	unordered_map<int, vector<Collider*>> xLists = this->buildSingleAxisList(this->m_XList);
 	unordered_map<int, vector<Collider*>> yLists = this->buildSingleAxisList(this->m_YList);
 
-	for (auto it = this->m_CollisionLists.begin(); it != this->m_CollisionLists.end(); ++it) {
+	for (register auto it = this->m_CollisionLists.begin(); it != this->m_CollisionLists.end(); ++it) {
 		it->second.clear();
 	}
 
-	for (auto it = xLists.begin(); it != xLists.end(); ++it) {
+	for (register auto it = xLists.begin(); it != xLists.end(); ++it) {
 		this->buildSingleCollisionList(it->first, it->second, yLists[it->first]);
 	}
 }
@@ -201,7 +186,7 @@ void CollisionManager::updateSingleCollider(Collider& col) {
 	if (colList.size() > 0 
 		&& (!col.isStationary() && col.isSolid())) {
 		Collider* currCollider = NULL;
-		for (int i = 0; i < colList.size(); ++i) {
+		for (register int i = 0; i < colList.size(); ++i) {
 			currCollider = colList[i];
 
 			if (currCollider && currCollider->isSolid()) {
@@ -217,7 +202,7 @@ void CollisionManager::update(float dtAsSeconds) {
 
 	this->buildCollisionLists();
 
-	for (auto it = this->m_Colliders.begin(); it != this->m_Colliders.end(); ++it) {
+	for (register auto it = this->m_Colliders.begin(); it != this->m_Colliders.end(); ++it) {
 		this->updateSingleCollider(*it->second);
 	}
 

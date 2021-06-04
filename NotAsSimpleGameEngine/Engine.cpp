@@ -55,11 +55,11 @@ void Engine::resetInstance() {
 void Engine::start() {
 	Clock clock;
 
-	//TestScene* testScene = new TestScene();
-	//SceneManager::getInstance()->add(*testScene);
+	TestScene* testScene = new TestScene();
+	SceneManager::getInstance()->add(*testScene);
 
-	PongScene* pongScene = new PongScene();
-	SceneManager::getInstance()->add(*pongScene);
+	//PongScene* pongScene = new PongScene();
+	//SceneManager::getInstance()->add(*pongScene);
 
 	FontManager::getInstance()->loadFile("game_over");
 

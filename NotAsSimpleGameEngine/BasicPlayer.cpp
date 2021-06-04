@@ -12,7 +12,8 @@ BasicPlayer::BasicPlayer()
 
 	this->m_Graphic = new RectangleGraphic(*this, rectSize, Color::Green);
 	//this->m_Collider = new RectangleCollider(*this, rectSize, true, false);
-	this->m_Collider = CollisionManager::getInstance()->createRectangleCollider(*this, rectSize, true, false);
+	//this->m_Collider = CollisionManager::getInstance()->createRectangleCollider(*this, rectSize, true, false);
+	this->m_Collider = CollisionManager::getInstance()->createCircleCollider(*this, 16.0f, true, false);
 	this->addComponent(*m_Collider);
 	this->addComponent(*m_Graphic);
 }

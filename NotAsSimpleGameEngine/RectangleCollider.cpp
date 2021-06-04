@@ -205,8 +205,6 @@ CollisionDirection RectangleCollider::getCollisionDirection(
 	for (int i = 0; i < 4; ++i) {
 		currDot = MathLib::dot(compass[i], uDiff);
 
-		//cout << "RectangleCollider: CurrDot is " << currDot << endl;
-
 		if (currDot > maxDot) {
 			maxDot = currDot;
 			desire = (CollisionDirection)i;

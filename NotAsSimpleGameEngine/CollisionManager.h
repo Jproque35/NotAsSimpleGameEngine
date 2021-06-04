@@ -9,24 +9,23 @@ using namespace std;
 
 class Collider;
 
-enum class CollisionEntryType {
-	Start,
-	End
-};
-
-struct CollisionEntry {
-	Collider* owner = NULL;
-	float value = 0.0f;
-	CollisionEntryType type = CollisionEntryType::Start;
-
-	bool operator<(const CollisionEntry& rhs) {
-		return this->value < rhs.value;
-	}
-};
-
-
 class CollisionManager final {
 private:
+	enum class CollisionEntryType {
+		Start,
+		End
+	};
+
+	struct CollisionEntry {
+		Collider* owner = NULL;
+		float value = 0.0f;
+		CollisionEntryType type = CollisionEntryType::Start;
+
+		bool operator<(const CollisionEntry& rhs) {
+			return this->value < rhs.value;
+		}
+	};
+
 	static CollisionManager* instance;
 	unordered_map<int, Collider*> m_Colliders;
 	unordered_map<int, vector<Collider*>> m_CollisionLists;
@@ -57,8 +56,22 @@ private:
 	void buildCollisionLists();
 
 public:
-	static CollisionManager* getInstance();
-	static void resetInstance();
+	inline static CollisionManager* getInstance() {
+		if (!instance) {
+			instance = new CollisionManager();
+		}
+
+		return instance;
+	}
+
+	inline static void resetInstance() {
+		if (instance) {
+			delete(instance);
+		}
+
+		instance = NULL;
+	}
+
 	RectangleCollider* createRectangleCollider(GameObject& owner,
 		const Vector2f& dimensions,
 		bool solid,
