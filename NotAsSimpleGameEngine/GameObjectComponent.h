@@ -10,19 +10,20 @@ class GameObject;
 class GameObjectComponent {
 
 private:
+	GameObject* const m_Owner;
+	int m_Id;
+
 	GameObjectComponent() = delete;
 	GameObjectComponent(const GameObjectComponent& obj) = delete;
 	GameObjectComponent& operator=(const GameObjectComponent& rhs) = delete;
 
 protected:
-	GameObject *const m_Owner;
-	int m_Id;
 
 public:
-	GameObjectComponent(GameObject& obj);
+	GameObjectComponent(GameObject& obj, int id);
 	virtual ~GameObjectComponent();
 
-	inline int getId() const {
+	inline const int getId() const {
 		return this->m_Id;
 	}
 
@@ -30,8 +31,8 @@ public:
 		return *this->m_Owner;
 	}
 
-	float getX() const;
-	float getY() const;
+	const float getX() const;
+	const float getY() const;
 	virtual void update(float dtAsSeconds) = 0;
 	virtual void destroy() const = 0;
 };

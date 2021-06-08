@@ -24,11 +24,6 @@ class GameObject {
 private:
 	vector<GameObjectComponent*> m_Components;
 	static int m_CurrId;
-
-	GameObject(const GameObject& obj) = delete;
-	GameObject& operator=(const GameObject& rhs) = delete;
-
-protected:
 	bool m_Active;
 	Vector2f m_Position;
 	Vector2f m_UpAxis;
@@ -36,6 +31,10 @@ protected:
 	InputManager* input;
 	int m_Id;
 
+	GameObject(const GameObject& obj) = delete;
+	GameObject& operator=(const GameObject& rhs) = delete;
+
+protected:
 	void addComponent(GameObjectComponent& component);
 	virtual void update(float dtAsSeconds) = 0;
 

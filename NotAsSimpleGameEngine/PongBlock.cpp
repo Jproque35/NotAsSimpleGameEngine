@@ -15,14 +15,14 @@ PongBlock::PongBlock() {
 	this->addComponent(*this->m_Rectangle);
 	this->addComponent(*this->m_Collider);
 
-	cout << "PongBlock: Block with id " << this->m_Id << " created." << endl;
+	cout << "PongBlock: Block with id " << this->getId() << " created." << endl;
 }
 
 PongBlock::~PongBlock() {}
 
 void PongBlock::init(float x, float y) {
 	GameObject::init(x, y);
-	cout << "PongBlock: Block initialized at position " << this->m_Position.x << ", " << this->m_Position.y << endl;
+	cout << "PongBlock: Block initialized at position " << this->getPosition().x << ", " << this->getPosition().y << endl;
 }
 
 void PongBlock::setNext(PongBlock* block) {
@@ -39,7 +39,7 @@ void PongBlock::update(float dtAsSeconds) {
 	for (int i = 0; i < colList.size(); ++i) {
 		cout << "Collision detected at time " << dtAsSeconds << endl;
 		if (colList[i]->getOwner().m_Tag == GameObjectTag::Enemy
-			&& this->m_Active) {
+			&& this->isActive()) {
 			this->destroy();
 		}
 	}
@@ -47,6 +47,6 @@ void PongBlock::update(float dtAsSeconds) {
 }
 
 void PongBlock::destroy() {
-	cout << "PongBlock: Destroyed object " << this->m_Id << endl;
+	cout << "PongBlock: Destroyed object " << this->getId() << endl;
 	PongBlockManager::getInstance()->addFreeBlock(*this);
 }

@@ -12,6 +12,7 @@ Entity::~Entity() {
 }
 
 void Entity::Move(const Vector2f& direction) {
-	this->m_Position.x += direction.x;
-	this->m_Position.y += direction.y;
+	//this->m_Position.x += direction.x;
+	//this->m_Position.y += direction.y;
+	this->setPosition( Vector2f(this->getPosition().x + direction.x, this->getPosition().y + direction.y) );
 }

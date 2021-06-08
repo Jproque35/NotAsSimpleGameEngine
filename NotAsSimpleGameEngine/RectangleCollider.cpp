@@ -33,8 +33,8 @@ void RectangleCollider::repositionAfterRectangleCollision(const RectangleCollide
 	if (std::get<0>(collision)) {
 		CollisionDirection colDir = std::get<1>(collision);
 		Vector2f colVector = std::get<2>(collision);
-		Vector2f ownerPos = this->m_Owner->getPosition();
-		Vector2f newPos = this->m_Owner->getPosition();
+		Vector2f ownerPos = this->getOwner().getPosition();
+		Vector2f newPos = this->getOwner().getPosition();
 
 		if (colDir == CollisionDirection::Down) {
 			cout << "Collision Direction is Down" << endl;
@@ -50,7 +50,7 @@ void RectangleCollider::repositionAfterRectangleCollision(const RectangleCollide
 			newPos.x += col.getMaxX() - this->getMinX();
 		}
 
-		this->m_Owner->setPosition(newPos);
+		this->getOwner().setPosition(newPos);
 	}
 }
 
@@ -104,7 +104,7 @@ CollisionDirection RectangleCollider::correctRectangleHorizontalCollision(
 	const RectangleCollider& col,
 	const Vector2f& diff) const {
 
-	Vector2f ownerPos = this->m_Owner->getPosition();
+	Vector2f ownerPos = this->getOwner().getPosition();
 	Vector2f upperLeft(this->getMinX(), this->getMinY());
 	Vector2f upperRight(this->getMaxX(), this->getMinY());
 	Vector2f lowerLeft(this->getMinX(), this->getMaxY());
@@ -141,7 +141,7 @@ CollisionDirection RectangleCollider::correctRectangleVerticalCollision(
 	const RectangleCollider& col,
 	const Vector2f& diff) const {
 
-	Vector2f ownerPos = this->m_Owner->getPosition();
+	Vector2f ownerPos = this->getOwner().getPosition();
 	Vector2f upperLeft(this->getMinX(), this->getMinY());
 	Vector2f upperRight(this->getMaxX(), this->getMinY());
 	Vector2f lowerLeft(this->getMinX(), this->getMaxY());
@@ -223,19 +223,19 @@ CollisionDirection RectangleCollider::getCollisionDirection(
 }
 
 float RectangleCollider::getMinX() const {
-	return this->m_Owner->getPosition().x - this->m_Width / 2;
+	return this->getOwner().getPosition().x - this->m_Width / 2;
 }
 
 float RectangleCollider::getMinY() const {
-	return this->m_Owner->getPosition().y - this->m_Height / 2;
+	return this->getOwner().getPosition().y - this->m_Height / 2;
 }
 
 float RectangleCollider::getMaxX() const {
-	return this->m_Owner->getPosition().x + this->m_Width / 2;
+	return this->getOwner().getPosition().x + this->m_Width / 2;
 }
 
 float RectangleCollider::getMaxY() const {
-	return this->m_Owner->getPosition().y + this->m_Height / 2;
+	return this->getOwner().getPosition().y + this->m_Height / 2;
 }
 
 void RectangleCollider::update(float dtAsSeconds) {

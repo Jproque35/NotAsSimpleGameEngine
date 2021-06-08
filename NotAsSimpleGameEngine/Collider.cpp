@@ -7,11 +7,10 @@
 int Collider::currFreeId = 0;
 
 Collider::Collider(GameObject& owner, ColliderType type, bool solid, bool stationary) :
-	GameObjectComponent(owner),
+	GameObjectComponent(owner, currFreeId++),
 	m_Type(type),
 	m_Solid(solid),
 	m_Stationary(stationary) {
-	this->m_Id = currFreeId++;
 	//SSCollisionManager::getInstance()->add(*this);
 	//cout << "Collider: Sent collider with id " << this->m_Id << " to collision manager" << endl;
 }
@@ -32,9 +31,9 @@ bool Collider::intersects(const Collider& col) const {
 }
 
 Collision Collider::getCollisionData(const Collider& col) const {
-	bool collided = this->intersects(col) && col.m_Owner->isActive();
-	Vector2f diff(col.m_Owner->getPosition().x - this->m_Owner->getPosition().x,
-		col.m_Owner->getPosition().y - this->m_Owner->getPosition().y);
+	bool collided = this->intersects(col) && col.getOwner().isActive();
+	Vector2f diff(col.getOwner().getPosition().x - this->getOwner().getPosition().x,
+		col.getOwner().getPosition().y - this->getOwner().getPosition().y);
 	CollisionDirection colDir = this->getCollisionDirection(col, diff);
 
 	return std::make_tuple(collided, colDir, diff);

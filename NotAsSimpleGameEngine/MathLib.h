@@ -5,11 +5,10 @@
 
 using namespace sf;
 
-class MathLib final {
-public:
-	static float dot(const Vector2f& first, const Vector2f& second);
-	static Vector2f normalize(const Vector2f& v);
-	static float magnitude(const Vector2f& v);
+namespace MathLib {
+	const float dot(const Vector2f& first, const Vector2f& second);
+	const Vector2f normalize(const Vector2f& v);
+	const float magnitude(const Vector2f& v);
 };
 
 #endif

@@ -15,7 +15,7 @@ CircleCollider::~CircleCollider() {
 }
 
 bool CircleCollider::intersectsRectangle(const RectangleCollider& col) const {
-	Vector2f ownerPos = this->m_Owner->getPosition();
+	Vector2f ownerPos = this->getOwner().getPosition();
 	float testX = ownerPos.x;
 	float testY = ownerPos.y;
 
@@ -42,8 +42,8 @@ bool CircleCollider::intersectsRectangle(const RectangleCollider& col) const {
 }
 
 bool CircleCollider::intersectsCircle(const CircleCollider& col) const {
-	float distX = col.m_Owner->getPosition().x - this->m_Owner->getPosition().x;
-	float distY = col.m_Owner->getPosition().y - this->m_Owner->getPosition().y;
+	float distX = col.getOwner().getPosition().x - this->getOwner().getPosition().x;
+	float distY = col.getOwner().getPosition().y - this->getOwner().getPosition().y;
 	float dist = sqrt(distX * distX + distY * distY);
 
 	return dist < this->m_Radius + col.m_Radius;
@@ -78,7 +78,7 @@ void CircleCollider::repositionAfterRectangleCollision(const RectangleCollider& 
 	if (this->intersects(col)) {
 		CollisionDirection dir = this->getCollisionDirection(col, col.getOwner().getPosition() - this->getOwner().getPosition());
 
-		Vector2f newPos = this->m_Owner->getPosition();
+		Vector2f newPos = this->getOwner().getPosition();
 		switch (dir) {
 		case(CollisionDirection::Up):
 			newPos.y += this->m_Radius - (newPos.y - col.getMaxY());
@@ -94,7 +94,7 @@ void CircleCollider::repositionAfterRectangleCollision(const RectangleCollider& 
 			break;
 		}
 
-		this->m_Owner->setPosition(newPos);
+		this->getOwner().setPosition(newPos);
 	}
 }
 
@@ -103,19 +103,19 @@ void CircleCollider::repositionAfterCircleCollision(const CircleCollider& col) c
 }
 
 float CircleCollider::getMinX() const {
-	return this->m_Owner->getPosition().x - this->m_Radius;
+	return this->getOwner().getPosition().x - this->m_Radius;
 }
 
 float CircleCollider::getMaxX() const {
-	return this->m_Owner->getPosition().x + this->m_Radius;
+	return this->getOwner().getPosition().x + this->m_Radius;
 }
 
 float CircleCollider::getMinY() const {
-	return this->m_Owner->getPosition().y - this->m_Radius;
+	return this->getOwner().getPosition().y - this->m_Radius;
 }
 
 float CircleCollider::getMaxY() const {
-	return this->m_Owner->getPosition().y + this->m_Radius;
+	return this->getOwner().getPosition().y + this->m_Radius;
 }
 
 void CircleCollider::update(float dtAsSeconds) {

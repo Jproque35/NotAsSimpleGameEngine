@@ -28,10 +28,10 @@ void BasicPlayer::init(float x, float y) {
 }
 
 Vector2f BasicPlayer::inputToVector() {
-	bool upPressed = this->input->isKeyPressed(Button::Up);
-	bool downPressed = this->input->isKeyPressed(Button::Down);
-	bool leftPressed = this->input->isKeyPressed(Button::Left);
-	bool rightPressed = this->input->isKeyPressed(Button::Right);
+	bool upPressed = InputManager::getInstance()->isKeyPressed(Button::Up);
+	bool downPressed = InputManager::getInstance()->isKeyPressed(Button::Down);
+	bool leftPressed = InputManager::getInstance()->isKeyPressed(Button::Left);
+	bool rightPressed = InputManager::getInstance()->isKeyPressed(Button::Right);
 
 	Vector2f direction(0.0f, 0.0f);
 
